@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" type="text/css"
+        href="{% static 'welcome/styles.css' %}" />
+{% endblock %}
+
+
+{% block content %}
+    <h2 id="welcome-banner">Welcome</h2>
+{% endblock %}
