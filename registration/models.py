@@ -5,8 +5,8 @@ from django.utils import timezone
 
 # Create your models here.
 class Person(models.Model):
-    first_name = models.CharField(max_length=25, default='first_name')
-    last_name = models.CharField(max_length=25, default='last_name')
+    first_name = models.CharField(max_length=25)
+    last_name = models.CharField(max_length=25)
     email = models.EmailField(max_length=50, null=True)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
                                  message="Phone number must be entered in the format: '+999999999'."

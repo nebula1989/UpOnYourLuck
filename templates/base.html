@@ -11,6 +11,7 @@
 {% block css %}
 {% endblock %}
 
+
 <!--Navbar-->
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
   <a class="navbar-brand" href="{% url 'welcome_index' %}">Upon Your Luck</a>
@@ -31,6 +32,9 @@
     </ul>
   </div>
 </nav>
+
+{% block title %}
+{% endblock %}
 
 {% block content %}
 {% endblock %}
