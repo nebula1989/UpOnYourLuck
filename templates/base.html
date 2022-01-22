@@ -1,4 +1,9 @@
-{# Load the tag library #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Up On Your Luck</title>
+    {# Load the tag library #}
 {% load bootstrap5 %}
 
 {# Load CSS and JavaScript #}
@@ -10,8 +15,18 @@
 
 {% block css %}
 {% endblock %}
+</head>
+<body style="padding: 2px">
 
+
+{% block navbar %}
 {% include 'includes/navbar.html' %}
+{% endblock %}
+
 
 {% block content %}
 {% endblock %}
+
+
+</body>
+</html>
