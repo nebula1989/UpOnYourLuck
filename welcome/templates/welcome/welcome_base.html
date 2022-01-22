@@ -8,9 +8,8 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        <h2 id="welcome-banner">Hello, {{user.username}}</h2>
+        {% include 'includes/welcome_logged_in.html' %}
     {% else %}
-        <h2 id="welcome-banner">Welcome to UpOnYourLuck</h2>
+        {% include 'includes/welcome_logged_out.html' %}
     {% endif %}
-
 {% endblock %}
