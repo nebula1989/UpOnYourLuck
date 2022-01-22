@@ -2,16 +2,15 @@
 {% load static %}
 
 {% block css %}
-  <link rel="stylesheet" type="text/css"
-        href="{% static 'welcome/styles.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'welcome/styles.css' %}" />
 {% endblock %}
 
 
 {% block content %}
-    <h2 id="welcome-banner">Welcome
-        {% if user.is_authenticated %}
-            , {{user.username}}
-        {% else %}
-        {% endif %}
-    </h2>
+    {% if user.is_authenticated %}
+        <h2 id="welcome-banner">Hello, {{user.username}}</h2>
+    {% else %}
+        <h2 id="welcome-banner">Welcome to UpOnYourLuck</h2>
+    {% endif %}
+
 {% endblock %}
