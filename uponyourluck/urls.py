@@ -19,7 +19,14 @@ from django.urls import path, include
 from uponyourluck import views
 
 urlpatterns = [
+    # homepage url
     path('', include('welcome.urls')),
+    # create account url
     path("register", views.register_request, name="register"),
+    # login url
+    path("login", views.login_request, name="login"),
+    # logout url
+    path("logout", views.logout_request, name="logout"),
+    # admin url
     path('admin/', admin.site.urls),
 ]

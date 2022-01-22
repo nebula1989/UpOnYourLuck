@@ -13,25 +13,33 @@
 
 
 <!--Navbar-->
-<nav class="navbar navbar-expand-sm navbar-light bg-light">
-  <a class="navbar-brand" href="{% url 'welcome_index' %}">Upon Your Luck</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Up On Your Luck</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="False" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
+      {% if user.is_authenticated %}
+
       <li class="nav-item">
-        <a class="nav-link" href="">About</a>
+        <a class="nav-link" href="/logout">Logout</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="">The People</a>
+        <a class="nav-link" href="#">Welcome, {{user.username}}</a>
       </li>
+
+      {% else %}
+
       <li class="nav-item">
-        <a class="nav-link" href="">Contact</a>
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
       </li>
+
+      {% endif %}
     </ul>
   </div>
 </nav>
+
 
 {% block title %}
 {% endblock %}
