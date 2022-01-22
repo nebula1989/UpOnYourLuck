@@ -8,5 +8,10 @@
 
 
 {% block content %}
-    <h2 id="welcome-banner">Welcome</h2>
+    <h2 id="welcome-banner">Welcome
+        {% if user.is_authenticated %}
+            , {{user.username}}
+        {% else %}
+        {% endif %}
+    </h2>
 {% endblock %}
