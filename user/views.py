@@ -1,12 +1,24 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import NewUserForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 
 
-def profile(request):
-    pass
+@login_required
+def profile(request, username=None):
+    if username:
+        current_user = get_object_or_404(User, username=username)
+
+    else:
+        current_user = request.user
+
+    args1 = {
+        'current_user': current_user,
+    }
+    return render(request, 'user_base.html', args1)
 
 
 def register_request(request):
@@ -32,7 +44,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return redirect("welcome_index")
+                return redirect("user_profile", username)
             else:
                 messages.error(request, "Invalid username or password.")
         else:
