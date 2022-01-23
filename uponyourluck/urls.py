@@ -21,12 +21,8 @@ from uponyourluck import views
 urlpatterns = [
     # homepage url
     path('', include('welcome.urls')),
-    # create account url
-    path("register", views.register_request, name="register"),
-    # login url
-    path("login", views.login_request, name="login"),
-    # logout url
-    path("logout", views.logout_request, name="logout"),
+    # user url
+    path('', include('user.urls')),
     # admin url
     path('admin/', admin.site.urls),
 ]
