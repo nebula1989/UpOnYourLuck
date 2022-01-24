@@ -16,13 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from uponyourluck import views
 
 urlpatterns = [
     # homepage url
     path('', include('welcome.urls')),
     # user url
     path('', include('user.urls')),
+    # qrcode url
+    path('', include('qrcode.urls')),
     # admin url
     path('admin/', admin.site.urls),
 ]
+
+handler404 = "uponyourluck.views.page_not_found_view"
