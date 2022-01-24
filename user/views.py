@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required
-def profile(request, username=None):
+def dashboard(request, username=None):
     if username:
         current_user = get_object_or_404(User, username=username)
 
@@ -44,7 +44,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return redirect("user_profile", username)
+                return redirect("user_dashboard", username)
             else:
                 messages.error(request, "Invalid username or password.")
         else:
