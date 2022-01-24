@@ -18,7 +18,19 @@ def dashboard(request, username=None):
     args1 = {
         'current_user': current_user,
     }
-    return render(request, 'user_base.html', args1)
+    return render(request, 'dashboard.html', args1)
+
+
+def profile(request, username=None):
+    if username:
+        current_user = get_object_or_404(User, username=username)
+    else:
+        messages.error(request, 'No User Found')
+        return redirect('welcome_index')
+    args1 = {
+        'current_user': current_user,
+    }
+    return render(request, 'profile.html', args1)
 
 
 def register_request(request):
