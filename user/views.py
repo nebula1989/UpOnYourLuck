@@ -1,4 +1,6 @@
 from django.contrib.auth.models import User
+from qrcode.models import QRCode
+
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import NewUserForm
 from django.contrib.auth import login, logout, authenticate
@@ -40,7 +42,11 @@ def register_request(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful.")
+            username = form.cleaned_data.get('username')
+            # if account is successfully created, a qr for that user will be created automatically
+            create_qr_code(request, username)
             return redirect("welcome_index")
+
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(request=request, template_name="register.html", context={"register_form": form})
@@ -69,3 +75,9 @@ def logout_request(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     return redirect("welcome_index")
+
+
+def create_qr_code(request, __username):
+    username = __username
+    user_profile_url = ('profile/' + username + '/qrcode')
+    QRCode(associated_user=username, profile_url=user_profile_url).save()
