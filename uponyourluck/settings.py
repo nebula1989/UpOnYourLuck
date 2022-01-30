@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     'user',
     'welcome',
-    'qrcode.apps.QrcodeConfig',
 ]
 
 MIDDLEWARE = [
