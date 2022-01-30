@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from .models import Profile
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import NewUserForm
@@ -40,6 +41,13 @@ def register_request(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+
+            username = form.cleaned_data.get('username')
+            new_profile = Profile()
+            new_profile.profile_url = 'profile/' + username
+            new_profile.life_story = 'My Life Story'
+            new_profile.save()
+
             messages.success(request, "Registration successful.")
 
             return redirect("welcome_index")
