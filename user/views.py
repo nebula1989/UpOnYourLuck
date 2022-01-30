@@ -41,15 +41,7 @@ def register_request(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-
-            username = form.cleaned_data.get('username')
-            new_profile = Profile()
-            new_profile.profile_url = 'profile/' + username
-            new_profile.life_story = 'My Life Story'
-            new_profile.save()
-
             messages.success(request, "Registration successful.")
-
             return redirect("welcome_index")
 
         messages.error(request, "Unsuccessful registration. Invalid information.")
