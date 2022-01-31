@@ -10,15 +10,15 @@ from django.contrib.auth.decorators import login_required
 
 
 @login_required
-def dashboard(request, username=None):
-    if username:
-        current_user = get_object_or_404(User, username=username)
-
-    else:
-        current_user = request.user
+def dashboard(request):
+    # if username:
+    #     current_user = get_object_or_404(User, username=username)
+    #
+    # else:
+    #     current_user = request.user
 
     args1 = {
-        'current_user': current_user,
+        'current_user': request.user,
     }
     return render(request, 'dashboard.html', args1)
 
@@ -33,6 +33,16 @@ def profile(request, username=None):
         'current_user': current_user,
     }
     return render(request, 'profile.html', args1)
+
+"""@login_required
+def update_profile(request):
+    logged_in_user = request.user
+    profile = Profile.objects.get(user=logged_in_user)
+    form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
+    # when a user submits a form
+    if request.method == 'POST':
+        # do something
+    #return render(request)"""
 
 
 def register_request(request):
