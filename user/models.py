@@ -7,8 +7,8 @@ from django.db.models.signals import post_save
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    profile_url = models.URLField(max_length=200)  # can't figure out how to get the recently created username to create a user profile url field
-    life_story = models.TextField(max_length=500, default="Enter your life story here:")
+    profile_url = models.URLField(max_length=200)
+    life_story = models.TextField(max_length=500)
     profile_img = models.ImageField(upload_to='profile_img')
 
     class Meta:

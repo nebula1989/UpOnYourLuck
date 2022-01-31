@@ -1,65 +1,44 @@
-{% extends 'base.html' %}
-
+{% extends "base.html" %}
+{% block title %}Profile Page{% endblock title %}
 {% block content %}
-<!-- For demo purpose -->
-<div class="row">
-    <div class="col-lg-7 mx-auto text-white text-center pt-5">
-        <h1 class="display-4">Hello, welcome to my profile, and thanks for scanning.  My name is {{ current_user }}</h1>
-        <p class="lead mb-0">(After a passerby scans the QR code, they are taken to this page.)</p>
+    <div class="row my-3 p-3">
+        <img class="rounded-circle account-img" src="{{ user.profile.profile_img.url }} " style="cursor: pointer;"/>
     </div>
-</div><!-- End -->
-
-
-<div class="row py-5 px-4">
-    <div class="col-xl-4 col-md-6 col-sm-10 mx-auto">
-
-        <!-- Profile widget -->
-        <div class="bg-white shadow rounded overflow-hidden">
-            <div class="px-4 pt-0 pb-4 bg-dark">
-                <div class="media align-items-end profile-header">
-                        <div class="profile mr-3"><img src="https://media1.popsugar-assets.com/files/thumbor/ImeDu331xbOy0I3O8vkz7gvxYIw/160x160/filters:format_auto-!!-:strip_icc-!!-:sharpen-!1,0,true!-/2014/05/05/988/n/1922283/498f9344969fa0cf_o-GEORGE-CLOONEY-facebook/i/Facts-Life-1986.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail"><a href="#" class="btn btn-dark btn-sm btn-block">Edit profile</a></div>
-                    <div class="media-body mb-5 text-white">
-                        <h4 class="mt-0 mb-0">{{ current_user}}</h4>
-                        <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i>My City, USA</p>
+    {% if user_form.errors %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <div id="form_errors">
+                {% for key, value in user_form.errors.items %}
+                    <strong>{{ value }}</strong>
+                {% endfor %}
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+    <div class="form-content">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="small mb-1">Username:</label>
+                            {{ user_form.username }}
+                        <label class="small mb-1">Email:</label>
+                            {{ user_form.email }}
                     </div>
-                </div>
-            </div>
-
-            <div class="bg-light p-4 d-flex justify-content-end text-center">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block">241</h5><small class="text-muted"> <i class="fa fa-picture-o mr-1"></i>Photos</small>
-                    </li>
-                    <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block">84K</h5><small class="text-muted"> <i class="fa fa-user-circle-o mr-1"></i>Followers</small>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="py-4 px-4">
-                <div class="py-4">
-                    <h5 class="mb-3">My Story</h5>
-                    <div class="p-4 bg-light rounded shadow-sm">
-                        <p class="font-italic mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                        <ul class="list-inline small text-muted mt-3 mb-0">
-                            <li class="list-inline-item"><i class="fa fa-comment-o mr-2"></i>12 Comments</li>
-                            <li class="list-inline-item"><i class="fa fa-heart-o mr-2"></i>200 Likes</li>
-                        </ul>
+                    <div class="form-group">
+                        <a href="#">Change Password</a>
+                        <hr>
+                        <label class="small mb-1">Change Avatar:</label>
+                        {{ profile_form.avatar }}
                     </div>
+                    <label class="small mb-1">Bio:</label> {{ profile_form.bio }}
                 </div>
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h5 class="mb-0">My Interests, Skills, and Hobbies</h5><a href="#" class="btn btn-link text-muted">Show all</a>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 mb-2 pr-lg-1"><img src="https://bootstrapious.com/i/snippets/sn-profile/img-3.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
-                    <div class="col-lg-6 mb-2 pl-lg-1"><img src="https://bootstrapious.com/i/snippets/sn-profile/img-4.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
-                    <div class="col-lg-6 pr-lg-1 mb-2"><img src="https://bootstrapious.com/i/snippets/sn-profile/img-5.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
-                    <div class="col-lg-6 pl-lg-1"><img src="https://bootstrapious.com/i/snippets/sn-profile/img-6.jpg" alt="" class="img-fluid rounded shadow-sm"></div>
-                </div>
-
             </div>
-        </div><!-- End profile widget -->
-
+            <br><br>
+            <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>
+            <button type="reset" class="btn btn-dark btn-lg">Reset</button>
+        </form>
     </div>
-</div>
-{% endblock %}
+{% endblock content %}

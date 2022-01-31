@@ -21,7 +21,14 @@ class NewUserForm(UserCreationForm):
         return user
 
 
-class ProfileUpdateForm(forms.ModelForm):
+class UpdateUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+
+class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ("profile_img", "bio")
+        # the other field "profile_url" must not be altered so need to specify which fields to update
+        fields = ("profile_img", "life_story")
