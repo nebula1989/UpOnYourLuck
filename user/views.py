@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from .models import Profile
 
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from .forms import NewUserForm, UpdateUserForm, UpdateProfileForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -23,30 +23,28 @@ def dashboard(request):
     return render(request, 'dashboard.html', args1)
 
 
-def profile(request, username=None):
-    if username:
-        current_user = get_object_or_404(User, username=username)
-    else:
-        messages.error(request, 'No User Found')
-        return redirect('welcome_index')
+def profile(request):
     args1 = {
-        'current_user': current_user,
+        'current_user': request.user,
     }
     return render(request, 'profile.html', args1)
 
-
 @login_required()
 def update_profile(request):
-    logged_in_user = request.user
-    profile_obj = Profile.objects.get(user=logged_in_user)
-    # when a user submits a form
     if request.method == 'POST':
-        profile_form = UpdateProfileForm(request.POST)
-        if profile_form.is_valid():
-            profile_obj.form.save()
-            messages.success(request, "Profile Updated Successfully.")
-    profile_form = UpdateProfileForm()
-    return render(request, template_name='profile.html', context={"update_profile_form": profile_form})
+        p_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        u_form = UpdateUserForm(request.POST, instance=request.user)
+        if p_form.is_valid() and u_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request,'Your Profile has been updated!')
+            return redirect('profile')
+    else:
+        p_form = UpdateProfileForm(instance=request.user)
+        u_form = UpdateUserForm(instance=request.user.profile)
+
+    context = {'p_form': p_form, 'u_form': u_form}
+    return render(request, 'update_profile.html', context)
 
 
 def register_request(request):

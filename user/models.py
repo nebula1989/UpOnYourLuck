@@ -3,13 +3,15 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
+from PIL import Image
+
 
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     profile_url = models.URLField(max_length=200)
     life_story = models.TextField(max_length=500)
-    profile_img = models.ImageField(upload_to='profile_img')
+    profile_img = models.ImageField(upload_to='profile_img', default='default.jpg')
 
     class Meta:
         db_table = 'Profile'
@@ -18,6 +20,15 @@ class Profile(models.Model):
 
     def __str__(self):
         return str(self.user.username)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.profile_img.path)
+        if img.mode in ("RGBA", "P"): img = img.convert("RGB")
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.profile_img.path)
 
 
 # create a user profile automatically upon account creation using signals
