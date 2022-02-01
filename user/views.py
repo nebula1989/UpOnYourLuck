@@ -1,6 +1,3 @@
-from django.contrib.auth.models import User
-from .models import Profile
-
 from django.shortcuts import render, redirect
 from .forms import NewUserForm, UpdateUserForm, UpdateProfileForm
 from django.contrib.auth import login, logout, authenticate
@@ -11,15 +8,10 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def dashboard(request):
-    """if username:
-        current_user = get_object_or_404(User, username=username)
-
-    else:
-        current_user = request.user"""
-
     args1 = {
         'current_user': request.user,
     }
+
     return render(request, 'dashboard.html', args1)
 
 
