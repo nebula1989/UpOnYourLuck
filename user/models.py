@@ -11,7 +11,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     profile_url = models.URLField(max_length=200)
     life_story = models.TextField(max_length=500)
-    profile_img = models.ImageField(upload_to='profile_img', default='default.jpg')
+    profile_img = models.ImageField(upload_to='profile_img', default='profile_img/default.jpg')
 
     class Meta:
         db_table = 'Profile'
@@ -24,7 +24,8 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         img = Image.open(self.profile_img.path)
-        if img.mode in ("RGBA", "P"): img = img.convert("RGB")
+        if img.mode in ("RGBA", "P"):
+            img = img.convert("RGB")
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
             img.thumbnail(output_size)

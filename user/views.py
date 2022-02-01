@@ -29,6 +29,7 @@ def profile(request):
     }
     return render(request, 'profile.html', args1)
 
+
 @login_required()
 def update_profile(request):
     if request.method == 'POST':
@@ -37,7 +38,7 @@ def update_profile(request):
         if p_form.is_valid() and u_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request,'Your Profile has been updated!')
+            messages.success(request, 'Your Profile has been updated!')
             return redirect('profile')
     else:
         p_form = UpdateProfileForm(instance=request.user)
