@@ -12,6 +12,7 @@ class Profile(models.Model):
     profile_url = models.URLField(max_length=200)
     life_story = models.TextField(max_length=500)
     profile_img = models.ImageField(upload_to='profile_img', default='profile_img/default.jpg')
+    qr_code_img = models.ImageField(upload_to='qr_code', default='qr_code/default.png')
 
     class Meta:
         db_table = 'Profile'
@@ -31,9 +32,16 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self.profile_img.path)
 
+    def get_profile_url(self):
+        return self.profile_url
+
 
 # create a user profile automatically upon account creation using signals
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance, profile_url=f'profile/{instance.username}')
+        # set default values for profile url, and qr code img
+        Profile.objects.create(
+            user=instance, profile_url=f'profile/{instance.username}',
+        )
+

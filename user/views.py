@@ -1,9 +1,13 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import NewUserForm, UpdateUserForm, UpdateProfileForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from .models import Profile
+
+import qrcode
 
 
 @login_required
@@ -15,6 +19,21 @@ def dashboard(request):
     return render(request, 'dashboard.html', args1)
 
 
+# for visitors going to a user's profile page
+def visitor_to_profile(request, username=None):
+    if username:
+        current_user = get_object_or_404(User, username=username)
+    else:
+        messages.error(request, 'No User Found')
+        return redirect('welcome_index')
+    args1 = {
+        'current_user': current_user,
+        'qr_code_img': current_user.profile.qr_code_img,
+    }
+    return render(request, 'profile.html', args1)
+
+
+# For logged in users to see their own profile page
 def profile(request):
     args1 = {
         'current_user': request.user,
@@ -46,8 +65,9 @@ def register_request(request):
         if user_form.is_valid():
             user = user_form.save()
             login(request, user)
+            generate_qr_code(request)
             messages.success(request, "Registration successful.")
-            return redirect("welcome_index")
+            return redirect("user_dashboard")
 
         messages.error(request, "Unsuccessful registration. Invalid information.")
     user_form = NewUserForm()
@@ -77,3 +97,11 @@ def logout_request(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     return redirect("welcome_index")
+
+
+def generate_qr_code(request):
+    DOMAIN = '127.0.0.1/'
+    profile_url = request.user.profile.profile_url
+    qr_img = qrcode.make(DOMAIN + profile_url)
+    qr_img.save('media/qrcode/' + request.user.username + '.jpg')
+    request.user.profile.qr_code_img = 'qrcode/' + request.user.username + '.jpg'
