@@ -1,6 +1,7 @@
 asgiref==3.4.1
 backports.zoneinfo==0.2.1
 beautifulsoup4==4.10.0
+crispy-bootstrap5==0.6
 Django==4.0.1
 django-appconf==1.0.5
 django-bootstrap-v5==1.0.8
@@ -9,12 +10,11 @@ django-crispy-forms==1.13.0
 django-sass-processor==1.1
 importlib-metadata==3.10.1
 libsass==0.21.0
+Pillow==9.0.0
+qrcode==7.3.1
 rcssmin==1.1.0
 rjsmin==1.2.0
 six==1.16.0
 soupsieve==2.3.1
 sqlparse==0.4.2
 zipp==3.7.0
-
-Pillow~=9.0.0
-qrcode~=7.3.1
