@@ -3,8 +3,14 @@
 
 ## Installation
 ### Fork this repo
-### Clone your forked repo
+### Open the terminal and Clone your forked repo (make sure you have Git installed in your machine)
+## git clone https://github.com/<YOUR-USERNAME>/UpOnYourLuck
 ### Open terminal and change to the newly cloned directory
+## cd UpOnYourLuck
 ### Create a python virtual environment and activate it
-### enter the command 'pip install -r requirements.txt'
+## python3 -m venv venv
+## source venv/bin/activate
+### enter the command 'pip install -r requirements.txt' (this will auto install Django, and several other dependencies, like bootstrap, cristpy forms, qrcode, etc)
+### enter the command 'python manage.py makemigrations' 
+### enter the command 'python manage.py migrate' (this will create a new sqlite database, so feel free to create and delete users as you please)
 ### enter the command 'python manage.py runserver' to test if everything is working.  You should see the welcome page.
