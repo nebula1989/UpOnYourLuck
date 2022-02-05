@@ -100,8 +100,9 @@ def logout_request(request):
 
 
 def generate_qr_code(request):
-    DOMAIN = '127.0.0.1/'
+    DOMAIN = 'http://127.0.0.1:8000/'
     profile_url = request.user.profile.profile_url
-    qr_img = qrcode.make(DOMAIN + profile_url)
-    qr_img.save('media/qrcode/' + request.user.username + '.jpg')
+    user_profile_full_url = DOMAIN + profile_url
+    qr_img = qrcode.make(user_profile_full_url)
+    qr_img.save('media/qr_code/' + request.user.username + '.jpg')
     request.user.profile.qr_code_img = 'qrcode/' + request.user.username + '.jpg'
