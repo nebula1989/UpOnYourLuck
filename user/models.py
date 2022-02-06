@@ -12,7 +12,7 @@ class Profile(models.Model):
     profile_url = models.URLField(max_length=200)
     life_story = models.TextField(max_length=500)
     profile_img = models.ImageField(upload_to='profile_img', default='profile_img/default.jpg')
-    qr_code_img = models.FilePathField(max_length=150)
+    qr_code_img = models.FilePathField(path='media/qr_code/')
 
     class Meta:
         db_table = 'Profile'
@@ -42,6 +42,6 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         # set default values for profile url, and qr code img
         Profile.objects.create(
-            user=instance, profile_url=f'profile/{instance.username}',
+            user=instance, profile_url=instance.username,
         )
 

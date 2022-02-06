@@ -28,7 +28,6 @@ def visitor_to_profile(request, username=None):
         return redirect('welcome_index')
     args1 = {
         'current_user': current_user,
-        'qr_code_img': current_user.profile.qr_code_img,
     }
     return render(request, 'profile.html', args1)
 
@@ -105,4 +104,4 @@ def generate_qr_code(request):
     user_profile_full_url = DOMAIN + profile_url
     qr_img = qrcode.make(user_profile_full_url)
     qr_img.save('media/qr_code/' + request.user.username + '.jpg')
-    request.user.profile.qr_code_img = 'qrcode/' + request.user.username + '.jpg'
+    request.user.profile.qr_code_img = request.user.username + '.jpg'
