@@ -1,0 +1,23 @@
+{% extends 'welcome/welcome_base.html' %}
+
+{% block content %}
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+          {% for user in list_of_users %}
+            <li><a href="{% url 'visitor_to_profile' user.username %}">{{ user.username }}</a></li>
+          {% endfor %}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+{% endblock %}
