@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p>Sticker Index</p>
+    <p>This is your Unique QR Code Sticker</p>
+    <p>When someone scans this code, they will be taken to your profile page.</p>
+    <div>
+        <img src="media/qr_code/{{ current_user }}.jpg" alt="..." width="450" class="rounded mb-2 img-thumbnail">
+    </div>
+
+    <p>If you need assistance with this, please click <a href="#sticker-help">here</a></p>
+
+
 {% endblock %}
