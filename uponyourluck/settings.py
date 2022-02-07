@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     "crispy_bootstrap5",
     'user.apps.UserConfig',
+    'stickers.apps.StickersConfig',
     'welcome',
 ]
 

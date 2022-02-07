@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -6,6 +6,8 @@ from . import views
 
 
 urlpatterns = [
+    # sticker url
+    path('sticker', include('stickers.urls')),
     # create account url
     path("register", views.register_request, name="register"),
     # login url
@@ -15,7 +17,8 @@ urlpatterns = [
     path('dashboard', views.dashboard, name='user_dashboard'),
     path('profile', views.profile, name='profile'),
     path('<str:username>', views.visitor_to_profile, name='visitor_to_profile'),
-    path('profile/update/', views.update_profile, name='update_profile'),
+    path('profile/update', views.update_profile, name='update_profile'),
+
 ]
 
 # Only add this when we in debug mode
