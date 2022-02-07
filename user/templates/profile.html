@@ -23,7 +23,7 @@
                                 <img src="{{ user.profile.profile_img.url }}" alt="..." width="130" class="rounded mb-2 img-thumbnail">
                                 <a href="{% url 'update_profile' %}" class="btn btn-dark btn-sm btn-block">Edit profile</a>
                             {% else %}
-                                <img src="{% static '/user/img/default.jpg' %}" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                                <img src="media/profile_img/{{ current_user }}.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail">
                             {% endif %}
 
 
