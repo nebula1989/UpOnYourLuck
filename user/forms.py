@@ -11,7 +11,7 @@ class NewUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2")
+        fields = ("username", "first_name", "email", "password1", "password2")
 
     # when save is clicked, the email input needs to be validated before saving to DB
     def save(self, commit=True):
@@ -32,4 +32,4 @@ class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         # the other field "profile_url" must not be altered so need to specify which fields to update
-        fields = ("profile_img", "life_story")
+        fields = ("profile_img", "life_story", "payment_link_url")

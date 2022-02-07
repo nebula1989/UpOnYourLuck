@@ -13,6 +13,7 @@ class Profile(models.Model):
     life_story = models.TextField(max_length=500)
     profile_img = models.ImageField(upload_to='profile_img', default='profile_img/default.jpg')
     qr_code_img = models.FilePathField(path='media/qr_code/')
+    payment_link_url = models.URLField(max_length=200, default='This user has not provided a donation link.')
 
     class Meta:
         db_table = 'Profile'

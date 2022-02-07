@@ -12,7 +12,7 @@
     <tr>
       <td>
           {% for user in list_of_users %}
-            <li><a href="{% url 'visitor_to_profile' user.username %}">{{ user.username }}</a></li>
+            <li><a href="{% url 'visitor_to_profile' user.username %}">{{ user.first_name }}</a></li>
           {% endfor %}
       </td>
     </tr>

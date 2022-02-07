@@ -26,18 +26,20 @@ def visitor_to_profile(request, username=None):
     else:
         messages.error(request, 'No User Found')
         return redirect('welcome_index')
-    args1 = {
+    context = {
         'current_user': current_user,
+        'payment_link_url': current_user.profile.payment_link_url
     }
-    return render(request, 'profile.html', args1)
+    return render(request, 'profile.html', context)
 
 
 # For logged in users to see their own profile page
 def profile(request):
-    args1 = {
+    context = {
         'current_user': request.user,
+        'payment_link_url': request.user.profile.payment_link_url
     }
-    return render(request, 'profile.html', args1)
+    return render(request, 'profile.html', context)
 
 
 @login_required()
