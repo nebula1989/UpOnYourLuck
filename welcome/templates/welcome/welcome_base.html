@@ -7,9 +7,5 @@
 
 
 {% block content %}
-    {% if user.is_authenticated %}
-        {% include 'includes/welcome_logged_in.html' %}
-    {% else %}
-        {% include 'includes/welcome_logged_out.html' %}
-    {% endif %}
+    {% include 'includes/landing_page.html' %}
 {% endblock %}
