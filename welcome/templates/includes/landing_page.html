@@ -1,20 +1,20 @@
 {% block content %}
     <h2 id="welcome-banner"></h2>
+
     <div class="jumbotron">
-      <h1 class="display-4">Welcome</h1>
-      <p class="lead">Up On Your Luck</p>
+      <h1 class="display-4" id="welcome-text">Up On Your Luck</h1>
+      <p class="lead">Insert a catchy phrase here...</p>
       <hr class="my-4">
         <div id='info-content'>
-
-
+            <h3 class="h3">What Does This Service Do?</h3>
+            <p class="lead">Creates a profile page for a person who is homeless that displays their life story and donation links.</p>
+            <p class="lead">In addition, a user will be sent a QR-coded sticker which can be placed on a cardboard sign.</p>
+            <p class="lead">When a passerby scans the User's QR-coded sticker, they will be redirected to the User's profile page where they can read about their life and or donate.</p>
         </div>
-
-
-
-
 
       <p class="lead">
         <a class="btn btn-primary btn-lg" href="{% url 'show-all-users' %}" role="button">See Users in the Area</a>
       </p>
+
     </div>
 {% endblock %}
