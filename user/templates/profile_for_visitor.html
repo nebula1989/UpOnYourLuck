@@ -5,7 +5,7 @@
 <!-- For demo purpose -->
 <div class="row">
     <div class="col-lg-7 mx-auto text-center pt-5">
-        <h1 class="display-4">Hello, {{ current_user }} this is your public profile.</h1>
+        <h1 class="display-4">Hello, welcome to my profile, and thanks for scanning.  My name is {{ current_user }}</h1>
     </div>
 </div><!-- End -->
 
@@ -17,9 +17,9 @@
         <div class="bg-white shadow rounded overflow-hidden">
             <div class="px-4 pt-0 pb-4 bg-dark">
                 <div class="media align-items-end profile-header">
-                    <img src="{{ profile_img.url }}" alt="..." width="130" class="rounded mb-2 img-thumbnail">
-                    <a href="{% url 'update_profile' %}" class="btn btn-dark btn-sm btn-block">Edit profile</a>
-                </div>
+                        <div class="profile mr-3">
+                                <img src="{{ profile_img.url }}" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                        </div>
                     <div class="media-body mb-5 text-white">
                         <h4 class="mt-0 mb-0">{{ current_user }}</h4>
                         <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i>My City, USA</p>
