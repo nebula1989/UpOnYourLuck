@@ -18,7 +18,6 @@ urlpatterns = [
     path('profile', views.profile, name='profile'),
     path('<str:username>', views.visitor_to_profile, name='visitor_to_profile'),
     path('profile/update', views.update_profile, name='update_profile'),
-
 ]
 
 # Only add this when we in debug mode
