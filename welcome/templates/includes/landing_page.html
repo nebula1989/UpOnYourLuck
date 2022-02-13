@@ -1,5 +1,5 @@
 {% block content %}
-    <h2 id="welcome-banner"></h2>
+    <!-- <h2 id="welcome-banner"></h2>
 
     <div class="jumbotron">
       <h1 class="display-4" id="welcome-text">Up On Your Luck</h1>
@@ -16,5 +16,328 @@
         <a class="btn btn-primary btn-lg" href="{% url 'show-all-users' %}" role="button">See Users in the Area</a>
       </p>
 
+    </div> -->
+    {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+    :root { 
+      --font-size-small: 20px;
+      --font-size-medium: 28px;
+      --font-size-large: 36px;
+
+    }
+
+    
+    body {
+      color: rgb(240, 242, 245);
+      font-family: 'Roboto', sans-serif;
+    }
+
+    /* Register CTA */
+    .register-cta {
+      display: flex;
+      height: 400px;
+      justify-content: space-between;
+      padding: 10px 40px 10px 20px;
+      align-items: center;
+      background-image: url("media/home_page/homeless-camp.jpg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: right;
+      background-color:rgb(240, 242, 245);
+    }
+
+    .register-cta h1 {
+      display: block;
+      font-size: var(--font-size-large);
+      letter-spacing: 2px;
+      line-height: 45px;
+      color: black;
+      
+    }
+
+    #right-register-buttons {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      
+    }
+
+    #right-register-buttons a:last-child {
+      margin-top: 40px;
+    }
+
+    /* Business Process */
+    .business-process {
+      height: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 60px;
+      background: url("media/home_page/tents.svg");
+      background-repeat: no-repeat;
+      background-size: 150px 150px;
+      background-position: bottom left 3em;
+      background-color: rgb(15, 5, 165);
+
+    }
+
+    .business-process h2 {
+      font-size: var(--font-size-medium);
+      margin-bottom: 20px;
+    }
+
+    .business-process li {
+      list-style-type: none;
+      font-size: var(--font-size-small);
+      line-height: 50px;
+    }
+
+    .business-process li i {
+      margin-right: 15px;
+    }
+
+    #business-process-li-1 {
+      margin-left: 5%;
+    }
+
+    #business-process-li-2 {
+      margin-left: 25%;
+    }
+
+
+
+
+    #business-process-li-3 {
+      margin-left: 45%;
+    }
+
+    #business-process-li-4 {
+      margin-left: 65%;
+    }
+
+    /* Homeless Advantages */
+    .homeless-advantages {
+      height: 400px;
+      display: flex;
+      width: 100%;
+      background-color: rgb(7, 104, 7);
+      align-items: space-evenly;
+      justify-content: center;
+    }
+
+    .homeless-advantages-left {
+      width: 100%;
+      padding-left: 60px;
+      /* padding-top: 60px; */
+      display: flex;
+      align-items: center;
+    }
+
+    .homeless-advantages-left ul {
+      padding-left: 0;
+    }
+
+    .homeless-advantages-left li {
+      font-size: var(--font-size-large);
+      list-style-type: none;
+      line-height: 70px;
+    }
+
+    .homeless-advantages-left li span {
+      font-weight: 700;
+    }
+
+    .homeless-advantages-right {
+      height: 100%;
+    }
+
+    .homeless-advantages-right img {
+      height: 100%;
+    }
+
+    /* Donator Advantages */
+    .donator-advantages {
+      height: 400px;
+      display: flex;
+      background-color: darkslategray;
+    }
+
+    .donator-advantages-left {
+      height: 100%;
+    }
+
+    .donator-advantages-left img {
+      height: 100%;
+    }
+
+    .donator-advantages-right {
+      display: flex;
+      align-items: center;
+      justify-content: right;
+      width: 100%;
+      background: url("media/home_page/nurse.svg");
+      background-repeat: no-repeat;
+    }
+
+    .donator-advantages-right ul {
+      padding-right: 60px;
+    }
+
+    .donator-advantages-right li {
+      font-size: var(--font-size-large);
+      list-style-type: none;
+      line-height: 70px;
+    }
+
+    /* Reviews */
+    .reviews {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 350px;
+      gap: 40px;
+      background-color:rgb(240, 242, 245);
+
+    }
+
+    .reviews i {
+      font-size: var(--font-size-large);
+      margin-top: calc(calc(250px - 40px)/4);
+      align-self: flex-start;
+      color: black;
+
+    }
+
+    .review {
+      width: 300px;
+      height: 240px;
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-radius: 10px;
+      box-shadow: 5px 10px rgb(153, 156, 161);
+      
+    }
+
+    .review p {
+      margin: 0;
+      padding: 0;
+      font-size: var(--font-size-small);
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .review p:last-child {
+      margin-top: 40px;
+    }
+
+   
+
+    /* Footer */
+    footer {
+      width: 100%;
+      background: black;
+      color: white;
+      height: 40px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    footer p {
+      margin: 0;
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+  
+  <!-- <div class="jumbotron">
+    <h1 class="display-4">Welcome to UpOnYourLuck</h1>
+    <p class="lead">A service to help humanize the homeless.</p>
+    <hr class="my-4">
+    <p>To learn more about this app, click below.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="{% url 'show-all-users' %}" role="button">See Users in the Area</a>
+  
+    </p>
+  </div> -->
+  <div class="register-cta">
+    <h1>Join a Community of Thousands and <br>Start Receiving Donations Today </h1>
+    <div id="right-register-buttons">
+      <a class="btn btn-primary btn-lg" href="#" role="button">Register Now</a>
+      <a class="btn btn-primary btn-lg" href="{% url 'show-all-users' %}" role="button">See Users in the Area</a>
     </div>
+    
+  </div>
+  <div class="business-process">
+    <h2>How It Works</h2>
+    <ol>
+      <li id="business-process-li-1"><i class="fas fa-bed"></i> Visit a participating homeless shelter</li>
+      <li id="business-process-li-2"><i class="fas fa-laptop-house"></i> Create an Online Profile and Print out QR sticker</li>
+      <li id="business-process-li-3"><i class="fas fa-qrcode"></i> Place Sticker on Visible Sign and Let Passerbys Scan QR Code</li>
+      <li id="business-process-li-4"><i class="fas fa-mobile-alt"></i> Receive Web Traffic to Your Web Site</li>
+    </ol>
+  </div>
+  <div class="homeless-advantages">
+    <div class="homeless-advantages-left">
+      <ul>
+        <li><span>Sign Up Today!</span></li>
+        <li>Improve Your Life and Wellbeing</li>
+        <li>Build an Online Presence through Story Telling</li>
+      </ul>
+    </div>
+    <div class="homeless-advantages-right">
+      <img src="media/home_page/homeless-walking.jpg" alt="">
+    </div>
+  </div>
+  <div class="donator-advantages">
+    <div class="donator-advantages-left">
+      <img src="media/home_page/food-shelter.jpeg" alt="">
+      
+    </div>
+    <div class="donator-advantages-right">
+      <ul>
+        <li>Be Kind, Not Lazy</li>
+        <li>Raise Awareness of Homelessness</li>
+        <li>Help Someone Back on their Feet</li>
+      </ul>
+    </div>
+    
+  </div>
+  <div class="reviews">
+    <i class="fas fa-quote-left"></i>
+    <div class="review">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere aliquid distinctio vitae nisi quae nemo?</p>
+      <p>- John Doe Nowhere, USA</p>
+    </div>
+    <div class="review">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere aliquid distinctio vitae nisi quae nemo?</p>
+      <p>- Jane Doe Nowhere, USA</p>
+    </div>
+    <div class="review">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere aliquid distinctio vitae nisi quae nemo?</p>
+      <p>- John Doe Nowhere, USA</p>
+    </div>
+    <i class="fas fa-quote-right"></i>
+  </div>
+  <footer class="footer">
+    <p>UpOnYourLuck - All rights reserved</p>
+  </footer>
+  <script src="https://kit.fontawesome.com/090f6f902d.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
 {% endblock %}
