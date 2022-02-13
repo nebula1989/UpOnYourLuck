@@ -14,7 +14,7 @@ urlpatterns = [
     path("logout", views.logout_request, name="logout"),
     path('dashboard', views.dashboard, name='user_dashboard'),
     path('profile', views.profile, name='profile'),
-    path('profile/update/', views.update_profile, name='update_profile'),
+    path('update_profile', views.update_profile, name='update_profile'),
 ]
 
 # Only add this when we in debug mode
