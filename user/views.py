@@ -22,22 +22,26 @@ def dashboard(request):
 # for visitors going to a user's profile page
 def visitor_to_profile(request, username=None):
     if username:
-        current_user = get_object_or_404(User, username=username)
+        username_obj = get_object_or_404(User, username=username)
     else:
         messages.error(request, 'No User Found')
         return redirect('welcome_index')
     context = {
-        'current_user': current_user,
-        'payment_link_url': current_user.profile.payment_link_url
+        'current_user': username_obj.username,
+        'payment_link_url': username_obj.profile.payment_link_url,
+        'life_story': username_obj.profile.life_story,
+        'profile_img': username_obj.profile.profile_img,
     }
-    return render(request, 'profile.html', context)
+    return render(request, 'profile_for_visitor.html', context)
 
 
 # For logged in users to see their own profile page
 def profile(request):
     context = {
         'current_user': request.user,
-        'payment_link_url': request.user.profile.payment_link_url
+        'payment_link_url': request.user.profile.payment_link_url,
+        'life_story': request.user.profile.life_story,
+        'profile_img': request.user.profile.profile_img,
     }
     return render(request, 'profile.html', context)
 
