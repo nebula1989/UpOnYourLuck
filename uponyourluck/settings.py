@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'stickers.apps.StickersConfig',
     'welcome',
+    'localflavor',
 ]
 
 MIDDLEWARE = [

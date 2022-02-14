@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from localflavor.us.models import USStateField
 
 from PIL import Image
 
@@ -13,7 +14,9 @@ class Profile(models.Model):
     life_story = models.TextField(max_length=500)
     profile_img = models.ImageField(upload_to='profile_img', default='profile_img/default.jpg')
     qr_code_img = models.FilePathField(path='media/qr_code/')
-    payment_link_url = models.URLField(max_length=200, default='This user has not provided a donation link.')
+    payment_link_url = models.URLField(max_length=200, default="https://cash.app/$")
+    city = models.CharField(default="Raleigh", max_length=60)
+    state = USStateField(default="NC", blank=True)
 
     class Meta:
         db_table = 'Profile'
