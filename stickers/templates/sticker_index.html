@@ -2,11 +2,19 @@
 {% block content %}
     <p>This is your Unique QR Code Sticker</p>
     <p>When someone scans this code, they will be taken to your profile page.</p>
+    <p>You can also click the Sticker to print it.</p>
     <div>
-        <img src="media/qr_code/{{ current_user }}.jpg" alt="..." width="450" class="rounded mb-2 img-thumbnail">
+        <img src="media/qr_code/{{ current_user }}.jpg" id="qr_code" style="cursor: pointer;" alt="..." width="450" class="rounded mb-2 img-thumbnail" onclick="printImg('media/qr_code/{{ current_user }}.jpg')">
     </div>
 
     <p>If you need assistance with this, please click <a href="#sticker-help">here</a></p>
 
+    <script>
+        function printImg(url) {
+            var win = window.open('');
+            win.document.write('<img src="' + url + '" height="250%" style='+'"' + 'display: block; margin-left: auto; margin-right: auto;'+'" onload="window.print();window.close()" />');
+            win.focus();
+        }
+    </script>
 
 {% endblock %}

@@ -1,3 +1,4 @@
+from textwrap import fill
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import NewUserForm, UpdateProfileForm #UpdateUserForm
@@ -42,6 +43,8 @@ def profile(request):
         'payment_link_url': request.user.profile.payment_link_url,
         'life_story': request.user.profile.life_story,
         'profile_img': request.user.profile.profile_img,
+        'city': request.user.profile.city,
+        'state': request.user.profile.state,
     }
     return render(request, 'profile.html', context)
 
