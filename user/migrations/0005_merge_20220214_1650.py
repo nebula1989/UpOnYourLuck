@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0003_alter_profile_payment_link_url copy'),
+        ('user', '0003_alter_profile_payment_link_url'),
         ('user', '0004_add_city_state'),
     ]
 

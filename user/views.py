@@ -27,12 +27,18 @@ def visitor_to_profile(request, username=None):
     else:
         messages.error(request, 'No User Found')
         return redirect('welcome_index')
+        
+    if username_obj.username == request.user.username:
+        return redirect('profile')
     context = {
-        'current_user': username_obj.username,
+        'profile_username': username_obj.username,
         'payment_link_url': username_obj.profile.payment_link_url,
         'life_story': username_obj.profile.life_story,
         'profile_img': username_obj.profile.profile_img,
+        'city': username_obj.profile.city,
+        'state': username_obj.profile.state,
     }
+    
     return render(request, 'profile_for_visitor.html', context)
 
 

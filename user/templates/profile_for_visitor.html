@@ -3,12 +3,20 @@
 
 {% block content %}
 <!-- For demo purpose -->
+{% block css %}
+    <!-- <link rel="stylesheet" type="text/css" href="{% static '../static/user/styles.css' %}" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+{% endblock %}
+
 <div class="row">
+    {% if profile_username == current_user.username %}
+    <a href="{% url 'profile' %}"></a>
+    {% endif %}  
     <div class="col-lg-7 mx-auto text-center pt-5">
-        <h1 class="display-4">Hello, welcome to my profile, and thanks for scanning.  My name is {{ current_user }}</h1>
+        <h1 class="display-4">Hello, welcome to my profile, and thanks for scanning.  My name is {{ profile_username }}</h1>
     </div>
 </div><!-- End -->
-
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-620abdb966c95258"></script>
 
 <div class="row py-5 px-4">
     <div class="col-xl-4 col-md-6 col-sm-10 mx-auto">
@@ -21,8 +29,8 @@
                                 <img src="{{ profile_img.url }}" alt="..." width="130" class="rounded mb-2 img-thumbnail">
                         </div>
                     <div class="media-body mb-5 text-white">
-                        <h4 class="mt-0 mb-0">{{ current_user }}</h4>
-                        <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i>My City, USA</p>
+                        <h4 class="mt-0 mb-0">{{ profile_username }}</h4>
+                        <p class="small mb-4"> <i class="fa-solid fa-location-dot"></i> {{city}}, {{state}}</p>
                     </div>
                 </div>
             </div>
@@ -39,9 +47,12 @@
                     <h5 class="mb-0">Donation Link</h5>
                 </div>
                 <div class="row">
-                    <a href="{{ payment_link_url }}" target="_blank"><img src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/r0mqzkkha3nmbnsvodqm" alt="..."></a>
+                    {% if payment_link_url != 'https://cash.app/$' %}
+                        <a href="{{ payment_link_url }}" target="_blank"><img src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/r0mqzkkha3nmbnsvodqm" alt="..."></a>
+                    {% else %}
+                        <p class="font-italic mb-0">{{ profile_username }} has not setup a donation link yet.</p>
+                    {% endif %}       
                 </div>
-
             </div>
         </div><!-- End profile widget -->
 
