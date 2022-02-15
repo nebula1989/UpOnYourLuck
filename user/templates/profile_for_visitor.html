@@ -4,14 +4,11 @@
 {% block content %}
 <!-- For demo purpose -->
 {% block css %}
-    <!-- <link rel="stylesheet" type="text/css" href="{% static '../static/user/styles.css' %}" /> -->
+    <link rel="stylesheet" type="text/css" href="{% static '../static/user/styles.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 {% endblock %}
 
-<div class="row">
-    {% if profile_username == current_user.username %}
-    <a href="{% url 'profile' %}"></a>
-    {% endif %}  
+<div class="row"> 
     <div class="col-lg-7 mx-auto text-center pt-5">
         <h1 class="display-4">Hello, welcome to my profile, and thanks for scanning.  My name is {{ profile_username }}</h1>
     </div>
