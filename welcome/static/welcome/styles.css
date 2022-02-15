@@ -53,7 +53,7 @@ body {
   flex-direction: column;
   justify-content: center;
   padding-left: 3.75em;
-  background: url("background-images//tents.svg");
+  background: url("background-images/tents.svg");
   background-repeat: no-repeat;
   background-size: 9.375em 9.375em;
   background-position: bottom left 3em;
