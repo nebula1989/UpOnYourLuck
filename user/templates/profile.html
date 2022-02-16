@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block content %}
-<!-- For demo purpose -->
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static '../static/user/styles.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
@@ -11,7 +10,7 @@
     <div class="col-lg-7 mx-auto text-center pt-5">
         <h1 class="display-4">Hello, {{ current_user }} this is your public profile.</h1>
     </div>
-</div><!-- End -->
+</div>
 
 <script src="{% static '../static/user/app.js' %}"></script>
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
@@ -25,10 +24,11 @@
         <div class="bg-white shadow rounded overflow-hidden">
             <div class="px-4 pt-0 pb-4 bg-dark">
                 <div class="media align-items-end profile-header">
-                    <img src="{{ profile_img.url }}" alt="..." width="130" class="rounded mb-2 img-thumbnail">
-                    <a href="{% url 'update_profile' %}" class="btn btn-dark btn-sm btn-block">Edit profile</a>
-                    <!-- <a href="{% url 'sticker_index' %}" class="btn btn-dark btn-sm btn-block">QR Code</a> -->
-                </div>
+                    <div class="profile mr-3">
+                        <img src="{{ profile_img.url }}" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                        <a href="{% url 'update_profile' %}" class="btn btn-dark btn-sm btn-block">Edit profile</a>
+                        <!-- <a href="{% url 'sticker_index' %}" class="btn btn-dark btn-sm btn-block">QR Code</a> -->
+                    </div>
                     <div class="media-body mb-5 text-white">
                         <h4 class="mt-0 mb-0">{{ current_user }}</h4>
                         <p class="small mb-4"> <i class="fa-solid fa-location-dot"></i> {{city}}, {{state}}</p>

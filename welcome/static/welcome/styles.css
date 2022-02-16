@@ -227,7 +227,12 @@ footer p {
   text-align: center;
 }
 
+
 /***************** Tablet Media Query *************/
+
+
+/* Mobile Media Query */
+
 @media (max-width: 991px) {
   body {
     width: 100%;

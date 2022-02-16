@@ -1,3 +1,9 @@
 #dashboard-banner {
     color: black;
 }
+
+
+.profile-header {
+    transform: translateY(2rem);
+}
+
