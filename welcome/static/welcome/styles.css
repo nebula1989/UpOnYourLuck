@@ -4,6 +4,10 @@
   --font-size-small: 1.25rem;
   --font-size-medium: 1.75rem;
   --font-size-large: 2.25rem;
+
+  --font-size-large-phone: 1.5rem;
+  --font-size-small-phone: 0.75rem;
+  --font-size-medium-phone: 1rem;
 }
 
 body {
@@ -152,17 +156,17 @@ body {
   align-items: center;
   justify-content: right;
   width: 100%;
-  background: url("background-images/nurse.svg");
+  /* background: url("background-images/nurse.svg");
   background-repeat: no-repeat;
-  background-size: 20em;
+  background-size: 20em; */
 }
 
 .donator-advantages-right ul {
-  padding-right: 3.75em;
+  padding-right: 2em;
 }
 
 .donator-advantages-right li {
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-medium);
   list-style-type: none;
   line-height: 4.375rem;
 }
@@ -223,7 +227,7 @@ footer p {
   text-align: center;
 }
 
-/* Mobile Media Query */
+/***************** Tablet Media Query *************/
 @media (max-width: 991px) {
   body {
     width: 100%;
@@ -231,10 +235,19 @@ footer p {
 
   .register-cta {
     background-size: cover;
-
+    background-position: left;
     width: 100%;
     flex-direction: column;
     justify-content: center;
+    padding: 0.625em 0.625em 0.625em 0.625em;
+  }
+
+  .register-cta br {
+    display: none;
+  }
+
+  .register-cta h1 {
+    text-align: center;
   }
 
   #right-register-buttons {
@@ -251,6 +264,7 @@ footer p {
   .business-process {
     background-position: top left 3em;
     background-size: 8em 8em;
+    padding-left: 0;
   }
 
   .business-process h2 {
@@ -280,8 +294,31 @@ footer p {
     align-items: center;
   }
 
+  .homeless-advantages li {
+    font-size: var(--font-size-medium);
+    list-style-type: none;
+    line-height: 3.403rem;
+  }
+
+  .homeless-advantages li:first-child {
+    text-align: center;
+  }
+
   .homeless-advantages-right img {
     max-width: 100%;
+  }
+
+  .homeless-advantages-left {
+    padding: 0;
+  }
+
+  .homeless-advantages-left ul {
+    width: 100%;
+  }
+
+  .homeless-advantages-left ul li {
+    width: 100%;
+    text-align: center;
   }
 
   /* donator-advantages */
@@ -305,6 +342,15 @@ footer p {
     background-size: 10em;
   }
 
+  .donator-advantages-right ul {
+    width: 100%;
+  }
+
+  .donator-advantages-right li {
+    text-align: center;
+    font-size: var(--font-size-large-phone);
+  }
+
   /* Reviews */
   .reviews {
     flex-direction: column;
@@ -324,5 +370,53 @@ footer p {
 
   .review p:last-child {
     margin-top: 1em;
+  }
+}
+
+/**************** Mobile phone Media Query **************/
+@media (max-width: 450px) {
+  /* Register section */
+  .register-cta h1 {
+    font-size: var(--font-size-medium);
+  }
+
+  #right-register-buttons {
+    flex-direction: row;
+    gap: 1em;
+  }
+
+  /* Business Process section */
+
+  .business-process {
+    background-position: top left 0.5em;
+  }
+
+  .business-process ol {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  /* Homeless Advantages section */
+  .homeless-advantages-left {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  .homeless-advantages li {
+    font-size: var(--font-size-small);
+    list-style-type: none;
+    line-height: 2.431rem;
+  }
+
+  /* Donator Advantages section */
+  .donator-advantages-right li {
+    font-size: var(--font-size-large-phone);
+    line-height: 3.403rem;
+    text-align: center;
+  }
+
+  /* Reviews section */
+  .review p {
+    font-size: var(--font-size-medium-phone);
   }
 }
