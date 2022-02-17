@@ -425,3 +425,51 @@ footer p {
     font-size: var(--font-size-medium-phone);
   }
 }
+
+/**************** Mobile phone Media Query **************/
+@media (max-width: 450px) {
+  /* Register section */
+  .register-cta h1 {
+    font-size: var(--font-size-medium);
+  }
+
+  #right-register-buttons {
+    flex-direction: row;
+    gap: 1em;
+  }
+
+  /* Business Process section */
+
+  .business-process {
+    background-position: top left 0.5em;
+  }
+
+  .business-process ol {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  /* Homeless Advantages section */
+  .homeless-advantages-left {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  .homeless-advantages li {
+    font-size: var(--font-size-small);
+    list-style-type: none;
+    line-height: 2.431rem;
+  }
+
+  /* Donator Advantages section */
+  .donator-advantages-right li {
+    font-size: var(--font-size-large-phone);
+    line-height: 3.403rem;
+    text-align: center;
+  }
+
+  /* Reviews section */
+  .review p {
+    font-size: var(--font-size-medium-phone);
+  }
+}

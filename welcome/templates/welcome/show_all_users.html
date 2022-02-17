@@ -1,4 +1,8 @@
 {% extends 'welcome/welcome_base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'welcome/show_all_users.css' %}"/>
+{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -17,7 +21,7 @@
                     </div>
                     <div class="card-footer">
                         <!-- <button class="btn btn-light btn-sm bg-white has-icon btn-block" type="button" href="{% url 'visitor_to_profile' user.username %}">View Profile</button> -->
-                        <a href="{% url 'visitor_to_profile' user.username %}" class="btn btn-light btn-sm bg-white has-icon btn-block">View Profile</a>
+                        <a href="{% url 'visitor_to_profile' user.username %}" class="btn btn-outline-dark btn-sm has-icon btn-block">View Profile</a>
                         <!-- <button class="btn btn-light btn-sm bg-white has-icon ml-2" type="button"></button> -->
                     </div>
                     </div>
