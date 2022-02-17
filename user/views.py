@@ -69,7 +69,11 @@ def update_profile(request):
         p_form = UpdateProfileForm(instance=request.user)
         #u_form = UpdateUserForm(instance=request.user.profile)
 
-    context = {'p_form': p_form} #, 'u_form': u_form}
+    context = {
+            'p_form': p_form,
+            'current_user': request.user,
+            'profile_img': request.user.profile.profile_img,
+        }
     return render(request, 'update_profile.html', context)
 
 

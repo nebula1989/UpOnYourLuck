@@ -1,40 +1,45 @@
-<nav class="navbar navbar-expand-md navbar-dark navbar-fixed-top bg-dark">
-    <a class="navbar-brand" href="{% url 'welcome_index' %}">UpOnYourLuck</a>
+{% block css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+{% endblock %}
 
-    <!-- NavBar Button Toggler on small screen sizes -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu"
-        aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-inverse navbar-expand-md navbar-dark navbar-fixed-top bg-dark">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'welcome_index' %}">UpOnYourLuck</a>
+        </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+                aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <div class="collapse navbar-collapse" id="navbarMenu">
-        <ul class="navbar-nav mr-auto">
+        <div class="collapse navbar-collapse" id="navbarMenu">
             {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout | </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'user_dashboard' %}">My Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' %}">View My Profile</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'update_profile' %}">Update Profile</a>
-                </li>
-
+                <ul class="navbar-nav me-auto">
+                    <li class="active nav-item"><a class="nav-link" href="{% url 'welcome_index' %}"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li class="dropdown nav-item bg-dark me-auto"><a class="dropdown-toggle nav-link bg-dark" data-bs-toggle="dropdown" href="#"><i class="fa-solid fa-user"></i> Profile <span class="caret"></span></a>
+                        <ul class="dropdown-menu nav-item bg-dark">
+                            <li class="nav-item bg-dark">
+                                <a class="nav-link" href="{% url 'user_dashboard' %}">Dashboard</a>
+                            </li>
+                            <li class="nav-item bg-dark">
+                                <a class="nav-link" href="{% url 'profile' %}">View Profile</a>
+                            </li>
+            
+                            <li class="nav-item bg-dark">
+                                <a class="nav-link" href="{% url 'update_profile' %}">Update Profile</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}"><i class="fa-solid fa-right-to-bracket"></i> Logout</a>
+                    </li>
+                </ul>
             {% else %}
-                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                <ul class="navbar-nav navbar-right me-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}"><i class="fa-solid fa-user"></i> Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+                </ul>
             {% endif %}
-
-        </ul>
-        <!--
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        -->
+        </div>
     </div>
 </nav>
