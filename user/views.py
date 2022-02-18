@@ -1,7 +1,7 @@
 from textwrap import fill
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import NewUserForm, UpdateProfileForm #UpdateUserForm
+from .forms import LoginForm, NewUserForm, UpdateProfileForm #UpdateUserForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -89,12 +89,12 @@ def register_request(request):
 
         messages.error(request, "Unsuccessful registration. Invalid information.")
     user_form = NewUserForm()
-    return render(request=request, template_name="register.html", context={"register_form": user_form})
+    return render(request=request, template_name="register.html", context={"register_form": user_form, "user": request.user})
 
 
 def login_request(request):
     if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
+        form = LoginForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
@@ -107,7 +107,7 @@ def login_request(request):
                 messages.error(request, "Invalid username or password.")
         else:
             messages.error(request, "Invalid username or password.")
-    form = AuthenticationForm()
+    form = LoginForm()
     return render(request=request, template_name="login.html", context={"login_form": form})
 
 
