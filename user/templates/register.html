@@ -1,18 +1,81 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static '/user/styles.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+{% endblock %}
 
 {% block content %}
+<div class="mask d-flex align-items-center h-100 bg-dark">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 20px;">
+            <div class="card-body p-5">
+				{% if not user.is_authenticated %}
+					<h2 class="text-center mb-5">Create an account</h2>
 
-<!--Register--> 
-<div class="container py-5">
-	<h1>Register</h1>
-	<form method="POST">
-		{% csrf_token %}
-		{{ register_form|crispy }}                    
-		<button class="btn btn-primary" type="submit">Register</button>
-	</form>
-	<p class="text-center">If you already have an account, <a href="{% url 'login' %}">login</a> instead.</p>
+					<form method="POST">
+						{% csrf_token %}
+
+						<div class="form-outline mb-3">
+							<label class="form-label" for="form3Example1cg">Username</label>
+							{{ register_form.username }}
+						</div>
+
+						<div class="form-outline mb-3">
+							<label class="form-label" for="form3Example1cg">First Name</label>
+							{{ register_form.first_name }}
+						</div>
+
+						<div class="form-outline mb-3">
+							<label class="form-label" for="form3Example1cg">Email Address</label>
+							{{ register_form.email }}
+						</div>
+
+						<div class="form-outline mb-3">
+							<label class="form-label" for="form3Example1cg">Password</label>
+							{{ register_form.password1 }}
+						</div>
+
+						<div class="form-outline mb-3">
+							<label class="form-label" for="form3Example1cg">Repeat Password</label>
+							{{ register_form.password2 }}
+						</div>
+
+						<div class="form-check d-flex justify-content-center mb-5">
+						<input
+							class="form-check-input me-2"
+							type="checkbox"
+							value=""
+							id="form2Example3cg"
+							required
+						/>
+						<label class="form-check-label" for="form2Example3g">
+							I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
+						</label>
+						</div>
+
+						<div class="d-flex justify-content-center">
+						<button type="submit" class="btn btn-primary rounded-pill btn-outline-dark text-white">Register</button>
+						</div>
+
+						<p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="{% url 'login' %}" class="fw-bold text-body"><u>Login here</u></a></p>
+
+					</form>
+				{% else %}
+					<h2 class="text-center mb-5">You're already logged in.</h2>
+					<p class="text-center text-muted mt-5 mb-0">Click <a href="{% url 'profile' %}" class="fw-bold text-body"><u>here</u></a> to go to your profile</p>
+				{% endif %}
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 
 {% endblock %}

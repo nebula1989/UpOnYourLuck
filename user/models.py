@@ -1,5 +1,5 @@
 import os
-from uuid import uuid4
+from pathlib import Path
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
@@ -9,6 +9,8 @@ from PIL import Image
 import os
 from django.utils.deconstruct import deconstructible
 from django.core.files.storage import FileSystemStorage
+from os.path import splitext
+from collections import Counter
 
 @deconstructible
 class UploadToPathAndRename(object):
@@ -32,16 +34,6 @@ class OverwriteStorage(FileSystemStorage):
         if self.exists(name):
             os.remove(os.path.join('media', name))
         return name
-
-def rename_profile_img(user, path):
-    def wrapper(instance, filename):
-        ext = filename.split('.')[-1]
-        if instance.pk:
-            filename = '{}.{}'.format(instance.pk, ext)
-        else:
-            filename = '{}.{}'.format(user.username, ext)
-        return os.path.join(path, filename)
-    return wrapper
 
 # Create your models here.
 class Profile(models.Model):

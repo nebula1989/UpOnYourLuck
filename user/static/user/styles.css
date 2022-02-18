@@ -7,3 +7,12 @@
     transform: translateY(2rem);
 }
 
+html, 
+body {
+    height: 100%;
+}
+
+.form-rounded {
+    border-radius: 1rem;
+    border-color: black;
+}
