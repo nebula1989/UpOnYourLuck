@@ -9,20 +9,16 @@
     <div class="main-body">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm">
             {% for user in list_of_users %}
-                <!-- <li class="list-group-item"><a href="{% url 'visitor_to_profile' user.username %}">{{ user.first_name.upper }}</a></li> -->
                 <div class="col mb-3">
                     <div class="card">
                     <img src="/media/banner_imgs/banner{{ num_list|random }}.jpg" alt="Cover" class="card-img-top">
                     <div class="card-body text-center">
                         <img src="{{user.profile.profile_img.url}}" style="width:100px;margin-top:-60px;" alt="User" class="rounded mb-2 img-thumbnail">
                         <h5 class="card-title" style="color: black;">{{ user.first_name }}</h5>
-                        <!-- <p class="text-secondary mb-1">{{user.profile.}}</p> -->
                         <p class="text-muted font-size-sm">{{ user.profile.city }}, {{user.profile.state}}</p>
                     </div>
                     <div class="card-footer">
-                        <!-- <button class="btn btn-light btn-sm bg-white has-icon btn-block" type="button" href="{% url 'visitor_to_profile' user.username %}">View Profile</button> -->
                         <a href="{% url 'visitor_to_profile' user.username %}" class="btn btn-outline-dark btn-sm has-icon btn-block">View Profile</a>
-                        <!-- <button class="btn btn-light btn-sm bg-white has-icon ml-2" type="button"></button> -->
                     </div>
                     </div>
                 </div>
