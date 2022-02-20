@@ -3,6 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from . import views
+from stickers import views as sticker_views
 
 
 urlpatterns = [
@@ -17,6 +18,7 @@ urlpatterns = [
     path('dashboard', views.dashboard, name='user_dashboard'),
     path('profile', views.profile, name='profile'),
     path('<str:username>', views.visitor_to_profile, name='visitor_to_profile'),
+    path('stickers/<str:username>', sticker_views.sticker_index_for_visitor, name='visitor_to_qr_code'),
     path('profile/update', views.update_profile, name='update_profile'),
 ]
 

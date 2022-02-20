@@ -10,7 +10,7 @@
 
 <div class="row"> 
     <div class="col-lg-7 mx-auto text-center pt-5">
-        <h1 class="display-4">Hello, welcome to my profile, and thanks for scanning.  My name is {{ profile_username }}</h1>
+        <h1 class="display-4">Hello,  My name is {{ profile_username }}</h1>
     </div>
 </div><!-- End -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-620abdb966c95258"></script>
@@ -50,6 +50,13 @@
                         <p class="font-italic mb-0">{{ profile_username }} has not setup a donation link yet.</p>
                     {% endif %}       
                 </div>
+
+                <!-- View QR Code Image -->
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="mb-0"><a href="{% url 'visitor_to_qr_code' profile_username %}">QR COde</a></h5>
+                </div>
+
+
             </div>
         </div><!-- End profile widget -->
 
