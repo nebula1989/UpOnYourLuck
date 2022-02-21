@@ -6,7 +6,8 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from localflavor.us.models import USStateField
 from PIL import Image
-import os, platform
+import os
+import platform
 from django.utils.deconstruct import deconstructible
 from django.core.files.storage import FileSystemStorage
 
