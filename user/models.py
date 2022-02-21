@@ -36,7 +36,7 @@ class OverwriteStorage(FileSystemStorage):
 
         if platform.system() == 'Windows':
             file = file.split('\\')[1]
-        elif platform.system() == 'Linux' or platform.system() == 'MacOSX':
+        elif platform.system() == 'Linux' or platform.system() == 'Darwin':
             file = file.split('/')[1]
 
         #Checks for other file extensions to remove
