@@ -4,7 +4,7 @@
 ## Installation
 ### Fork this repo
 ### Open the terminal and Clone your forked repo (make sure you have Git installed in your machine)
-## git clone https://github.com/<YOUR-USERNAME>/UpOnYourLuck
+## git clone https://github.com/YOUR-USERNAME/UpOnYourLuck
 ### Open terminal and change to the newly cloned directory
 ## cd UpOnYourLuck
 ### Create a python virtual environment and activate it
