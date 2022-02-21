@@ -10,7 +10,7 @@
 ### Create a python virtual environment and activate it
 ## python3 -m venv venv
 ## source venv/bin/activate
-### enter the command 'pip install -r requirements.txt' (this will auto install Django, and several other dependencies, like bootstrap, cristpy forms, qrcode, etc)
+### enter the command 'pip install -r requirements.txt' (this will auto install Django, and several other dependencies, like bootstrap, crispy forms, qrcode, etc)
 ### enter the command 'python manage.py makemigrations' 
 ### enter the command 'python manage.py migrate' (this will create a new sqlite database, so feel free to create and delete users as you please)
 ### enter the command 'python manage.py runserver' to test if everything is working.  You should see the welcome page.
