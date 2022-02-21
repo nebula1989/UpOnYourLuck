@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from localflavor.us.models import USStateField
 from PIL import Image
-import os
+import os, platform
 from django.utils.deconstruct import deconstructible
 from django.core.files.storage import FileSystemStorage
 
@@ -32,7 +32,11 @@ class OverwriteStorage(FileSystemStorage):
         # If the filename already exists, remove it as if it was a true file system
         ext_list = ['.jpg', '.png', '.gif']
         file = name.split('.')[0]
-        file = file.split('\\')[1]
+
+        if platform.system() == 'Windows':
+            file = file.split('\\')[1]
+        elif platform.system() == 'Linux' or platform.system() == 'MacOSX':
+            file = file.split('/')[1]
 
         #Checks for other file extensions to remove
         for ext in ext_list:
