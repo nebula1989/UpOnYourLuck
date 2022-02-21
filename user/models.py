@@ -30,8 +30,15 @@ class UploadToPathAndRename(object):
 class OverwriteStorage(FileSystemStorage):
     def get_available_name(self, name, max_length=None):
         # If the filename already exists, remove it as if it was a true file system
-        if self.exists(name):
-            os.remove(os.path.join('media', name))
+        ext_list = ['.jpg', '.png', '.gif']
+        file = name.split('.')[0]
+        file = file.split('\\')[1]
+
+        #Checks for other file extensions to remove
+        for ext in ext_list:
+            filename = 'profile_img/{}{}'.format(file, ext)
+            if self.exists(filename):
+                os.remove(os.path.join('media', filename))
         return name
 
 
