@@ -9,8 +9,7 @@ from PIL import Image
 import os
 from django.utils.deconstruct import deconstructible
 from django.core.files.storage import FileSystemStorage
-from os.path import splitext
-from collections import Counter
+
 
 @deconstructible
 class UploadToPathAndRename(object):
@@ -27,24 +26,30 @@ class UploadToPathAndRename(object):
         # return the whole path to the file
         return os.path.join(self.sub_path, filename)
 
-class OverwriteStorage(FileSystemStorage):
 
+class OverwriteStorage(FileSystemStorage):
     def get_available_name(self, name, max_length=None):
         # If the filename already exists, remove it as if it was a true file system
         if self.exists(name):
             os.remove(os.path.join('media', name))
         return name
 
+
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     profile_url = models.URLField(max_length=200)
     life_story = models.TextField(max_length=500)
-    profile_img = models.ImageField(upload_to=UploadToPathAndRename(user, "profile_img/"), default='profile_img/default.jpg', storage=OverwriteStorage())
+    profile_img = models.ImageField(
+        upload_to=UploadToPathAndRename(user, "profile_img/"),
+        storage=OverwriteStorage(),
+        default='profile_img/default.jpg',
+    )
     qr_code_img = models.FilePathField(path='media/qr_code/')
     payment_link_url = models.URLField(max_length=200, default="https://cash.app/$")
     city = models.CharField(default="Raleigh", max_length=60)
     state = USStateField(default="NC", blank=True)
+
 
     class Meta:
         db_table = 'Profile'
