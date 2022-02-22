@@ -1,6 +1,9 @@
+import django.contrib.messages
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
+from .forms import SendStickerForm
 
 
 # Create your views here.
@@ -26,3 +29,19 @@ def sticker_index_for_visitor(request, username=None):
     }
 
     return render(request, 'sticker_index_for_visitor.html', context)
+
+
+def request_sticker(request):
+    if request.method == 'POST':
+        request_sticker_form = SendStickerForm(request.POST)
+
+        if request_sticker_form.is_valid():
+            request_sticker_form.save()
+
+        messages.success(request=request, message='Your Order has Been Processed')
+        return redirect('user_dashboard')
+
+    else:
+        request_sticker_form = SendStickerForm
+    return render(request, 'request_sticker.html', {'request_sticker_form': request_sticker_form})
+
