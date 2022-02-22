@@ -1,5 +1,3 @@
-import os
-from pathlib import Path
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
@@ -7,7 +5,7 @@ from django.db.models.signals import post_save
 from localflavor.us.models import USStateField
 from PIL import Image
 import os
-import platform
+from platform import system as local_os
 from django.utils.deconstruct import deconstructible
 from django.core.files.storage import FileSystemStorage
 
@@ -34,9 +32,9 @@ class OverwriteStorage(FileSystemStorage):
         ext_list = ['.jpg', '.png', '.gif']
         file = name.split('.')[0]
 
-        if platform.system() == 'Windows':
+        if local_os() == 'Windows':
             file = file.split('\\')[1]
-        elif platform.system() == 'Linux' or platform.system() == 'MacOSX':
+        elif local_os() == 'Linux' or local_os() == 'Darwin':
             file = file.split('/')[1]
 
         #Checks for other file extensions to remove
