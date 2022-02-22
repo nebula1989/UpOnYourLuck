@@ -67,13 +67,25 @@ class LoginForm(AuthenticationForm):
         
 
 
-"""class UpdateUserForm(forms.ModelForm):
+class UpdateUserForm(forms.ModelForm):
+    email = forms.EmailField(required=True, 
+        widget = forms.EmailInput(
+            attrs = {
+                'class': 'form-control form-control-lg form-rounded',
+                'placeholder': 'name@example.com'
+            }))
+
     class Meta:
         model = User
-        fields = ['username', 'email']"""
+        fields = ['username', 'email', 'first_name', 'last_name']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control form-control-lg form-rounded', 'placeholder': 'First Name'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control form-control-lg form-rounded', 'placeholder': 'Last Name'}),
+        }
 
 
 class UpdateProfileForm(forms.ModelForm):
+    
     class Meta:
         model = Profile
         # the other field "profile_url" must not be altered so need to specify which fields to update

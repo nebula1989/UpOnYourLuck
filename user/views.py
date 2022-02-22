@@ -1,7 +1,7 @@
 from textwrap import fill
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import LoginForm, NewUserForm, UpdateProfileForm #UpdateUserForm
+from .forms import LoginForm, NewUserForm, UpdateProfileForm, UpdateUserForm #UpdateUserForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -59,7 +59,7 @@ def profile(request):
 def update_profile(request):
     if request.method == 'POST':
         p_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        #u_form = UpdateUserForm(request.POST, instance=request.user)
+        u_form = UpdateUserForm(request.POST, instance=request.user)
         if p_form.is_valid(): #and u_form.is_valid():
             #u_form.save()
             p_form.save()
@@ -67,10 +67,11 @@ def update_profile(request):
             return redirect('profile')
     else:
         p_form = UpdateProfileForm(instance=request.user)
-        #u_form = UpdateUserForm(instance=request.user.profile)
+        u_form = UpdateUserForm(instance=request.user.profile)
 
     context = {
             'p_form': p_form,
+            'u_form': u_form,
             'current_user': request.user,
             'profile_img': request.user.profile.profile_img,
         }

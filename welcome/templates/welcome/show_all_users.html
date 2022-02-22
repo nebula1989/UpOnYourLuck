@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container"
+<div class="container">
     <div class="main-body">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm">
             {% for user in list_of_users %}
@@ -18,7 +18,7 @@
                         <p class="text-muted font-size-sm">{{ user.profile.city }}, {{user.profile.state}}</p>
                     </div>
                     <div class="card-footer">
-                        <a href="{% url 'visitor_to_profile' user.username %}" class="btn btn-outline-dark btn-sm has-icon btn-block">View Profile</a>
+                        <a href="{% url 'visitor_to_profile' user.username %}" class="btn btn-primary rounded-pill btn-outline-dark text-white btn-sm">View Profile</a>
                     </div>
                     </div>
                 </div>
