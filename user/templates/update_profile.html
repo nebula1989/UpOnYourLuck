@@ -8,17 +8,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 {% endblock %}
 {% block content %}
-<div class="container py-4">
-    <form method='POST' enctype="multipart/form-data">
-        <p><i>Ignore Photo section if you do not wish to update profile picture.</i></p>
-        {%csrf_token%}
-        {{p_form|crispy}}
-        <button class="btn btn-primary" type='submit'>Update</button>
-        <a class="button" href="{% url 'profile' %}">Cancel</a>
-    </form>
-</div>
 
-<!-- <div class="container-xl px-4 mt-4">
+<div class="container-xl px-4 mt-4">
     <form method='POST' enctype="multipart/form-data">
     {%csrf_token%}
     <nav class="nav nav-borders">
@@ -88,7 +79,7 @@
         </div>
     </div>
 </form>
-</div> -->
+</div>
 
 <style>
 body {
