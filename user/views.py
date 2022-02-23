@@ -1,8 +1,8 @@
 from textwrap import fill
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import LoginForm, NewUserForm, UpdateProfileForm #UpdateUserForm
-from django.contrib.auth import login, logout, authenticate
+from .forms import ChangePassword, LoginForm, NewUserForm, UpdateProfileForm, UpdateUserForm #UpdateUserForm
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
@@ -59,22 +59,39 @@ def profile(request):
 def update_profile(request):
     if request.method == 'POST':
         p_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
-        #u_form = UpdateUserForm(request.POST, instance=request.user)
-        if p_form.is_valid(): #and u_form.is_valid():
-            #u_form.save()
+        u_form = UpdateUserForm(request.POST, instance=request.user)
+        
+        if p_form.is_valid() and u_form.is_valid():
+            u_form.save()
             p_form.save()
             messages.success(request, 'Your Profile has been updated!')
             return redirect('profile')
     else:
         p_form = UpdateProfileForm(instance=request.user)
-        #u_form = UpdateUserForm(instance=request.user.profile)
+        u_form = UpdateUserForm(instance=request.user.profile)
 
     context = {
             'p_form': p_form,
+            'u_form': u_form,
             'current_user': request.user,
             'profile_img': request.user.profile.profile_img,
         }
     return render(request, 'update_profile.html', context)
+
+@login_required()
+def update_security(request):
+    if request.method == 'POST':
+        form = ChangePassword(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('profile')
+        else:
+            messages.error(request, form.errors)
+    else:
+        form = ChangePassword(request.user)
+    return render(request, 'security_update.html', {'p_form': form, 'current_user': request.user})
 
 
 def register_request(request):
