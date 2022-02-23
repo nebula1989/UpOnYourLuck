@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm, UsernameField
+from django.contrib.auth.forms import AuthenticationForm, UsernameField, PasswordChangeForm
 from django.contrib.auth.models import User
 from .models import Profile
 from crispy_forms.helper import FormHelper
@@ -32,7 +32,7 @@ class NewUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("username", "first_name", "email", "password1", "password2")
+        fields = ("username", "first_name", "last_name", "email", "password1", "password2")
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control form-control-lg form-rounded', 'placeholder': 'Username'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control form-control-lg form-rounded', 'placeholder': 'First Name'}),
@@ -64,15 +64,38 @@ class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ("username", "password")
-        
 
+class ChangePassword(PasswordChangeForm):
+    old_password = forms.CharField(required=True,
+        widget = forms.PasswordInput(
+            attrs = {
+                'class': 'form-control form-control-lg form-rounded',
+                'placeholder': 'Password'
+            }))
+    new_password1 = forms.CharField(required=True, 
+        widget = forms.PasswordInput(
+            attrs = {
+                'class': 'form-control form-control-lg form-rounded',
+                'placeholder': 'New Password'
+            }))
+    new_password2 = forms.CharField(required=True, 
+        widget = forms.PasswordInput(
+            attrs = {
+                'class': 'form-control form-control-lg form-rounded',
+                'placeholder': 'Repeat New Password'
+            }))
+
+    class Meta:
+        model = User
+        fields = ("old_password", "new_password1", "new_password2")
+        
 
 class UpdateUserForm(forms.ModelForm):
     email = forms.EmailField(required=True, 
         widget = forms.EmailInput(
             attrs = {
                 'class': 'form-control form-control-lg form-rounded',
-                'placeholder': 'name@example.com'
+                'placeholder': 'name@example.com',
             }))
 
     class Meta:
