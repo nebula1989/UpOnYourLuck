@@ -2,11 +2,6 @@
     color: black;
 }
 
-
-.profile-header {
-    transform: translateY(2rem);
-}
-
 html, 
 body {
     height: 100%;
