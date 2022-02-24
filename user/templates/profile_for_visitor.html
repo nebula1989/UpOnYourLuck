@@ -15,10 +15,8 @@
 </div><!-- End -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-620abdb966c95258"></script>
 
-<div class="row py-5 px-4">
+<!-- <div class="row py-5 px-4">
     <div class="col-xl-4 col-md-6 col-sm-10 mx-auto">
-
-        <!-- Profile widget -->
         <div class="bg-white shadow rounded overflow-hidden">
             <div class="px-4 pt-0 pb-4 bg-dark">
                 <div class="media align-items-end profile-header">
@@ -51,15 +49,82 @@
                     {% endif %}       
                 </div>
 
-                <!-- View QR Code Image -->
                 <div class="p-4 bg-light rounded shadow-sm">
                     <h5 class="mb-0"><a href="{% url 'visitor_to_qr_code' profile_username %}">See My QR Code</a></h5>
                 </div>
 
 
             </div>
-        </div><!-- End profile widget -->
-
+        </div>
+    </div>
+</div> -->
+<div class="h-60 gradient-custom-2">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-lg-9 col-xl-7">
+                <div class="card">
+                    <div class="rounded-top text-white d-flex flex-row" style="background-color: rgb(24, 24, 24); height:200px;">
+                    <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; transform: translateY(1.5rem);">
+                        <img src="{{profile_img.url}}" alt="" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1; transform: translateY(-1rem);">
+                        <form action="followers_count" method="POST">
+                            {%csrf_token%}
+                            <input type="hidden" name="following" value="{{current_user}}" readonly/>
+                            <input type="hidden" name="follower" value="{{user.username}}" readonly/>
+                            {% if follow_btn == 'follow' %}
+                                <button type="submit" class="btn btn-outline-dark rounded-pill btn-sm">
+                                    <input type="hidden" name="value" value="follow" readonly/>
+                                    Follow
+                                </button>
+                            {% else %}
+                                <button type="submit" class="btn btn-outline-dark rounded-pill btn-sm">
+                                    <input type="hidden" name="value" value="unfollow" readonly/>
+                                    Unfollow
+                                </button>
+                            {% endif %}
+                        </form>
+                    </div>
+                    <div class="ms-3" style="margin-top: 130px;">
+                        <h5>{{ profile_username }}</h5>
+                        <p class="small mb-4"> <i class="fa-solid fa-location-dot"></i> {{city}}, {{state}}</p>
+                    </div>
+                </div>
+                <div class="p-4 text-black" style="background-color: #f8f9fa;">
+                <div class="d-flex justify-content-end text-center py-1">
+                    <div class="px-3">
+                    <p class="mb-1 h5">{{user_followers}}</p>
+                    <p class="small text-muted mb-0">Followers</p>
+                    </div>
+                    <div>
+                    <p class="mb-1 h5">{{user_following}}</p>
+                    <p class="small text-muted mb-0">Following</p>
+                    </div>
+                </div>
+                </div>
+                <div class="card-body p-4 text-black">
+                    <div class="mb-5">
+                        <p class="lead fw-normal mb-1">Life Story</p>
+                        <div class="p-4" style="background-color: #f8f9fa;">
+                            <p class="font-italic mb-1 text-muted">{{life_story}}</p>
+                        </div>
+                    </div>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <p class="lead fw-normal mb-1">Donation Link</h5>
+                </div>
+                <div class="row g-2">
+                    {% if payment_link_url != 'https://cash.app/$' %}
+                        <a href="{{ payment_link_url }}" target="_blank"><img src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/r0mqzkkha3nmbnsvodqm" alt="..."></a>
+                    {% else %}
+                        <div class="p-4" style="background-color: #f8f9fa;">
+                            <p class="font-italic mb-1 text-muted">{{ profile_username }} has not setup a donation link yet.</p>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="p-4 bg-light rounded shadow-sm">
+                    <h5 class="mb-0"><a href="{% url 'visitor_to_qr_code' profile_username %}">See My QR Code</a></h5>
+                </div>
+            </div>
+        </div>
+      </div>
     </div>
 </div>
 {% endblock %}
