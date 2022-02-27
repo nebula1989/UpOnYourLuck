@@ -6,7 +6,7 @@ from django.contrib.auth import login, logout, authenticate, update_session_auth
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .models import Profile
+from .models import FollowersCount, Profile
 
 import qrcode
 
@@ -27,10 +27,31 @@ def visitor_to_profile(request, username=None):
     else:
         messages.error(request, 'No User Found')
         return redirect('welcome_index')
+
+    current_user = username_obj.username
+    logged_in_user = request.user.username
+    #print(current_user, logged_in_user)
+    user_followers = len(FollowersCount.objects.filter(following=current_user))
+    user_following = len(FollowersCount.objects.filter(follower=current_user))
+    follower_list = FollowersCount.objects.filter(following=current_user)
+
+    user_list = []
+    for x in follower_list:
+        follower_list = x.follower
+        user_list.append(follower_list)
+
+    if logged_in_user in user_list:
+        follow_btn = 'unfollow'
+    else:
+        follow_btn = 'follow'
         
     if username_obj.username == request.user.username:
         return redirect('profile')
     context = {
+        'current_user': current_user,
+        'user_followers': user_followers,
+        'user_following': user_following,
+        'follow_btn': follow_btn,
         'profile_username': username_obj.username,
         'payment_link_url': username_obj.profile.payment_link_url,
         'life_story': username_obj.profile.life_story,
@@ -41,11 +62,34 @@ def visitor_to_profile(request, username=None):
     
     return render(request, 'profile_for_visitor.html', context)
 
+def followers_count(request):
+    if request.method == 'POST':
+        value = request.POST['value']
+        following = request.POST['following']
+        follower = request.POST['follower']
+        print(following)
+
+        if value == 'follow':
+            followers_cnt = FollowersCount.objects.create(follower=follower, following=following)
+            followers_cnt.save()
+        else:
+            followers_cnt = FollowersCount.objects.get(follower=follower, following=following)
+            followers_cnt.delete()
+            
+        return redirect('/'+following)
 
 # For logged in users to see their own profile page
 def profile(request):
+    logged_in_user = request.user.username
+    #print(current_user, logged_in_user)
+    user_followers = len(FollowersCount.objects.filter(following=logged_in_user))
+    user_following = len(FollowersCount.objects.filter(follower=logged_in_user))
+    follower_list = FollowersCount.objects.filter(following=logged_in_user)
+
     context = {
         'current_user': request.user,
+        'user_followers': user_followers,
+        'user_following': user_following,
         'payment_link_url': request.user.profile.payment_link_url,
         'life_story': request.user.profile.life_story,
         'profile_img': request.user.profile.profile_img,
