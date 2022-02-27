@@ -29,12 +29,28 @@ class NewUserForm(UserCreationForm):
                 'class': 'form-control form-control-lg form-rounded',
                 'placeholder': 'Repeat Password'
             }))
+    username = UsernameField(required=True,
+        widget = forms.TextInput(
+            attrs = {
+                'autofocus': True,
+                'class': 'form-control form-control-lg form-rounded', 'placeholder': 'Username'
+            }))
+    first_name = forms.CharField(required=True,
+        widget = forms.TextInput(
+            attrs = {
+                'class': 'form-control form-control-lg form-rounded', 'placeholder': 'First Name'
+            }))
+    last_name = forms.CharField(required=True,
+        widget = forms.TextInput(
+            attrs = {
+                'class': 'form-control form-control-lg form-rounded', 'placeholder': 'First Name'
+            }))
 
     class Meta:
         model = User
         fields = ("username", "first_name", "last_name", "email", "password1", "password2")
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control form-control-lg form-rounded', 'placeholder': 'Username'}),
+            #'username': forms.TextInput(attrs={'class': 'form-control form-control-lg form-rounded', 'placeholder': 'Username'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control form-control-lg form-rounded', 'placeholder': 'First Name'}),
         }
 

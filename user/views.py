@@ -1,3 +1,4 @@
+import os
 from textwrap import fill
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
@@ -137,8 +138,22 @@ def update_security(request):
         form = ChangePassword(request.user)
     return render(request, 'security_update.html', {'p_form': form, 'current_user': request.user})
 
+@login_required()
+def delete_profile(request):
+    if request.method == 'POST':
+        profile = Profile.objects.get(user=request.user)
+        print(profile.qr_code_img)
+
+        os.remove(profile.profile_img.path)
+        os.remove(f'media/qr_code/{request.user.username}.jpg')
+        profile.user.delete()
+
+        messages.success(request, 'Your account was successfully deleted!')
+        return redirect('welcome_index')
+
 
 def register_request(request):
+    args = {}
     if request.method == "POST":
         user_form = NewUserForm(request.POST)
         if user_form.is_valid():
@@ -148,8 +163,9 @@ def register_request(request):
             messages.success(request, "Registration successful.")
             return redirect("user_dashboard")
 
-        messages.error(request, "Unsuccessful registration. Invalid information.")
-    user_form = NewUserForm()
+        messages.error(request, f"{user_form.errors}")
+    else:
+        user_form = NewUserForm()
     return render(request=request, template_name="register.html", context={"register_form": user_form, "user": request.user})
 
 
