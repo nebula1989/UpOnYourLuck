@@ -59,8 +59,6 @@ class Profile(models.Model):
     payment_link_url = models.URLField(max_length=200, default="https://cash.app/$")
     city = models.CharField(default="Raleigh", max_length=60)
     state = USStateField(default="NC", blank=True)
-    # follower = models.CharField(max_length=1000, default='0')
-    # following = models.CharField(max_length=1000, default='0')
 
 
     class Meta:

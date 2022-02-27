@@ -22,6 +22,7 @@ urlpatterns = [
     path('stickers/<str:username>', sticker_views.sticker_index_for_visitor, name='visitor_to_qr_code'),
     path('profile/update', views.update_profile, name='update_profile'),
     path('profile/update_security', views.update_security, name='update_security'),
+    path('profile/delete_profile', views.delete_profile, name='delete_profile'),
 ]
 
 # Only add this when we in debug mode
