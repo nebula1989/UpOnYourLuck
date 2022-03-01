@@ -30,11 +30,11 @@ def dashboard(request):
 
 @login_required()
 def view_followers(request):
-    followers_list = FollowersCount.objects.filter(following=request.user.username)
+    followers_list = FollowersCount.objects.filter(follower=request.user.username)
     num_list = [1, 2, 3, 4, 5, 6]
     user_list = []
     for user in followers_list:
-        user_list.append(get_object_or_404(User, username=user))
+        user_list.append(get_object_or_404(User, username=user.following))
 
     context = {
         'current_user': request.user,
@@ -46,11 +46,12 @@ def view_followers(request):
 
 @login_required()
 def view_following(request):
-    following_list = FollowersCount.objects.filter(follower=request.user.username)
+    following_list = FollowersCount.objects.filter(following=request.user.username)
+    print(following_list)
     num_list = [1, 2, 3, 4, 5, 6]
     user_list = []
     for user in following_list:
-        user_list.append(get_object_or_404(User, username=user))
+        user_list.append(get_object_or_404(User, username=user.follower))
 
     context = {
         'current_user': request.user,
@@ -78,8 +79,8 @@ def visitor_to_profile(request, username=None):
     #Get number of followers and following
     current_user = username_obj.username
     logged_in_user = request.user.username
-    user_followers = len(FollowersCount.objects.filter(following=current_user))
-    user_following = len(FollowersCount.objects.filter(follower=current_user))
+    user_followers = len(FollowersCount.objects.filter(follower=current_user))
+    user_following = len(FollowersCount.objects.filter(following=current_user))
     follower_list = FollowersCount.objects.filter(following=current_user)
 
     #Loop through follower_list to check if requester is already following
@@ -129,8 +130,8 @@ def followers_count(request):
 # For logged in users to see their own profile page
 def profile(request):
     logged_in_user = request.user.username
-    user_followers = len(FollowersCount.objects.filter(following=logged_in_user))
-    user_following = len(FollowersCount.objects.filter(follower=logged_in_user))
+    user_followers = len(FollowersCount.objects.filter(follower=logged_in_user))
+    user_following = len(FollowersCount.objects.filter(following=logged_in_user))
     follower_list = FollowersCount.objects.filter(following=logged_in_user)
 
     context = {
