@@ -15,8 +15,8 @@ import qrcode
 
 @login_required
 def dashboard(request):
-    user_followers = len(FollowersCount.objects.filter(following=request.user.username))
-    user_following = len(FollowersCount.objects.filter(follower=request.user.username))
+    user_followers = len(FollowersCount.objects.filter(follower=request.user.username))
+    user_following = len(FollowersCount.objects.filter(following=request.user.username))
     qr_scans = Profile.objects.get(user=request.user).qr_scan_count
 
     context = {
