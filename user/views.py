@@ -29,18 +29,25 @@ def visitor_to_profile(request, username=None):
         messages.error(request, 'No User Found')
         return redirect('welcome_index')
 
+    # Check if user came from QR scan
+    if "?source=qr" in request.build_absolute_uri():
+        profile = Profile.objects.get(user=username_obj)
+        profile.qr_scan_count += 1
+        print(profile.qr_scan_count)
+        profile.save()
+
+    #Get number of followers and following
     current_user = username_obj.username
     logged_in_user = request.user.username
-    #print(current_user, logged_in_user)
     user_followers = len(FollowersCount.objects.filter(following=current_user))
     user_following = len(FollowersCount.objects.filter(follower=current_user))
     follower_list = FollowersCount.objects.filter(following=current_user)
 
+    #Loop through follower_list to check if requester is already following
     user_list = []
     for x in follower_list:
         follower_list = x.follower
         user_list.append(follower_list)
-
     if logged_in_user in user_list:
         follow_btn = 'unfollow'
     else:
@@ -65,11 +72,12 @@ def visitor_to_profile(request, username=None):
 
 def followers_count(request):
     if request.method == 'POST':
+        #Get form values
         value = request.POST['value']
         following = request.POST['following']
         follower = request.POST['follower']
-        print(following)
 
+        #If user is not following, create follower. Otherwise delete follower
         if value == 'follow':
             followers_cnt = FollowersCount.objects.create(follower=follower, following=following)
             followers_cnt.save()
@@ -82,7 +90,6 @@ def followers_count(request):
 # For logged in users to see their own profile page
 def profile(request):
     logged_in_user = request.user.username
-    #print(current_user, logged_in_user)
     user_followers = len(FollowersCount.objects.filter(following=logged_in_user))
     user_following = len(FollowersCount.objects.filter(follower=logged_in_user))
     follower_list = FollowersCount.objects.filter(following=logged_in_user)
@@ -125,8 +132,12 @@ def update_profile(request):
 
 @login_required()
 def update_security(request):
+    
     if request.method == 'POST':
+        #Get correct form
         form = ChangePassword(request.user, request.POST)
+
+        #Check if form is valid, save and update if valid, display error if invalid
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
@@ -141,13 +152,17 @@ def update_security(request):
 @login_required()
 def delete_profile(request):
     if request.method == 'POST':
+        #Get Profile object of user
         profile = Profile.objects.get(user=request.user)
-        print(profile.qr_code_img)
 
+        #Remove profile image and qr code
         os.remove(profile.profile_img.path)
         os.remove(f'media/qr_code/{request.user.username}.jpg')
+
+        #Delete user data
         profile.user.delete()
 
+        #Display success to user and return to homepage
         messages.success(request, 'Your account was successfully deleted!')
         return redirect('welcome_index')
 
@@ -197,7 +212,7 @@ def logout_request(request):
 def generate_qr_code(request):
     DOMAIN = 'http://127.0.0.1:8000/'
     profile_url = request.user.profile.profile_url
-    user_profile_full_url = DOMAIN + profile_url
+    user_profile_full_url = DOMAIN + profile_url + '?source=qr'
     qr_img = qrcode.make(user_profile_full_url)
     qr_img.save('media/qr_code/' + request.user.username + '.jpg')
     request.user.profile.qr_code_img = request.user.username + '.jpg'
