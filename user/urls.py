@@ -23,6 +23,8 @@ urlpatterns = [
     path('profile/update', views.update_profile, name='update_profile'),
     path('profile/update_security', views.update_security, name='update_security'),
     path('profile/delete_profile', views.delete_profile, name='delete_profile'),
+    path('dashboard/followers', views.view_followers, name='view_followers'),
+    path('dashboard/following', views.view_following, name='view_following'),
 ]
 
 # Only add this when we in debug mode

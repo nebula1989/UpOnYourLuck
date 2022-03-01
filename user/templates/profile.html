@@ -34,11 +34,11 @@
                 <div class="p-4 text-black" style="background-color: #f8f9fa;">
                 <div class="d-flex justify-content-end text-center py-1">
                     <div class="px-3">
-                    <p class="mb-1 h5">{{user_followers}}</p>
+                    <a class="mb-1 h5 text-black px-4" href="{% url 'view_followers' %}" style="text-decoration: none;">{{user_followers}}</a>
                     <p class="small text-muted mb-0">Followers</p>
                     </div>
                     <div>
-                    <p class="mb-1 h5">{{user_following}}</p>
+                    <a class="mb-1 h5 text-black px-4" href="{% url 'view_following' %}" style="text-decoration: none;">{{user_following}}</a>
                     <p class="small text-muted mb-0">Following</p>
                     </div>
                 </div>
