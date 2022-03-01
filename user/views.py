@@ -1,3 +1,4 @@
+from multiprocessing import context
 import os
 from textwrap import fill
 from django.contrib.auth.models import User
@@ -14,12 +15,50 @@ import qrcode
 
 @login_required
 def dashboard(request):
-    args1 = {
+    user_followers = len(FollowersCount.objects.filter(following=request.user.username))
+    user_following = len(FollowersCount.objects.filter(follower=request.user.username))
+    qr_scans = Profile.objects.get(user=request.user).qr_scan_count
+
+    context = {
         'current_user': request.user,
+        'user_followers': user_followers,
+        'user_following': user_following,
+        'qr_scans': qr_scans,
     }
 
-    return render(request, 'dashboard.html', args1)
+    return render(request, 'dashboard.html', context)
 
+@login_required()
+def view_followers(request):
+    followers_list = FollowersCount.objects.filter(following=request.user.username)
+    num_list = [1, 2, 3, 4, 5, 6]
+    user_list = []
+    for user in followers_list:
+        user_list.append(get_object_or_404(User, username=user))
+
+    context = {
+        'current_user': request.user,
+        'list_of_users': user_list,
+        'num_list': num_list,
+        'title': "Your followers"
+    }
+    return render(request, 'welcome/show_all_users.html', context)
+
+@login_required()
+def view_following(request):
+    following_list = FollowersCount.objects.filter(follower=request.user.username)
+    num_list = [1, 2, 3, 4, 5, 6]
+    user_list = []
+    for user in following_list:
+        user_list.append(get_object_or_404(User, username=user))
+
+    context = {
+        'current_user': request.user,
+        'list_of_users': user_list,
+        'num_list': num_list,
+        'title': "People you are following"
+    }
+    return render(request, 'welcome/show_all_users.html', context)
 
 # for visitors going to a user's profile page
 def visitor_to_profile(request, username=None):
