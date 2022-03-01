@@ -126,73 +126,45 @@
 	</div>
 </div>
 
-<!-- <script defer>
-	const inputElements = document.querySelectorAll('input');
+<script>
+	const labelsArray = document.getElementsByTagName('label')
+	const agreeLabel = labelsArray[labelsArray.length-1];
+	const agreeInputCheck = document.getElementById('form2Example3cg');
 	const registerBtn = document.getElementsByTagName('button')[1];
-	console.log(registerBtn);
-	// console.log(inputElements);
-	function changeBorderColorFormControls() {
-		for(let i = 1; i < inputElements.length; i++) {
-			console.log(inputElements[i].style);
-			inputElements[i].style.removeProperty("borderColor");
-			inputElements[i].style.removeProperty("background-image");
 
+	/* Add functionality to make clicking Agreement text check */
+	agreeLabel.addEventListener('click', () => {
+		if(!agreeInputCheck.checked) {
+			agreeInputCheck.checked = true;
 		}
-	}
-	changeBorderColorFormControls();
-
-	registerBtn.addEventListener('click', (e) => {
-		console.log('here');
-		let validInfo = true;
-		for(let i = 1; i < inputElements.length; i++) {
-			if(inputElements[i].value == '') {
-				validInfo = false;
-				let errMsg = document.createElement('div')
-				errMsg.innerText = addErrMessage(i);
-				errMsg.classList.add('invalid-feedback')
-				inputElements[i].style.setProperty("border-color");
-				inputElements[i].style.setProperty("background-image", "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e\")");
-
-				inputElements[i].nextElementSibling.insertAdjacentElement('afterend', errMsg);
-			}
-		}
-		if(!validInfo) {
-			e.preventDefault();
+		else {
+			agreeInputCheck.checked = false;
 		}
 	})
 
-	function addErrMessage(intI) {
-		let errMsg = ''
-		switch(intI) {
-			case 1:
-				errMsg = 'Please enter a username'
-				break;
-			case 2:
-				errMsg = 'Please enter your first name'
 
-				break;
-			case 3:
-				errMsg = 'Please enter your last name'
+	/* Add functionality to check if both passwords are identical */
+	registerBtn.addEventListener('click', (e) => {
+		console.log('yess');
+		const password1 = document.getElementById('id_password1')
+		const password2 = document.getElementById('id_password2')
 
-				break;
-			case 4:
-				errMsg = 'Please enter your email'
-
-				break;			
-			case 5:
-				errMsg = 'Please enter your password'
-
-				break;
-			case 6:
-				errMsg = 'Please re-enter your password'
-
-				break;	
-			default:
-				break;
+		let matches = checkIfPasswordsMatch(password1.value, password2.value) 
+		if(!matches) {
+			console.log('yesssssssssssss');
+			e.preventDefault();
+			/* display error message to user */
 		}
-		return errMsg;
+	});
+
+	function checkIfPasswordsMatch(str1, str2) {
+		if(str1 == str2) {
+			console.log('hereeee');
+			return true;
+		}
+		return false;
 	}
 	
-</script> -->
+</script>
 
 {% endblock %}
