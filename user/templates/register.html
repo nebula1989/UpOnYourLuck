@@ -145,13 +145,11 @@
 
 	/* Add functionality to check if both passwords are identical */
 	registerBtn.addEventListener('click', (e) => {
-		console.log('yess');
 		const password1 = document.getElementById('id_password1')
 		const password2 = document.getElementById('id_password2')
 
 		let matches = checkIfPasswordsMatch(password1.value, password2.value) 
 		if(!matches) {
-			console.log('yesssssssssssss');
 			e.preventDefault();
 			/* display error message to user */
 		}
@@ -159,7 +157,6 @@
 
 	function checkIfPasswordsMatch(str1, str2) {
 		if(str1 == str2) {
-			console.log('hereeee');
 			return true;
 		}
 		return false;
