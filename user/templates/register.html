@@ -144,16 +144,24 @@
 
 
 	/* Add functionality to check if both passwords are identical */
-	registerBtn.addEventListener('click', (e) => {
-		const password1 = document.getElementById('id_password1')
-		const password2 = document.getElementById('id_password2')
+	// function addRegisterBtn() {
+	// 	registerBtn.addEventListener('click', (e) => {
+	// 		const password1 = document.getElementById('id_password1')
+	// 		const password2 = document.getElementById('id_password2')
 
-		let matches = checkIfPasswordsMatch(password1.value, password2.value) 
-		if(!matches) {
-			e.preventDefault();
-			/* display error message to user */
-		}
-	});
+	// 		let matches = checkIfPasswordsMatch(password1.value, password2.value) 
+	// 		if(!matches) {
+	// 			e.preventDefault();
+				
+	// 			/* display error message to user */
+
+	// 		}
+	// 	});
+	// }
+
+	// Uncomment line below and function above to work
+	// addRegisterBtn();
+
 
 	function checkIfPasswordsMatch(str1, str2) {
 		if(str1 == str2) {
