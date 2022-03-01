@@ -29,7 +29,7 @@ class UploadToPathAndRename(object):
 class OverwriteStorage(FileSystemStorage):
     def get_available_name(self, name, max_length=None):
         # If the filename already exists, remove it as if it was a true file system
-        ext_list = ['.jpg', '.png', '.gif']
+        ext_list = ['.jpg', '.png', '.gif', '.jpeg']
         file = name.split('.')[0]
 
         if local_os() == 'Windows':
