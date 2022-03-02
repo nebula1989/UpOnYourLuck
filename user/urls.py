@@ -17,10 +17,14 @@ urlpatterns = [
     path("logout", views.logout_request, name="logout"),
     path('dashboard', views.dashboard, name='user_dashboard'),
     path('profile', views.profile, name='profile'),
+    path('followers_count', views.followers_count, name='followers_count'),
     path('<str:username>', views.visitor_to_profile, name='visitor_to_profile'),
     path('stickers/<str:username>', sticker_views.sticker_index_for_visitor, name='visitor_to_qr_code'),
     path('profile/update', views.update_profile, name='update_profile'),
     path('profile/update_security', views.update_security, name='update_security'),
+    path('profile/delete_profile', views.delete_profile, name='delete_profile'),
+    path('dashboard/followers', views.view_followers, name='view_followers'),
+    path('dashboard/following', views.view_following, name='view_following'),
 ]
 
 # Only add this when we in debug mode

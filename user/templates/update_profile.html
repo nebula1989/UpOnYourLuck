@@ -22,7 +22,7 @@
             <div class="card mb-4 mb-xl-0">
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
-                    <img class="img-account-profile rounded-circle mb-2" src="{{profile_img.url}}" alt="">
+                    <img class="img-account-profile rounded-circle mb-2" src="{{profile_img.url}}" alt="" id="current_profile_img">
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                     {{p_form.profile_img}}
                 </div>
@@ -134,7 +134,7 @@
                         <textarea name="life_story" cols="40" rows="10" maxlength="500" class="textarea form-control" required="" id="id_life_story">{{current_user.profile.life_story}}</textarea>
                     </div>
 
-                    <button class="btn btn-primary btn-sm rounded-pill btn-outline-dark text-white" type="submit">Save changes</button>
+                    <button class="btn btn-primary btn-sm rounded-pill btn-outline-dark text-white px-4" type="submit">Save changes</button>
                     <a class="btn btn-sm" href="{% url 'profile' %}">Cancel</a>
                 </div>
             </div>
@@ -142,6 +142,34 @@
     </div>
 </form>
 </div>
+
+<script>
+    const imgInput = document.getElementById('id_profile_img')
+    imgInput.addEventListener('change', (e) => {
+        const profileImg = document.getElementById('current_profile_img');
+        console.log(e.srcElement.files[0]);
+
+        var reader = new FileReader();
+        reader.readAsDataURL(e.srcElement.files[0]);
+        reader.onload = function() {
+            let fileContent = reader.result;
+            
+            profileImg.src = fileContent;
+        }
+    })
+
+    // var openFile = function(file) {
+    // var input = file.target;
+
+    // var reader = new FileReader();
+    // reader.onload = function(){
+    //   var dataURL = reader.result;
+    //   var output = document.getElementById('output');
+    //   output.src = dataURL;
+    // };
+    // reader.readAsDataURL(input.files[0]);
+  
+</script>
 
 <style>
 body {

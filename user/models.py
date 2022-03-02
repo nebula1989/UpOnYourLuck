@@ -29,7 +29,7 @@ class UploadToPathAndRename(object):
 class OverwriteStorage(FileSystemStorage):
     def get_available_name(self, name, max_length=None):
         # If the filename already exists, remove it as if it was a true file system
-        ext_list = ['.jpg', '.png', '.gif']
+        ext_list = ['.jpg', '.png', '.gif', '.jpeg']
         file = name.split('.')[0]
 
         if local_os() == 'Windows':
@@ -59,6 +59,7 @@ class Profile(models.Model):
     payment_link_url = models.URLField(max_length=200, default="https://cash.app/$")
     city = models.CharField(default="Raleigh", max_length=60)
     state = USStateField(default="NC", blank=True)
+    qr_scan_count = models.IntegerField(default=0)
 
 
     class Meta:
@@ -81,6 +82,13 @@ class Profile(models.Model):
 
     def get_profile_url(self):
         return self.profile_url
+
+class FollowersCount(models.Model):
+    follower = models.CharField(max_length=1000)
+    following = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return self.following
 
 
 # create a user profile automatically upon account creation using signals

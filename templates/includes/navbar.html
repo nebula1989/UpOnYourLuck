@@ -4,16 +4,24 @@
 
 <nav class="navbar navbar-inverse navbar-expand-md navbar-dark navbar-fixed-top bg-dark">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <img src="/media/home_page/UpOnYourLuck_Logo_navbar.jpg" alt="">
-            <a class="navbar-brand" href="{% url 'welcome_index' %}">UpOnYourLuck</a>
 
-        </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
-                aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
+    <!-- Logo -->
+    <div class="navbar-header">
+        <img src="/media/home_page/UpOnYourLuck_Logo_navbar.jpg" style="width: 75px; height: 50px">
+    </div>
+    <!-- Home Page Link Text -->
+    <div class="navbar-header">
+        <a class="navbar-brand" href="{% url 'welcome_index' %}">UpOnYourLuck</a>
+    </div>
+
+    <!-- Toggle Button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+        aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Logic to display dynamic data based on user authentication -->
         <div class="collapse navbar-collapse" id="navbarMenu">
             {% if user.is_authenticated %}
                 <ul class="navbar-nav me-auto">

@@ -6,76 +6,166 @@
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static '/user/styles.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+	<style>
+		.form-control.is-invalid, .was-validated .form-control:invalid:focus {
+    		border-color: black;
+    		box-shadow: none;
+		}
+
+		.form-control.is-invalid, .was-validated .form-control:invalid {
+			border-color: black;
+		}
+
+		.form-control.is-invalid, .was-validated .form-control:invalid {
+    		border-color: black;
+    		padding-right: calc(1.5em + 0.75rem);
+    		background-image: none;
+    		background-repeat: no-repeat;
+    		background-position: right calc(0.375em + 0.1875rem) center;
+    		background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+		}
+
+		.form-check-input.is-invalid, .was-validated .form-check-input:invalid {
+			border-color: black;
+		}
+
+		.form-check-input.is-invalid~.form-check-label, .was-validated .form-check-input:invalid~.form-check-label {
+			color: black;
+		}
+
+	</style>
 {% endblock %}
 
 {% block content %}
 <div class="mask d-flex align-items-center h-100 bg-dark">
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-          <div class="card" style="border-radius: 20px;">
-            <div class="card-body p-5">
-				{% if not user.is_authenticated %}
-					<h2 class="text-center mb-5">Create an account</h2>
-
-					<form method="POST">
-						{% csrf_token %}
-
-						<div class="form-outline mb-3">
-							<label class="form-label" for="form3Example1cg">Username</label>
-							{{ register_form.username }}
-						</div>
-
-						<div class="form-outline mb-3">
-							<label class="form-label" for="form3Example1cg">First Name</label>
-							{{ register_form.first_name }}
-						</div>
-
-						<div class="form-outline mb-3">
-							<label class="form-label" for="form3Example1cg">Email Address</label>
-							{{ register_form.email }}
-						</div>
-
-						<div class="form-outline mb-3">
-							<label class="form-label" for="form3Example1cg">Password</label>
-							{{ register_form.password1 }}
-						</div>
-
-						<div class="form-outline mb-3">
-							<label class="form-label" for="form3Example1cg">Repeat Password</label>
-							{{ register_form.password2 }}
-						</div>
-
-						<div class="form-check d-flex justify-content-center mb-5">
-						<input
-							class="form-check-input me-2"
-							type="checkbox"
-							value=""
-							id="form2Example3cg"
-							required
-						/>
-						<label class="form-check-label" for="form2Example3g">
-							I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-						</label>
-						</div>
-
-						<div class="d-flex justify-content-center">
-						<button type="submit" class="btn btn-primary rounded-pill btn-outline-dark text-white">Register</button>
-						</div>
-
-						<p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="{% url 'login' %}" class="fw-bold text-body"><u>Login here</u></a></p>
-
-					</form>
-				{% else %}
-					<h2 class="text-center mb-5">You're already logged in.</h2>
-					<p class="text-center text-muted mt-5 mb-0">Click <a href="{% url 'profile' %}" class="fw-bold text-body"><u>here</u></a> to go to your profile</p>
-				{% endif %}
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+	<div class="container h-100">
+		<div class="row d-flex justify-content-center align-items-center h-100">
+			<div class="col-12 col-md-9 col-lg-7 col-xl-6">
+				<div class="card" style="border-radius: 1rem;">
+					<div class="card-body p-5">
+						{% if not user.is_authenticated %}
+							
+						<h2 class="text-center mb-5">Create an account</h2>
+						<form method="POST" class="was-validated row g-2 justify-content-center">
+							{% csrf_token %}
+								
+							<div class="col-md-8">
+								<div class="form-floating mb-3">
+									{{ register_form.username }}
+									<label for="id_username" class="form-label" style="margin-left: 0px;">Username</label>
+									<!-- <div class="invalid-feedback">Please enter a username.</div> -->
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="form-floating mb-3">
+									{{ register_form.first_name }}
+									<label class="form-label" for="id_first_name">First Name</label>	
+									<!-- <div class="invalid-feedback">Please enter your first name.</div> -->
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="form-floating mb-3">
+									{{ register_form.last_name }}
+									<label class="form-label" for="id_first_name">Last Name</label>
+									<!-- <div class="invalid-feedback">Please enter your last name.</div> -->
+								</div>
+							</div>
+							<div class="col-md-8">
+								<div class="form-floating mb-3">
+									{{ register_form.email }}
+									<label class="form-label" for="id_email">Email Address</label>
+									<!-- <div class="invalid-feedback">Please enter your email.</div> -->
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="form-floating mb-3">
+									{{ register_form.password1 }}
+									<label class="form-label" for="id_password1">Password</label>
+									<!-- <div class="invalid-feedback">Please enter your password.</div> -->
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="form-floating mb-3">
+									{{ register_form.password2 }}
+									<label class="form-label" for="id_password2">Repeat Password</label>
+									<!-- <div class="invalid-feedback">Please re-enter your password.</div> -->
+								</div>
+							</div>
+							<div class="form-check d-flex justify-content-center mb-5">
+								<input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" required/>
+								<label class="form-check-label" for="form2Example3g">
+									I agree all statements in 
+									<a href="#!" class="text-body">
+										<u>Terms of service</u>
+									</a>
+								</label>
+							</div>
+							<div class="d-flex justify-content-center">
+								<button type="submit" class="btn btn-primary rounded-pill btn-outline-dark text-white px-4">Register</button>
+							</div>
+							<p class="text-center text-muted mt-5 mb-0">Have already an account? 
+								<a href="{% url 'login' %}" class="fw-bold text-body">
+									<u>Login here</u>
+								</a>
+							</p>
+						</form>
+						{% else %}
+							
+						<h2 class="text-center mb-5">You're already logged in.</h2>
+						<p class="text-center text-muted mt-5 mb-0">Click <a href="{% url 'profile' %}" class="fw-bold text-body"><u>here</u></a> to go to your profile</p>
+						{% endif %}
+            		
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
+<script>
+	const labelsArray = document.getElementsByTagName('label')
+	const agreeLabel = labelsArray[labelsArray.length-1];
+	const agreeInputCheck = document.getElementById('form2Example3cg');
+	const registerBtn = document.getElementsByTagName('button')[1];
+
+	/* Add functionality to make clicking Agreement text check */
+	agreeLabel.addEventListener('click', () => {
+		if(!agreeInputCheck.checked) {
+			agreeInputCheck.checked = true;
+		}
+		else {
+			agreeInputCheck.checked = false;
+		}
+	})
+
+
+	/* Add functionality to check if both passwords are identical */
+	// function addRegisterBtn() {
+	// 	registerBtn.addEventListener('click', (e) => {
+	// 		const password1 = document.getElementById('id_password1')
+	// 		const password2 = document.getElementById('id_password2')
+
+	// 		let matches = checkIfPasswordsMatch(password1.value, password2.value) 
+	// 		if(!matches) {
+	// 			e.preventDefault();
+				
+	// 			/* display error message to user */
+
+	// 		}
+	// 	});
+	// }
+
+	// Uncomment line below and function above to work
+	// addRegisterBtn();
+
+
+	function checkIfPasswordsMatch(str1, str2) {
+		if(str1 == str2) {
+			return true;
+		}
+		return false;
+	}
+	
+</script>
 
 {% endblock %}
