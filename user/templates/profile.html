@@ -24,7 +24,7 @@
                     <div class="rounded-top text-white d-flex flex-row" style="background-color: rgb(24, 24, 24); height:200px;">
                     <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; transform: translateY(1.5rem);">
                         <img src="{{profile_img.url}}" alt="" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1; transform: translateY(-1rem);">
-                        <a href="{% url 'update_profile' %}" class="btn btn-outline-dark rounded-pill btn-sm">Edit profile</a>
+                        
                     </div>
                     <div class="ms-3" style="margin-top: 130px;">
                         <h5>{{current_user}}</h5>
@@ -32,15 +32,21 @@
                     </div>
                 </div>
                 <div class="p-4 text-black" style="background-color: #f8f9fa;">
-                <div class="d-flex justify-content-end text-center py-1">
-                    <div class="px-3">
-                    <a class="mb-1 h5 text-black px-4" href="{% url 'view_followers' %}" style="text-decoration: none;">{{user_followers}}</a>
-                    <p class="small text-muted mb-0">Followers</p>
+                <div class="d-flex justify-content-between text-center py-1">
+                    <div class="mr-6">
+                        <a href="{% url 'update_profile' %}" class="btn btn-outline-dark rounded-pill btn-sm">Edit profile</a>
                     </div>
-                    <div>
-                    <a class="mb-1 h5 text-black px-4" href="{% url 'view_following' %}" style="text-decoration: none;">{{user_following}}</a>
-                    <p class="small text-muted mb-0">Following</p>
+                    <div class="followers-labels d-flex">
+                        <div class="px-3">
+                            <a class="mb-1 h5 text-black px-4" href="{% url 'view_followers' %}" style="text-decoration: none;">{{user_followers}}</a>
+                            <p class="small text-muted mb-0">Followers</p>
+                        </div>
+                        <div>
+                            <a class="mb-1 h5 text-black px-4" href="{% url 'view_following' %}" style="text-decoration: none;">{{user_following}}</a>
+                            <p class="small text-muted mb-0">Following</p>
+                        </div>
                     </div>
+                    
                 </div>
                 </div>
                 <div class="card-body p-4 text-black">
