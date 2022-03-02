@@ -3,7 +3,7 @@
 :root {
   --font-size-small: 1.25rem;
   --font-size-medium: 1.75rem;
-  --font-size-large: 2.25rem;
+  --font-size-large: 2.5rem;
 
   --font-size-large-phone: 1.5rem;
   --font-size-small-phone: 0.75rem;
@@ -17,9 +17,8 @@ body {
 
 a:link {
   color: black;
-    text-decoration: none;
-    background-color: transparent;
-
+  text-decoration: none;
+  background-color: transparent;
 }
 
 a:visited {
@@ -40,9 +39,10 @@ a:active {
   text-decoration: underline;
 }
 
-#landing-page-title{
+#landing-page-title {
   color: black;
   font-family: "JetBrains Mono ExtraBold", sans-serif;
+  font-size: var(--font-size-large);
 }
 
 /* Register CTA */
@@ -61,17 +61,19 @@ a:active {
 
 .register-cta h1 {
   display: block;
-  width: 800px;
-  height: 100px;
-  border-radius: 15px 50px 30px;
+  max-width: 50rem;
+  height: 50%;
+  border-radius: 0.9375em 3.125em 1.875em;
   font-size: var(--font-size-large);
   letter-spacing: 2px;
   line-height: 2.875rem;
   color: black;
   text-align: center;
   background: rgba(194, 213, 213, 80%);
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-top-right-radius: 0.625em;
+  border-bottom-right-radius: 0.625em;
+  display: flex;
+  align-items: center;
 }
 
 #right-register-buttons {
@@ -91,7 +93,8 @@ a:active {
   flex-direction: column;
   justify-content: center;
   padding-left: 3.75em;
-  border-radius: 25px;
+  border-radius: 1.5625em;
+  border-bottom-right-radius: 0px;
   background: url("background-images/tents.svg");
   background-repeat: no-repeat;
   background-size: 9.375em 9.375em;
@@ -140,7 +143,7 @@ a:active {
   justify-content: space-evenly;
 }
 
-#homeless-advantages-title{
+#homeless-advantages-title {
   color: black;
 }
 
@@ -179,7 +182,7 @@ a:active {
 .donator-advantages {
   min-height: 25em;
   display: flex;
-  border-radius: 25px;
+  border-radius: 1.5625em;
   background-color: darkslategray;
 }
 
@@ -267,9 +270,32 @@ footer p {
   text-align: center;
 }
 
+/***************** Additional Media Query for small Desktops *************/
+
+@media (max-width: 1100px) {
+  .register-cta {
+    display: flex;
+    flex-direction: column;
+    /* gap: 0; */
+    height: 17em;
+    justify-content: space-evenly;
+  }
+
+  #right-register-buttons {
+    flex-direction: row;
+    width: 100%;
+    align-items: space-between;
+  }
+
+  #right-register-buttons a {
+  }
+
+  #right-register-buttons a:last-child {
+    margin-top: 0px;
+  }
+}
 
 /***************** Tablet Media Query *************/
-
 
 /* Mobile Media Query */
 
@@ -284,6 +310,7 @@ footer p {
     width: 100%;
     flex-direction: column;
     justify-content: center;
+    height: 25em;
     padding: 0.625em 0.625em 0.625em 0.625em;
   }
 
@@ -293,6 +320,11 @@ footer p {
 
   .register-cta h1 {
     text-align: center;
+    width: 90%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
   }
 
   #right-register-buttons {
@@ -301,7 +333,13 @@ footer p {
   }
 
   #right-register-buttons a {
-    margin-top: 2.5em;
+    margin-top: 1.7em;
+    display: flex;
+    align-items: center;
+  }
+
+  #right-register-buttons a:last-child {
+    margin-top: 1.7em;
   }
 
   /* Business Process */
@@ -314,6 +352,7 @@ footer p {
 
   .business-process h2 {
     text-align: center;
+    font-size: var(--font-size-medium);
   }
 
   #business-process-li-1 {
@@ -339,8 +378,14 @@ footer p {
     align-items: center;
   }
 
-  .homeless-advantages li {
+  #homeless-advantages-title {
+    text-align: center;
+    margin: 2.1875rem 0 2.1875rem 0;
     font-size: var(--font-size-medium);
+  }
+
+  .homeless-advantages li {
+    font-size: var(--font-size-large-phone);
     list-style-type: none;
     line-height: 3.403rem;
   }
@@ -359,10 +404,13 @@ footer p {
 
   .homeless-advantages-left ul {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .homeless-advantages-left ul li {
-    width: 100%;
+    width: 90%;
     text-align: center;
   }
 
@@ -419,10 +467,11 @@ footer p {
 }
 
 /**************** Mobile phone Media Query **************/
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   /* Register section */
   .register-cta h1 {
     font-size: var(--font-size-medium);
+    min-height: 30%;
   }
 
   #right-register-buttons {
