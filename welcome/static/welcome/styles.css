@@ -3,7 +3,7 @@
 :root {
   --font-size-small: 1.25rem;
   --font-size-medium: 1.75rem;
-  --font-size-large: 2.25rem;
+  --font-size-large: 2.5rem;
 
   --font-size-large-phone: 1.5rem;
   --font-size-small-phone: 0.75rem;
@@ -42,6 +42,7 @@ a:active {
 #landing-page-title {
   color: black;
   font-family: "JetBrains Mono ExtraBold", sans-serif;
+  font-size: var(--font-size-large);
 }
 
 /* Register CTA */
@@ -282,6 +283,7 @@ footer p {
     width: 100%;
     flex-direction: column;
     justify-content: center;
+
     padding: 0.625em 0.625em 0.625em 0.625em;
   }
 
@@ -291,6 +293,10 @@ footer p {
 
   .register-cta h1 {
     text-align: center;
+    width: 90%;
+    height: 50%;
+    display: flex;
+    align-items: center;
   }
 
   #right-register-buttons {
@@ -312,6 +318,7 @@ footer p {
 
   .business-process h2 {
     text-align: center;
+    font-size: var(--font-size-medium);
   }
 
   #business-process-li-1 {
@@ -337,8 +344,14 @@ footer p {
     align-items: center;
   }
 
-  .homeless-advantages li {
+  #homeless-advantages-title {
+    text-align: center;
+    margin: 2.1875rem 0 2.1875rem 0;
     font-size: var(--font-size-medium);
+  }
+
+  .homeless-advantages li {
+    font-size: var(--font-size-large-phone);
     list-style-type: none;
     line-height: 3.403rem;
   }
@@ -357,10 +370,13 @@ footer p {
 
   .homeless-advantages-left ul {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .homeless-advantages-left ul li {
-    width: 100%;
+    width: 90%;
     text-align: center;
   }
 
@@ -417,10 +433,11 @@ footer p {
 }
 
 /**************** Mobile phone Media Query **************/
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   /* Register section */
   .register-cta h1 {
     font-size: var(--font-size-medium);
+    min-height: 30%;
   }
 
   #right-register-buttons {
