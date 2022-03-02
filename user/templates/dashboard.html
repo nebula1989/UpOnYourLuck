@@ -13,7 +13,7 @@
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-lg-1 col-sm-6">
             <div class="circle-tile ">
-                <a href="#"><div class="circle-tile-heading dark-blue"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
+                <a href="{% url 'view_followers' %}"><div class="circle-tile-heading dark-blue"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
                 <div class="circle-tile-content dark-blue overflow-hidden" style="border-radius: 1rem;">
                     <div class="circle-tile-description text-faded"> Followers </div>
                     <div class="circle-tile-number text-faded ">{{user_followers}}</div>
@@ -24,7 +24,7 @@
      
         <div class="col-lg-1 col-sm-6">
             <div class="circle-tile ">
-                <a href="#"><div class="circle-tile-heading red"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
+                <a href="{% url 'view_following' %}"><div class="circle-tile-heading red"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
                 <div class="circle-tile-content red overflow-hidden" style="border-radius: 1rem;">
                     <div class="circle-tile-description text-faded"> Following </div>
                     <div class="circle-tile-number text-faded ">{{user_following}}</div>
@@ -52,7 +52,7 @@
                     {% if current_user.username|length > 10 %}
                         <div class="circle-tile-profile text-faded" style="overflow-wrap: break-word;">@{{current_user}}</div>
                     {% else %}
-                        <div class="circle-tile-profile text-faded">@{{current_user}}</div>
+                        <div class="circle-tile-number text-faded">@{{current_user}}</div>
                     {% endif %}
                     <a class="circle-tile-footer" href="{% url 'update_profile' %}">Update</a>
                 </div>
@@ -82,12 +82,6 @@
     }
     .circle-tile-content {
         padding-top: 50px;
-    }
-    .circle-tile-number {
-        font-size: 26px;
-        font-weight: 700;
-        line-height: 1;
-        padding: 5px 0 15px;
     }
     .circle-tile-profile {
         font-size: 14px;
