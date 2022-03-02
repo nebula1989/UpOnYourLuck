@@ -17,9 +17,8 @@ body {
 
 a:link {
   color: black;
-    text-decoration: none;
-    background-color: transparent;
-
+  text-decoration: none;
+  background-color: transparent;
 }
 
 a:visited {
@@ -40,7 +39,7 @@ a:active {
   text-decoration: underline;
 }
 
-#landing-page-title{
+#landing-page-title {
   color: black;
   font-family: "JetBrains Mono ExtraBold", sans-serif;
 }
@@ -61,17 +60,17 @@ a:active {
 
 .register-cta h1 {
   display: block;
-  width: 800px;
-  height: 100px;
-  border-radius: 15px 50px 30px;
+  width: 50rem;
+  height: 6.25rem;
+  border-radius: 0.9375em 3.125em 1.875em;
   font-size: var(--font-size-large);
   letter-spacing: 2px;
   line-height: 2.875rem;
   color: black;
   text-align: center;
   background: rgba(194, 213, 213, 80%);
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-top-right-radius: 0.625em;
+  border-bottom-right-radius: 0.625em;
 }
 
 #right-register-buttons {
@@ -91,7 +90,8 @@ a:active {
   flex-direction: column;
   justify-content: center;
   padding-left: 3.75em;
-  border-radius: 25px;
+  border-radius: 1.5625em;
+  border-bottom-right-radius: 0px;
   background: url("background-images/tents.svg");
   background-repeat: no-repeat;
   background-size: 9.375em 9.375em;
@@ -140,7 +140,7 @@ a:active {
   justify-content: space-evenly;
 }
 
-#homeless-advantages-title{
+#homeless-advantages-title {
   color: black;
 }
 
@@ -179,7 +179,7 @@ a:active {
 .donator-advantages {
   min-height: 25em;
   display: flex;
-  border-radius: 25px;
+  border-radius: 1.5625em;
   background-color: darkslategray;
 }
 
@@ -267,9 +267,7 @@ footer p {
   text-align: center;
 }
 
-
 /***************** Tablet Media Query *************/
-
 
 /* Mobile Media Query */
 
