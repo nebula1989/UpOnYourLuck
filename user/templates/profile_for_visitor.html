@@ -6,6 +6,11 @@
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static '/user/styles.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <style>
+        #followers_container {
+            align-items: center;
+        }
+    </style>
 {% endblock %}
 
 <div class="row"> 
@@ -23,7 +28,7 @@
                     <div class="rounded-top text-white d-flex flex-row" style="background-color: rgb(24, 24, 24); height:200px;">
                     <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; transform: translateY(1.5rem);">
                         <img src="{{profile_img.url}}" alt="" class="img-fluid img-thumbnail mt-4 mb-2" style="z-index: 1; transform: translateY(-1rem); min-height: 9.375rem; min-width: 9.375rem;">
-                        <form action="followers_count" method="POST">
+                        <!-- <form action="followers_count" method="POST">
                             {%csrf_token%}
                             <input type="hidden" name="following" value="{{current_user}}" readonly/>
                             <input type="hidden" name="follower" value="{{user.username}}" readonly/>
@@ -38,7 +43,7 @@
                                     Unfollow
                                 </button>
                             {% endif %}
-                        </form>
+                        </form> -->
                     </div>
                     <div class="ms-3" style="margin-top: 130px;">
                         <h5>{{ profile_username }}</h5>
@@ -46,16 +51,37 @@
                     </div>
                 </div>
                 <div class="p-4 text-black" style="background-color: #f8f9fa;">
-                <div class="d-flex justify-content-end text-center py-1">
-                    <div class="px-3">
-                    <p class="mb-1 h5">{{user_followers}}</p>
-                    <p class="small text-muted mb-0">Followers</p>
+                    <div class="d-flex justify-content-between text-center py-1" id="followers_container">
+                        <div id="followers_btn_form" class="mr-6">
+                            <form action="followers_count" method="POST" >
+                                {%csrf_token%}
+                                <input type="hidden" name="following" value="{{current_user}}" readonly/>
+                                <input type="hidden" name="follower" value="{{user.username}}" readonly/>
+                                {% if follow_btn == 'follow' %}
+                                    <button type="submit" class="btn btn-outline-dark rounded-pill btn-sm">
+                                        <input type="hidden" name="value" value="follow" readonly/>
+                                        Follow
+                                    </button>
+                                {% else %}
+                                    <button type="submit" class="btn btn-outline-dark rounded-pill btn-sm">
+                                        <input type="hidden" name="value" value="unfollow" readonly/>
+                                        Unfollow
+                                    </button>
+                                {% endif %}
+                            </form>
+                        </div>
+                        <div class="followers-labels d-flex">
+                            <div class="px-3" id="followers_cnt_container">
+                                <p class="mb-1 h5">{{user_followers}}</p>
+                                <p class="small text-muted mb-0">Followers</p>
+                            </div>
+                            <div>
+                                <p class="mb-1 h5" id="following_cnt_container">{{user_following}}</p>
+                                <p class="small text-muted mb-0">Following</p>
+                            </div>
+                        </div>
+                        
                     </div>
-                    <div>
-                    <p class="mb-1 h5">{{user_following}}</p>
-                    <p class="small text-muted mb-0">Following</p>
-                    </div>
-                </div>
                 </div>
                 <div class="card-body p-4 text-black">
                     <div class="mb-5">
