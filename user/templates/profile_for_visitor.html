@@ -22,18 +22,18 @@
                 <div class="card">
                     <div class="rounded-top text-white d-flex flex-row" style="background-color: rgb(24, 24, 24); height:200px;">
                     <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; transform: translateY(1.5rem);">
-                        <img src="{{profile_img.url}}" alt="" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1; transform: translateY(-1rem);">
+                        <img src="{{profile_img.url}}" alt="" class="img-fluid img-thumbnail mt-4 mb-2" style="z-index: 1; transform: translateY(-1rem); min-height: 9.375rem; min-width: 9.375rem;">
                         <form action="followers_count" method="POST">
                             {%csrf_token%}
                             <input type="hidden" name="following" value="{{current_user}}" readonly/>
                             <input type="hidden" name="follower" value="{{user.username}}" readonly/>
                             {% if follow_btn == 'follow' %}
-                                <button type="submit" class="btn btn-outline-dark rounded-pill btn-sm">
+                                <button type="submit" class="btn btn-outline-dark rounded-pill btn-sm" style="transform: translateY(-1rem);">
                                     <input type="hidden" name="value" value="follow" readonly/>
                                     Follow
                                 </button>
                             {% else %}
-                                <button type="submit" class="btn btn-outline-dark rounded-pill btn-sm">
+                                <button type="submit" class="btn btn-outline-dark rounded-pill btn-sm" style="transform: translateY(-1rem);">
                                     <input type="hidden" name="value" value="unfollow" readonly/>
                                     Unfollow
                                 </button>

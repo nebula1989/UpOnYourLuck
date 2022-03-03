@@ -23,8 +23,8 @@
                 <div class="card">
                     <div class="rounded-top text-white d-flex flex-row" style="background-color: rgb(24, 24, 24); height:200px;">
                     <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; transform: translateY(1.5rem);">
-                        <img src="{{profile_img.url}}" alt="" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1; transform: translateY(-1rem);">
-                        <a href="{% url 'update_profile' %}" class="btn btn-outline-dark rounded-pill btn-sm">Edit profile</a>
+                        <img src="{{profile_img.url}}" alt="" class="img-fluid img-thumbnail mt-4 mb-2" style="z-index: 1; transform: translateY(-1rem); min-height: 9.375rem; min-width: 9.375rem;">
+                        <a href="{% url 'update_profile' %}" class="btn btn-outline-dark rounded-pill btn-sm" style="transform: translateY(-1rem);">Edit profile</a>
                     </div>
                     <div class="ms-3" style="margin-top: 130px;">
                         <h5>{{current_user}}</h5>
@@ -67,5 +67,9 @@
       </div>
     </div>
 </div>
+
+<script>
+
+</script>
               
 {% endblock %}
