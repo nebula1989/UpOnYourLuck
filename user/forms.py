@@ -94,19 +94,22 @@ class ChangePassword(PasswordChangeForm):
         widget = forms.PasswordInput(
             attrs = {
                 'class': 'form-control form-control-lg form-rounded',
-                'placeholder': 'Password'
+                'placeholder': 'Password',
+                'style': 'background-color: #3b3b3b; color: #CDD1CC; border-color: transparent;'
             }))
     new_password1 = forms.CharField(required=True, 
         widget = forms.PasswordInput(
             attrs = {
                 'class': 'form-control form-control-lg form-rounded',
-                'placeholder': 'New Password'
+                'placeholder': 'New Password',
+                'style': 'background-color: #3b3b3b; color: #CDD1CC; border-color: transparent;'
             }))
     new_password2 = forms.CharField(required=True, 
         widget = forms.PasswordInput(
             attrs = {
                 'class': 'form-control form-control-lg form-rounded',
-                'placeholder': 'Repeat New Password'
+                'placeholder': 'Repeat New Password',
+                'style': 'background-color: #3b3b3b; color: #CDD1CC; border-color: transparent;'
             }))
 
     class Meta:

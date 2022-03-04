@@ -27,7 +27,7 @@
 	<div class="container h-100">
 		<div class="row d-flex justify-content-center align-items-center h-100">
 			<div class="col-12 col-md-9 col-lg-7 col-xl-6">
-				<div class="card" style="border-radius: 1rem; background-color: #222224;">
+				<div class="card" style="border-radius: 1rem; background-color: #202123;">
 					<div class="card-body p-5">
 						{% if errors %}
 							<h1 id="error-message" style="display: none;">{{errors}}</h1>
@@ -128,7 +128,7 @@
 						</form>
 						{% else %}
 							
-						<h2 class="text-center mb-5">You're already logged in.</h2>
+						<h2 class="text-center mb-5" style="color: #CDD1CC;">You're already logged in.</h2>
 						<p class="text-center text-muted mt-5 mb-0">Click <a href="{% url 'profile' %}" class="fw-bold text-body" style="color: #26dda6"><u style="color: #26dda6">here</u></a> to go to your profile</p>
 						{% endif %}
 						
