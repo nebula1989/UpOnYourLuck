@@ -15,35 +15,41 @@ class NewUserForm(UserCreationForm):
         widget = forms.EmailInput(
             attrs = {
                 'class': 'form-control form-control-lg form-rounded',
-                'placeholder': 'Email'
+                'placeholder': 'Email',
+                'style': 'background-color: #3b3b3b; color: #CDD1CC;'
             }))
     password1 = forms.CharField(required=True, 
         widget = forms.PasswordInput(
             attrs = {
                 'class': 'form-control form-control-lg form-rounded',
-                'placeholder': 'Password'
+                'placeholder': 'Password',
+                'style': 'background-color: #3b3b3b; color: #CDD1CC;'
             }))
     password2 = forms.CharField(required=True, 
         widget = forms.PasswordInput(
             attrs = {
                 'class': 'form-control form-control-lg form-rounded',
-                'placeholder': 'Repeat Password'
+                'placeholder': 'Repeat Password',
+                'style': 'background-color: #3b3b3b; color: #CDD1CC;'
             }))
     username = UsernameField(required=True,
         widget = forms.TextInput(
             attrs = {
                 'autofocus': True,
-                'class': 'form-control form-control-lg form-rounded', 'placeholder': 'Username'
+                'class': 'form-control form-control-lg form-rounded', 'placeholder': 'Username',
+                'style': 'background-color: #3b3b3b; color: #CDD1CC;'
             }))
     first_name = forms.CharField(required=True,
         widget = forms.TextInput(
             attrs = {
-                'class': 'form-control form-control-lg form-rounded', 'placeholder': 'First Name'
+                'class': 'form-control form-control-lg form-rounded', 'placeholder': 'First Name',
+                'style': 'background-color: #3b3b3b; color: #CDD1CC;'
             }))
     last_name = forms.CharField(required=True,
         widget = forms.TextInput(
             attrs = {
-                'class': 'form-control form-control-lg form-rounded', 'placeholder': 'First Name'
+                'class': 'form-control form-control-lg form-rounded', 'placeholder': 'First Name',
+                'style': 'background-color: #3b3b3b; color: #CDD1CC;'
             }))
 
     class Meta:
@@ -68,13 +74,15 @@ class LoginForm(AuthenticationForm):
             attrs = {
                 'autofocus': True,
                 'class': 'form-control form-control-lg form-rounded',
-                'placeholder': 'Username'
+                'placeholder': 'Username',
+                'style': 'background-color: #3b3b3b; color: #CDD1CC;'
             }))
     password = forms.CharField(required=True,
         widget = forms.PasswordInput(
             attrs = {
                 'class': 'form-control form-control-lg form-rounded',
-                'placeholder': 'Password'
+                'placeholder': 'Password',
+                'style': 'background-color: #3b3b3b; color: #CDD1CC;'
             }))
 
     class Meta:
