@@ -15,67 +15,9 @@
 
 		#pw2-err-msg {
 			color: #dc3545;
-			margin-top: -10px;
+			margin-top: -1rem;
 		}
-		/* .form-control.is-invalid, .was-validated .form-control:invalid:focus {
-    		border-color: black;
-    		box-shadow: none;
-		}
-
-
-
-		.form-control.is-invalid, .was-validated .form-control:invalid {
-    		border-color: black;
-    		padding-right: calc(1.5em + 0.75rem);
-    		background-image: none;
-    		background-repeat: no-repeat;
-    		background-position: right calc(0.375em + 0.1875rem) center;
-    		background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-		}
-
 		
-
-		.form-check-input.is-invalid, .was-validated .form-check-input:invalid {
-			border-color: black;
-		}
-
-		.form-check-input.is-invalid~.form-check-label, .was-validated .form-check-input:invalid~.form-check-label {
-			color: black;
-		}
-
-		.form-is-invalid:focus {
-    		border-color: #dc3545;
-    		box-shadow: none;
-		}
-
-		.form-is-invalid {
-			border-color: #dc3545;
-    		padding-right: calc(1.5em + 0.75rem);
-    		background-image: none;
-    		background-repeat: no-repeat;
-    		background-position: right calc(0.375em + 0.1875rem) center;
-    		background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-		} */
-
-		/* Old styles */
-		/* .form-control.is-invalid-2, .was-validated .form-control-2:invalid:focus {
-            border-color: #dc3545;
-            box-shadow: 0 0 0 0.25rem rgb(220 53 69 / 25%);
-        }
-
-        .form-control.is-invalid-2, .was-validated .form-control-2:invalid {
-            border-color: #dc3545;
-        }
-
-		.form-control.is-invalid-2, .was-validated .form-control-2:invalid {
-            border-color: #dc3545;
-            padding-right: calc(1.5em + 0.75rem);
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right calc(0.375em + 0.1875rem) center;
-            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-        } */
-
 
 	</style>
 {% endblock %}
@@ -104,8 +46,13 @@
 								}
 								// check if 2 errors
 								let errMessages = errMessage.split('password2');
-
-
+								if(errMessages.length == 1) {
+									errMessages = errMessage.split('usernameA')
+									for(let i = 0; i < errMessages.length; i++) {
+										errMessages[i] = errMessages[i].trim()
+									}
+								}
+								
 							</script>
 						{% endif %}
 						{% if not user.is_authenticated %}
@@ -187,13 +134,6 @@
 						<p class="text-center text-muted mt-5 mb-0">Click <a href="{% url 'profile' %}" class="fw-bold text-body"><u>here</u></a> to go to your profile</p>
 						{% endif %}
 						
-						<!-- {% if errors %}
-							<script>
-								const userField2 = document.getElementById('id_username')
-								console.log(userField2);
-							</script>
-
-						{% endif %} -->
 					</div>
 				</div>
 			</div>
@@ -201,7 +141,7 @@
 	</div>
 </div>
 
-<script defer>
+<script>
 	const userField = document.getElementById('id_username');
 	const fNameField = document.getElementById('id_first_name');
 	const lNameField = document.getElementById('id_last_name');
@@ -220,10 +160,7 @@
 	const registerBtn = document.getElementsByTagName('button')[1];
 
 	userField.blur()
-	/* Add functionality to check for error messages */
-	// const errorContainer = document.getElementsByClassName['alert'][0];
-
-	// console.log(errorContainer);
+	
 
 	/* Add functionality to make clicking Agreement text check */
 	agreeLabel.addEventListener('click', () => {
@@ -235,15 +172,6 @@
 		}
 	})
 
-	// for(let i = 0; i < fields.length; i++) {
-	// 	fields[i].style.borderColor = '#dc3545';
-	// 	fields[i].style.backgroundImage = 'none';
-	// 	// fields[i].style.boxShadow = '0 0 0 0.25rem rgb(25 135 84 / 25%);'
-
-	// 	fields[i].addEventListener('focus', () => {
-	// 		fields[i].style.boxShadow = 'none';
-	// 	})
-	// }
 
 		function changeFieldToError(domEle) {
 			domEle.style.borderColor = '#dc3545';
@@ -274,40 +202,48 @@
 				domEle.focus();
 		}
 
-	if(errMessages) {
-		// Check for error messages for username
-		console.log(errMessages);
-		if(errMessages[0].startsWith('A user')) {
-			// set the field to invalid basically
-				userErr.textContent = errMessages[0]
-				changeFieldToError(userField);
-				userField.addEventListener('keypress', () => {
-					console.log('here')
-					changeFieldToValid(userField);
-					userField.style.boxShadow = '0 0 0 0.25rem rgb(25 135 84 / 25%)'
-					userErr.style.display = 'none'
-				})
-		}
-
-		if(errMessages[0].startsWith("This password is too") || errMessages[0].startsWith("The two password fields didn't match")) {
-			// might need to add more here, if not keeping the default red styles
-			pwField.focus();
+		function addPasswordError(err) {
 			let pwErrMsgDiv = document.createElement('div');
 			pwErrMsgDiv.classList.add('form-check')
 			pwErrMsgDiv.classList.add('d-flex')
 			pwErrMsgDiv.classList.add('justify-content-center')
 			pwErrMsgDiv.classList.add('mb-1')
 			pwErrMsgDiv.id = 'pw2-err-msg'
-			pwErrMsgDiv.innerText = errMessages[0]
-			// let pwErrMsg = `<div class="form-check d-flex justify-content-center mb-1">
-			// 					<div class="error-message" id="pw2-err-msg">
-			// 						${errMessages[0]}
-			// 					</div>
-			// 				</div>`
+			pwErrMsgDiv.innerText = err
 			document.getElementById('tos-div').insertAdjacentElement('beforebegin', pwErrMsgDiv);
 		}
-		
-		// userField.style.borderColor
+
+	function addUserErr(msg) {
+		userErr.textContent = msg
+		changeFieldToError(userField);
+		userField.addEventListener('keypress', () => {
+			changeFieldToValid(userField);
+			userField.style.boxShadow = '0 0 0 0.25rem rgb(25 135 84 / 25%)'
+			userErr.style.display = 'none'
+		})
+	}
+
+	if(errMessages) {
+		// Check for error messages for username
+		console.log(errMessages);
+		if(errMessages[0].startsWith('A user')) {
+			// set the field to invalid basically
+			addUserErr(errMessages[0])
+		}
+		else if(errMessages[0].startsWith("This password") || errMessages[0].startsWith("The two password")) {
+			// might need to add more here, if not keeping the default red styles
+			pwField.focus();
+			addPasswordError(errMessages[0])
+			
+			
+		}
+		if(errMessages.length == 2 && (errMessages[1].startsWith("This password") || errMessages[1].startsWith("The two password fields didn't match"))) {
+			addPasswordError(errMessages[1]);
+		}
+		if(errMessages.length == 2 && errMessages[1].startsWith("user")) {
+			addUserError(errMessages[1]);
+		}
+
 	}
 
 	function displayUsernameError() {
