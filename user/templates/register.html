@@ -205,6 +205,8 @@
 	const fields = [userField, fNameField, lNameField, emailField, pwField, pw2Field]
 
 	const userErr = document.getElementById('username-err-msg')
+	const pwErr = document.getElementById('pw2-err-msg')
+	
 
 	const labelsArray = document.getElementsByTagName('label')
 	const agreeLabel = labelsArray[labelsArray.length-1];
@@ -284,7 +286,7 @@
 		if(errMessages[0].startsWith("This password is too") || errMessages[0].startsWith("The two password fields didn't match")) {
 			// might need to add more here, if not keeping the default red styles
 			pwField.focus();
-
+			pwErr.textContent = errMessages[0]
 		}
 		
 		// userField.style.borderColor
