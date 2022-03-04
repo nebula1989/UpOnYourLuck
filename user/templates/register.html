@@ -12,6 +12,11 @@
 			text-align: center;
 			color: #dc3545;
 		}
+
+		#pw2-err-msg {
+			color: #dc3545;
+			margin-top: -10px;
+		}
 		/* .form-control.is-invalid, .was-validated .form-control:invalid:focus {
     		border-color: black;
     		box-shadow: none;
@@ -152,12 +157,13 @@
 								<div class="form-floating mb-3">
 									{{ register_form.password2 }}
 									<label class="form-label" for="id_password2">Repeat Password</label>
-									<div class="error-message" id="pw2-err-msg">
-
-									</div>
+									
 								</div>
 							</div>
-							<div class="form-check d-flex justify-content-center mb-5">
+							
+							
+							
+							<div id="tos-div" class="form-check d-flex justify-content-center mb-5">
 								<input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" required/>
 								<label class="form-check-label" for="form2Example3g">
 									I agree all statements in 
@@ -205,7 +211,7 @@
 	const fields = [userField, fNameField, lNameField, emailField, pwField, pw2Field]
 
 	const userErr = document.getElementById('username-err-msg')
-	const pwErr = document.getElementById('pw2-err-msg')
+	
 	
 
 	const labelsArray = document.getElementsByTagName('label')
@@ -286,7 +292,19 @@
 		if(errMessages[0].startsWith("This password is too") || errMessages[0].startsWith("The two password fields didn't match")) {
 			// might need to add more here, if not keeping the default red styles
 			pwField.focus();
-			pwErr.textContent = errMessages[0]
+			let pwErrMsgDiv = document.createElement('div');
+			pwErrMsgDiv.classList.add('form-check')
+			pwErrMsgDiv.classList.add('d-flex')
+			pwErrMsgDiv.classList.add('justify-content-center')
+			pwErrMsgDiv.classList.add('mb-1')
+			pwErrMsgDiv.id = 'pw2-err-msg'
+			pwErrMsgDiv.innerText = errMessages[0]
+			// let pwErrMsg = `<div class="form-check d-flex justify-content-center mb-1">
+			// 					<div class="error-message" id="pw2-err-msg">
+			// 						${errMessages[0]}
+			// 					</div>
+			// 				</div>`
+			document.getElementById('tos-div').insertAdjacentElement('beforebegin', pwErrMsgDiv);
 		}
 		
 		// userField.style.borderColor
