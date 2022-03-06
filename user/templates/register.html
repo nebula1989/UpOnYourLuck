@@ -23,11 +23,11 @@
 {% endblock %}
 
 {% block content %}
-<div class="mask d-flex align-items-center h-100 bg-dark">
+<div class="mask d-flex align-items-center h-100">
 	<div class="container h-100">
 		<div class="row d-flex justify-content-center align-items-center h-100">
 			<div class="col-12 col-md-9 col-lg-7 col-xl-6">
-				<div class="card" style="border-radius: 1rem;">
+				<div class="card" style="border-radius: 1rem; background-color: #202123;">
 					<div class="card-body p-5">
 						{% if errors %}
 							<h1 id="error-message" style="display: none;">{{errors}}</h1>
@@ -57,14 +57,14 @@
 						{% endif %}
 						{% if not user.is_authenticated %}
 							
-						<h2 class="text-center mb-5">Create an account</h2>
+						<h2 class="text-center mb-5" style="color: #CDD1CC;">Create an account</h2>
 						<form method="POST" class="was-validated row g-2 justify-content-center">
 							{% csrf_token %}
 								
 							<div class="col-md-8">
 								<div class="form-floating mb-3">
 									{{ register_form.username }}
-									<label for="id_username" class="form-label" style="margin-left: 0px;">Username</label>
+									<label for="id_username" class="form-label" style="margin-left: 0px; color: #CDD1CC;">Username</label>
 									<div class="error-message" id="username-err-msg">
 										<!-- Please enter a username. -->
 									</div>
@@ -73,28 +73,28 @@
 							<div class="col-md-5">
 								<div class="form-floating mb-3">
 									{{ register_form.first_name }}
-									<label class="form-label" for="id_first_name">First Name</label>	
+									<label class="form-label" for="id_first_name" style="color: #CDD1CC;">First Name</label>	
 									<!-- <div class="invalid-feedback">Please enter your first name.</div> -->
 								</div>
 							</div>
 							<div class="col-md-5">
 								<div class="form-floating mb-3">
 									{{ register_form.last_name }}
-									<label class="form-label" for="id_first_name">Last Name</label>
+									<label class="form-label" for="id_first_name" style="color: #CDD1CC;">Last Name</label>
 									<!-- <div class="invalid-feedback">Please enter your last name.</div> -->
 								</div>
 							</div>
 							<div class="col-md-8">
 								<div class="form-floating mb-3">
 									{{ register_form.email }}
-									<label class="form-label" for="id_email">Email Address</label>
+									<label class="form-label" for="id_email" style="color: #CDD1CC;">Email Address</label>
 									<!-- <div class="invalid-feedback">Please enter your email.</div> -->
 								</div>
 							</div>
 							<div class="col-md-5">
 								<div class="form-floating mb-3">
 									{{ register_form.password1 }}
-									<label class="form-label" for="id_password1">Password</label>
+									<label class="form-label" for="id_password1" style="color: #CDD1CC;">Password</label>
 									<div class="error-message" id="pw-err-msg">
 
 									</div>
@@ -103,35 +103,33 @@
 							<div class="col-md-5">
 								<div class="form-floating mb-3">
 									{{ register_form.password2 }}
-									<label class="form-label" for="id_password2">Repeat Password</label>
+									<label class="form-label" for="id_password2" style="color: #CDD1CC;">Repeat Password</label>
 									
 								</div>
 							</div>
 							
-							
-							
 							<div id="tos-div" class="form-check d-flex justify-content-center mb-5">
 								<input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" required/>
-								<label class="form-check-label" for="form2Example3g">
-									I agree all statements in 
+								<label class="form-check-label" for="form2Example3g" style="color: #CDD1CC;">
+									I agree to all statements in 
 									<a href="#!" class="text-body">
-										<u>Terms of service</u>
+										<u style="color: #26dda6">Terms of service</u>
 									</a>
 								</label>
 							</div>
 							<div class="d-flex justify-content-center">
-								<button type="submit" class="btn btn-primary rounded-pill btn-outline-dark text-white px-4">Register</button>
+								<button type="submit" class="btn btn-primary rounded-pill btn-outline-dark px-4 text-black" style=" background-color: #26dda6;">Register</button>
 							</div>
-							<p class="text-center text-muted mt-5 mb-0">Have already an account? 
+							<p class="text-center mt-5 mb-0" style="color: #CDD1CC;">Already have an account?
 								<a href="{% url 'login' %}" class="fw-bold text-body">
-									<u>Login here</u>
+									<u style="color: #26dda6">Login here</u>
 								</a>
 							</p>
 						</form>
 						{% else %}
 							
-						<h2 class="text-center mb-5">You're already logged in.</h2>
-						<p class="text-center text-muted mt-5 mb-0">Click <a href="{% url 'profile' %}" class="fw-bold text-body"><u>here</u></a> to go to your profile</p>
+						<h2 class="text-center mb-5" style="color: #CDD1CC;">You're already logged in.</h2>
+						<p class="text-center text-muted mt-5 mb-0">Click <a href="{% url 'profile' %}" class="fw-bold text-body" style="color: #26dda6"><u style="color: #26dda6">here</u></a> to go to your profile</p>
 						{% endif %}
 						
 					</div>

@@ -10,16 +10,15 @@
 {% endblock %}
 
 {% block content %}
-
-<div class="mask d-flex align-items-center h-100 bg-dark">
+<div class="mask d-flex align-items-center h-100">
   <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-        <div class="card" style="border-radius: 20px;">
+        <div class="card" style="border-radius: 20px; background-color: #202123;">
           <div class="card-body p-5">
             {% if not user.is_authenticated %}
-              <h2 class="fw-bold mb-2 text-center">Login</h2>
-              <p class="text-dark-50 mb-5 text-center">Please enter your username and password!</p>
+              <h2 class="fw-bold mb-2 text-center" style="color: #CDD1CC;">Login</h2>
+              <p class="text-dark-50 mb-5 text-center" style="color: #CDD1CC;">Please enter your username and password!</p>
 
               <form method="POST" class="was-validated row g-2 justify-content-center">
                 {% csrf_token %}
@@ -27,26 +26,26 @@
                 
                 <div class="form-floating mb-3 col-md-8">
                   {{ login_form.username }}
-                  <label class="form-label" for="id_username">Username</label>
+                  <label class="form-label" for="id_username" style="color: #CDD1CC;">Username</label>
                   <div class="invalid-feedback">Please enter a username.</div>
                 </div>
 
                 <div class="form-floating mb-3 col-md-8">
                   {{ login_form.password }}
-                  <label class="form-label" for="id_password">Password</label>
+                  <label class="form-label" for="id_password" style="color: #CDD1CC;">Password</label>
                   <div class="invalid-feedback">Please enter your password.</div>
                 </div>
 
                 <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary rounded-pill btn-outline-dark text-white px-4">Login</button>
+                <button type="submit" class="btn btn-primary rounded-pill btn-outline-dark px-4 text-black" style="background-color: #26dda6;">Login</button>
                 </div>
 
-                <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="{% url 'register' %}" class="fw-bold text-muted"><u>Sign up</u></a></p>
+                <p class="text-center mt-5 mb-0" style="color: #CDD1CC">Don't have an account? <a href="{% url 'register' %}" class="fw-bold" style="color: #26dda6;"><u>Sign up</u></a></p>
 
               </form>
             {% else %}
-              <h2 class="text-center mb-5">You're already logged in.</h2>
-              <p class="text-center text-muted mt-5 mb-0">Click <a href="{% url 'profile' %}" class="fw-bold text-body"><u>here</u></a> to go to your profile</p>
+              <h2 class="text-center mb-5" style="color: #CDD1CC;">You're already logged in.</h2>
+              <p class="text-center text-muted mt-5 mb-0">Click <a href="{% url 'profile' %}" class="fw-bold text-body"><u style="color: #26dda6;">here</u></a> to go to your profile</p>
             {% endif %}
           </div>
         </div>
