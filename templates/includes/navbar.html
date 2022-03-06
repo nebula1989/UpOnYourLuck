@@ -1,14 +1,15 @@
 {% block css %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link id="dark-theme-style" rel="stylesheet" />
 {% endblock %}
 
-<nav class="navbar navbar-inverse navbar-expand-md navbar-dark navbar-fixed-top bg-dark">
+<nav class="navbar navbar-inverse navbar-expand-md navbar-dark navbar-fixed-top" style="background: transparent;">
     <div class="container-fluid">
 
     
     <!-- Home Page Link Text -->
-    <div class="navbar-header">
-        <a class="navbar-brand" href="{% url 'welcome_index' %}"><img src="/media/home_page/UpOnYourLuck_Logo_navbar.jpg" style="width: 75px; height: 75px">UpOnYourLuck</a>
+    <div class="navbar-header text-color">
+        <a class="navbar-brand fw-bold" href="{% url 'welcome_index' %}" style="color: #26dda6;"><img src="/media/home_page/UpOnYourLuck_Logo_transparent.png" style="width: 75px; height: 50px">UpOnYourLuck</a>
     </div>
 
     <!-- Toggle Button -->
@@ -20,30 +21,34 @@
     <!-- Logic to display dynamic data based on user authentication -->
         <div class="collapse navbar-collapse" id="navbarMenu">
             {% if user.is_authenticated %}
-                <ul class="navbar-nav me-auto">
-                    <li class="active nav-item"><a class="nav-link" href="{% url 'welcome_index' %}"><i class="fa-solid fa-house"></i> Home</a></li>
-                    <li class="dropdown nav-item bg-dark me-auto"><a class="dropdown-toggle nav-link bg-dark" data-bs-toggle="dropdown" href="#"><i class="fa-solid fa-user"></i> Profile <span class="caret"></span></a>
-                        <ul class="dropdown-menu nav-item bg-dark">
-                            <li class="nav-item bg-dark">
-                                <a class="nav-link" href="{% url 'user_dashboard' %}">Dashboard</a>
+                <ul class="navbar-nav ml-auto">
+                    <li class="active nav-item"><a class="nav-link text-color fw-bold" href="{% url 'welcome_index' %}"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li class="dropdown nav-item ml-auto"><a class="dropdown-toggle nav-link text-color fw-bold" data-bs-toggle="dropdown" href="#"><i class="fa-solid fa-user"></i> Profile <span class="caret"></span></a>
+                        <ul class="dropdown-menu nav-item" style="background: #222224;">
+                            <li class="nav-item">
+                                <a class="nav-link text-color fw-bold" href="{% url 'user_dashboard' %}">Dashboard</a>
                             </li>
-                            <li class="nav-item bg-dark">
-                                <a class="nav-link" href="{% url 'profile' %}">View Profile</a>
+                            <li class="nav-item">
+                                <a class="nav-link text-color fw-bold" href="{% url 'profile' %}">View Profile</a>
                             </li>
             
-                            <li class="nav-item bg-dark">
-                                <a class="nav-link" href="{% url 'update_profile' %}">Update Profile</a>
+                            <li class="nav-item">
+                                <a class="nav-link text-color fw-bold" href="{% url 'update_profile' %}">Update Profile</a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}"><i class="fa-solid fa-right-to-bracket"></i> Logout</a>
+                        <a class="nav-link text-color fw-bold" href="{% url 'logout' %}"><i class="fa-solid fa-right-to-bracket"></i> Logout</a>
                     </li>
                 </ul>
             {% else %}
-                <ul class="navbar-nav navbar-right me-auto">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}"><i class="fa-solid fa-user"></i> Sign Up</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+                <ul class="navbar-nav navbar-right ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-color fw-bold" href="{% url 'register' %}"><i class="fa-solid fa-user"></i> Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-color fw-bold" href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                    </li>
                 </ul>
             {% endif %}
         </div>

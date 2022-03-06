@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p>This is my QR Code that you scanned!</p>
-    <p>Thank you very much!</p>
-    <p>Please Share My QR Code.</p>
-    <div>
-        <img src="/media/qr_code/{{ username }}.jpg" id="qr_code" style="cursor: pointer;" alt="..." width="450" class="rounded mb-2 img-thumbnail" onclick="printImg('/media/qr_code/{{ username }}.jpg')">
+    <div style="padding-top: 0.5rem; padding-left: 1rem;">
+        <p>This is my QR Code that you scanned!</p>
+        <p>Thank you very much!</p>
+        <p>Please Share My QR Code.</p>
+        <div>
+            <img src="/media/qr_code/{{ username }}.jpg" id="qr_code" style="cursor: pointer;" alt="..." width="450" class="rounded mb-2 img-thumbnail" onclick="printImg('/media/qr_code/{{ username }}.jpg')">
+        </div>
     </div>
 
     <script>
@@ -14,5 +16,14 @@
             win.focus();
         }
     </script>
+
+    <style>
+        body {
+            height: 100%;
+            width: 100%;
+            background-color: #121212;
+            color: #CDD1CC;
+        }
+    </style>
 
 {% endblock %}

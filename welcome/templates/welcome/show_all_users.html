@@ -7,7 +7,7 @@
 {% block content %}
 <div class="row" style="padding-bottom: 3rem;">
     <div class="col-lg-7 mx-auto text-center pt-5">
-        <h1 class="display-4" id="dashboard-banner">{{title}}</h1>
+        <h1 class="display-4" id="dashboard-banner" style="color: #CDD1CC;">{{title}}</h1>
         {% if list_of_users|length == 0 %}
             <a class="lead mb-0 text-muted" href="{% url 'user_dashboard' %}">You have no followers. Return to dashboard?</a>
         {% endif %}
@@ -18,25 +18,25 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm justify-content-center">
             {% for user in list_of_users %}
                 <div class="col mb-3">
-                    <div class="card" style=" overflow: hidden;">
+                    <div class="card" style="overflow: hidden; background-color: #202123;">
                     <img src="/media/banner_imgs/banner{{ num_list|random }}.jpg" alt="Cover" class="card-img-top">
                     <div class="card-body text-center">
                         <img src="{{user.profile.profile_img.url}}" style="width:100px;margin-top:-60px;" alt="User" class="rounded mb-2 img-thumbnail">
-                        <h5 class="card-title" style="color: black;">{{ user.first_name }} {{user.last_name}}</h5>
+                        <h5 class="card-title" style="color: #CDD1CC;">{{ user.first_name }} {{user.last_name}}</h5>
                         <p class="text-secondary mb-1">@{{user.username}}</p>
                         <p class="text-muted font-size-sm">{{ user.profile.city }}, {{user.profile.state}}</p>
                     </div>
                     <div class="card-footer" style="justify-content: center;">
-                        <a href="{% url 'visitor_to_profile' user.username %}" class="btn btn-primary rounded-pill btn-outline-dark text-white btn-sm">View Profile</a>
+                        <a href="{% url 'visitor_to_profile' user.username %}" class="btn rounded-pill btn-outline-dark text-black btn-sm" style="background-color: #26dda6;">View Profile</a>
                         {% if not user.username == current_user %}
                             <form action="followers_count" method="POST">
                                 {%csrf_token%}
                                 <input type="hidden" name="following" value="{{current_user}}" readonly/>
                                 <input type="hidden" name="follower" value="{{user.username}}" readonly/>
                                 {% if follow_btn == 'follow' %}
-                                    <button class="btn btn-secondary btn-sm has-icon ml-2 rounded-pill px-4" type="button"><i class="fa-solid fa-user-plus"></i></button>
+                                    <button class="btn btn-sm has-icon ml-2 rounded-pill px-4" type="button" style="border-color: #69707a; background-color: #bb86fc;"><i class="fa-solid fa-user-plus"></i></button>
                                 {% else %}
-                                    <button class="btn btn-secondary btn-sm has-icon ml-2 rounded-pill px-4" type="button"><i class="fa-solid fa-user-minus"></i></button>
+                                    <button class="btn btn-sm has-icon ml-2 rounded-pill px-4" type="button" style="border-color: #69707a; background-color: #bb86fc;"><i class="fa-solid fa-user-minus"></i></button>
                                 {% endif %}
                             </form>
                         {% endif %}

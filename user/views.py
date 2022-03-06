@@ -218,10 +218,10 @@ def register_request(request):
             messages.success(request, "Registration successful.")
             return redirect("user_dashboard")
 
-        messages.error(request, f"{user_form.errors}")
+        # messages.error(request, f"{user_form.errors}")
     else:
         user_form = NewUserForm()
-    return render(request=request, template_name="register.html", context={"register_form": user_form, "user": request.user})
+    return render(request=request, template_name="register.html", context={"register_form": user_form, "user": request.user, "errors": user_form.errors})
 
 
 def login_request(request):
