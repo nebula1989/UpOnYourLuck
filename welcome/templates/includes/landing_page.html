@@ -9,18 +9,19 @@
 <!-- Up On Your Luck Title -->
 <div class="container" id="jumbotron-container">
     <div class="jumbotron">
-        <h1 class="display-4 text-color" id="landing-page-title" style="text-align: center; padding-top: 1em;">UpOnYourLuck</h1>
+        <h1 class="display-4 fw-bold" id="landing-page-title" style="text-align: center; padding-top: 1em; color: #26dda6;">Up On Your Luck</h1>
+        <p class="lead" style="text-align: center;">Lending a helping hand to those in need.</p>
+        <hr class="my-4">
     </div>
 </div>
-
-<!-- Banner Section -->
-<div class="register-cta">
-    <h1 class="text-color">Using QR Technology to Help People Experiencing Homelessness</h1>
-    <div id="right-register-buttons">
-      <a class="btn btn-lg rounded-pill" href="{% url 'register' %}" role="button">Register Now</a>
-      <a class="btn btn-lg rounded-pill" href="{% url 'show-all-users' %}" role="button">See Users in the Area</a>
-    </div>
-</div>
+  <!-- Banner Section -->
+  <div class="register-cta">
+      <h1 class="text-color">Using QR Technology to Help People Experiencing Homelessness</h1>
+      <div id="right-register-buttons">
+        <a class="btn btn-lg rounded-pill px-4 btn-floating" href="{% url 'register' %}" role="button">Register Now</a>
+        <a class="btn btn-lg rounded-pill px-4 btn-floating" href="{% url 'show-all-users' %}" role="button">See Users in the Area</a>
+      </div>
+  </div>
 
 <!-- About Section -->
 <div class="business-process">
