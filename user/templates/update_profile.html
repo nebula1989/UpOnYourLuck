@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
+{% load static %}
 
 {% block title %}Profile Page{% endblock title %}
 
@@ -13,48 +14,51 @@
     <form method='POST' enctype="multipart/form-data">
     {%csrf_token%}
     <nav class="nav nav-borders">
-        <a class="nav-link active ms-0" href="{% url 'update_profile' %}">Profile</a>
-        <a class="nav-link" href="{% url 'update_security' %}">Security</a>
+        <a class="nav-link active ms-0" href="{% url 'update_profile' %}" style="color: #26dda6; border-bottom-color: #26dda6;">Profile</a>
+        <a class="nav-link" href="{% url 'update_security' %}" style="color: #CDD1CC;">Security</a>
     </nav>
     <hr class="mt-0 mb-4">
     <div class="row">
         <div class="col-xl-4">
-            <div class="card mb-4 mb-xl-0">
+            <div class="card mb-4 mb-xl-0" style="background-color: #202123; color: #CDD1CC;">
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
-                    <img class="img-account-profile rounded-circle mb-2" src="{{profile_img.url}}" alt="" id="current_profile_img">
-                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                    {{p_form.profile_img}}
+                    <div class="img-container">
+                        <img class="img-account-profile rounded-circle mb-4" src="{{profile_img.url}}" alt="" id="current_profile_img">
+                        <div class="small font-italic mb-4" id="img-label" style="color: #CDD1CC; display: none;">No JPG or PNG larger than 5 MB</div>
+                    </div>
+                    
+                    <input type="file" name="profile_img" id="id_profile_img" style="width: 13.75rem;">
                 </div>
             </div>
         </div>
         <div class="col-xl-8">
-            <div class="card mb-4">
+            <div class="card mb-4" style="background-color: #202123; color: #CDD1CC;">
                 <div class="card-header">Account Details</div>
                 <div class="card-body">
                     <div class="mb-3">
                         <label class="small mb-1" for="inputUsername">Username (cannot be changed)</label>
-                        <input type="text" class="form-control" name="username" maxlength="150" required="" id="id_username" value="{{ current_user }}" style="cursor: not-allowed;" readonly>
+                        <input type="text" class="form-control" name="username" maxlength="150" required="" id="id_username" value="{{ current_user }}" style="cursor: not-allowed; background-color: #3b3b3b; color: #CDD1CC;" readonly>
                     </div>
                     <div class="row gx-3 mb-3">
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputFirstName">First name</label>
-                            <input type="text" name="first_name" class="form-control form-control-lg form-rounded" placeholder="First Name" maxlength="150" id="id_first_name" value="{{current_user.first_name}}">
+                            <input type="text" name="first_name" class="form-control form-control-lg form-rounded" placeholder="First Name" maxlength="150" id="id_first_name" value="{{current_user.first_name}}" style="background-color: #3b3b3b; color: #CDD1CC;">
                         </div>
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputLastName">Last name</label>
-                            <input type="text" name="last_name" class="form-control form-control-lg form-rounded" placeholder="Last Name" maxlength="150" id="id_last_name" value="{{current_user.last_name}}">
+                            <input type="text" name="last_name" class="form-control form-control-lg form-rounded" placeholder="Last Name" maxlength="150" id="id_last_name" value="{{current_user.last_name}}" style="background-color: #3b3b3b; color: #CDD1CC;">
                         </div>
                     </div>
                     <div class="row gx-3 mb-3">
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputOrgName">City</label>
 
-                            <input type="text" name="city" value="{{current_user.profile.city}}" maxlength="60" class="textinput textInput form-control" required="" id="id_city">
+                            <input type="text" name="city" value="{{current_user.profile.city}}" maxlength="60" class="textinput textInput form-control" required="" id="id_city" style="background-color: #3b3b3b; color: #CDD1CC;">
                         </div>
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputLocation">State</label>
-                            <select name="state" class="select form-select" id="id_state" value="{{current_user.profile.state}}">
+                            <select name="state" class="select form-select" id="id_state" value="{{current_user.profile.state}}" style="background-color: #3b3b3b; color: #CDD1CC; border-color: transparent;">
                                 <option value="">---------</option>
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
@@ -121,21 +125,21 @@
                     <div class="row gx-3 mb-3">
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputPhone">Donation Link</label>
-                            <input type="url" name="payment_link_url" value="{{current_user.profile.payment_link_url}}" placeholder="https://cash.app/$yourcashtag" maxlength="200" class="urlinput form-control" required="" id="id_payment_link_url">
+                            <input type="url" name="payment_link_url" value="{{current_user.profile.payment_link_url}}" placeholder="https://cash.app/$yourcashtag" maxlength="200" class="urlinput form-control" required="" id="id_payment_link_url" style="background-color: #3b3b3b; color: #CDD1CC;">
                         </div>
 
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                            <input type="email" name="email" class="form-control form-control-lg form-rounded" placeholder="name@example.com" required="" id="id_email" value="{{current_user.email}}">
+                            <input type="email" name="email" class="form-control form-control-lg form-rounded" placeholder="name@example.com" required="" id="id_email" value="{{current_user.email}}" style="background-color: #3b3b3b; color: #CDD1CC;">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="small mb-1" for="inputEmailAddress">Life Story</label>
-                        <textarea name="life_story" cols="40" rows="10" maxlength="500" class="textarea form-control" required="" id="id_life_story">{{current_user.profile.life_story}}</textarea>
+                        <textarea name="life_story" cols="40" rows="10" maxlength="500" class="textarea form-control" required="" id="id_life_story" style="background-color: #3b3b3b; color: #CDD1CC;" spellcheck="true">{{current_user.profile.life_story}}</textarea>
                     </div>
 
-                    <button class="btn btn-primary btn-sm rounded-pill btn-outline-dark text-white px-4" type="submit">Save changes</button>
-                    <a class="btn btn-sm" href="{% url 'profile' %}">Cancel</a>
+                    <button class="btn btn-outline-dark btn-sm rounded-pill text-black px-4" type="submit" style="background-color: #26dda6;">Save changes</button>
+                    <a class="btn btn-sm rounded-pill text-black" href="{% url 'profile' %}" style="border-color: #69707a; background-color: #bb86fc;">Cancel</a>
                 </div>
             </div>
         </div>
@@ -145,17 +149,36 @@
 
 <script>
     const imgInput = document.getElementById('id_profile_img')
+    const imgLabel = document.getElementById('img-label');
+
+
     imgInput.addEventListener('change', (e) => {
         const profileImg = document.getElementById('current_profile_img');
-        console.log(e.srcElement.files[0]);
+        console.log(e.srcElement.files[0].size);
+        if(e.srcElement.files[0].size > 5000000) {
+            // display error to user
+            imgLabel.style.display =  'block';
+            imgLabel.style.color = 'red'
 
-        var reader = new FileReader();
-        reader.readAsDataURL(e.srcElement.files[0]);
-        reader.onload = function() {
+            // remove imgInput
+            imgInput.value = '';
+        }
+        else {
+            imgLabel.style.color = '#CDD1CC';
+            imgLabel.style.display =  'none';
+            var reader = new FileReader();
+
+            reader.readAsDataURL(e.srcElement.files[0]);
+            reader.onload = function() {
             let fileContent = reader.result;
             
             profileImg.src = fileContent;
+            // profileImg.style.maxHeight = '90%'
+            // profileImg.style.maxWidth = '80%'
+
         }
+        }
+        
     })
 
     
@@ -165,8 +188,12 @@
 <style>
 body {
     margin-top:auto;
-    background-color:#f2f6fc;
+    background-color:#121212;
     color:#69707a;
+}
+.nav-borders .nav-link.active:hover {
+    color: #3bba9cec;
+    border-bottom-color: #26dda6;
 }
 .form-rounded {
     border-radius: 1rem;
@@ -205,17 +232,20 @@ body {
     color: #69707a;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #c5ccd6;
+    border: 1px solid;
+    border-color: transparent;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     border-radius: 0.35rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-
-.nav-borders .nav-link.active {
-    color: #0061f2;
-    border-bottom-color: #0061f2;
+button, input {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    border-radius: 1rem;
 }
 .nav-borders .nav-link {
     color: #69707a;
@@ -228,6 +258,10 @@ body {
     padding-right: 0;
     margin-left: 1rem;
     margin-right: 1rem;
+}
+
+#current-profile-img {
+    max-width: 40%;
 }
 </style>
 {% endblock content %}

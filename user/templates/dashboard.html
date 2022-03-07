@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static '/user/styles.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+        
+{% endblock %}
 {% block content %}
 
 <div class="container-fluid">
     <div class="row" style="padding-bottom: 3rem;">
         <div class="col-lg-7 mx-auto text-center pt-5">
-            <h1 class="display-4" id="dashboard-banner">Welcome to your personal Dashboard.</h1>
-            <p class="lead mb-0">Manage your account here.</p>
+            <h1 class="display-4" id="dashboard-banner" style="color: #CDD1CC;">Welcome to your personal Dashboard.</h1>
+            <p class="lead mb-0" style="color: #CDD1CC;">Manage your account here.</p>
         </div>
     </div>
     <div class="row d-flex justify-content-center align-items-center">
@@ -37,24 +42,24 @@
             <div class="circle-tile ">
                 <a href="{% url 'sticker_index' %}"><div class="circle-tile-heading yellow "><i class="fa-solid fa-qrcode fa-fw fa-3x" style="transform: translateY(0.8rem);"></i></div></a>
                 <div class="circle-tile-content yellow overflow-hidden" style="border-radius: 1rem;">
-                    <div class="circle-tile-description text-faded"> QR Scans </div>
-                    <div class="circle-tile-number text-faded ">{{qr_scans}}</div>
-                    <a class="circle-tile-footer" href="{% url 'sticker_index' %}">View Code</a>
+                    <div class="circle-tile-description text-faded text-black"> QR Scans </div>
+                    <div class="circle-tile-number text-faded text-black fw-bold">{{qr_scans}}</div>
+                    <a class="circle-tile-footer text-black" href="{% url 'sticker_index' %}">View Code</a>
                 </div>
             </div>
-        </div> 
+        </div>
      
         <div class="col-lg-1 col-sm-6">
             <div class="circle-tile ">
                 <a href="{% url 'profile' %}"><div class="circle-tile-heading orange"><i class="fa-solid fa-user fa-fw fa-3x" style="transform: translateY(0.6rem);"></i></div></a>
                 <div class="circle-tile-content orange overflow-hidden" style="border-radius: 1rem;">
-                    <div class="circle-tile-description text-faded"> Profile </div>
+                    <div class="circle-tile-description text-faded text-black"> Profile </div>
                     {% if current_user.username|length > 10 %}
-                        <div class="circle-tile-profile text-faded" style="overflow-wrap: break-word;">@{{current_user}}</div>
+                        <div class="circle-tile-profile text-faded fw-bold text-black" style="overflow-wrap: break-word;">@{{current_user}}</div>
                     {% else %}
-                        <div class="circle-tile-number text-faded">@{{current_user}}</div>
+                        <div class="circle-tile-number text-faded fw-bold text-black">@{{current_user}}</div>
                     {% endif %}
-                    <a class="circle-tile-footer" href="{% url 'update_profile' %}">Update</a>
+                    <a class="circle-tile-footer text-black" href="{% url 'update_profile' %}">Update</a>
                 </div>
             </div>
         </div> 
@@ -105,28 +110,28 @@
         text-decoration: none;
     }
     .circle-tile-heading.dark-blue:hover {
-        background-color: #2E4154;
+        background-color: #602e75;
     }
     .circle-tile-heading.green:hover {
         background-color: #138F77;
     }
     .circle-tile-heading.orange:hover {
-        background-color: #DA8C10;
+        background-color: #009196;
     }
     .circle-tile-heading.blue:hover {
         background-color: #2473A6;
     }
     .circle-tile-heading.red:hover {
-        background-color: #CF4435;
+        background-color: #2a018a;
     }
     .circle-tile-heading.purple:hover {
-        background-color: #7F3D9B;
+        background-color: #602e75;
     }
     .circle-tile-heading.yellow:hover {
-        background-color: #d6b315;
+        background-color: #00a390;
     }
     .dark-blue {
-        background-color: #34495E;
+        background-color: #bb86fc;
     }
     .green {
         background-color: #16A085;
@@ -135,10 +140,10 @@
         background-color: #2980B9;
     }
     .orange {
-        background-color: #F39C12;
+        background-color: #03c5cc;
     }
     .red {
-        background-color: #E74C3C;
+        background-color: #3700b3;
     }
     .purple {
         background-color: #8E44AD;
@@ -153,7 +158,7 @@
         background-color: #BDC3C7;
     }
     .yellow {
-        background-color: #F1C40F;
+        background-color: #03dac0;
     }
     .text-dark-blue {
         color: #34495E;

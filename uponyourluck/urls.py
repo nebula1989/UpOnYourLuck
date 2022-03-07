@@ -18,13 +18,17 @@ from django.urls import path, include
 
 
 urlpatterns = [
+    # admin url
+    path('admin/', admin.site.urls),
+    # contact url
+    path('', include('contact.urls')),
     # homepage url
     path('', include('welcome.urls')),
     # user url
     path('', include('user.urls')),
+    # contact url
+    path('', include('contact.urls')),
 
-    # admin url
-    path('admin/', admin.site.urls),
 ]
 
 handler404 = "uponyourluck.views.page_not_found_view"
