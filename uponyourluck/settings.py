@@ -132,7 +132,7 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
 
 CONTACT_EMAIL = 'benwalterscoding@gmail.com'
-ADMIN_EMAILS = ['benwalterscoding@gmail.com']
+ADMIN_EMAILS = ['benwalterscoding@gmail.com', 'ldcollins@my.waketech.edu']
 
 from uponyourluck.secrets import SENDGRID_API_KEY
 # Twilio SendGrid
