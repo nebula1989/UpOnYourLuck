@@ -21,7 +21,7 @@
                     <div class="card" style="overflow: hidden; background-color: #202123;">
                     <img src="/media/banner_imgs/banner{{ num_list|random }}.jpg" alt="Cover" class="card-img-top">
                     <div class="card-body text-center">
-                        <img src="{{user.profile.profile_img.url}}" style="width:100px;margin-top:-60px;" alt="User" class="rounded mb-2 img-thumbnail">
+                        <img src="{{user.profile.profile_img.url}}" style="width:100px;margin-top:-60px;" alt="User Profile Image" class="rounded mb-2 img-thumbnail">
                         <h5 class="card-title" style="color: #CDD1CC;">{{ user.first_name }} {{user.last_name}}</h5>
                         <p class="text-secondary mb-1">@{{user.username}}</p>
                         <p class="text-muted font-size-sm">{{ user.profile.city }}, {{user.profile.state}}</p>
