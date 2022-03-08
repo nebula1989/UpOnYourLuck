@@ -52,10 +52,10 @@
             {% else %}
                 <ul class="navbar-nav navbar-right ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-color fw-bold" href="{% url 'register' %}"><i class="fa-solid fa-user"></i> Sign Up</a>
+                        <a class="nav-link text-color fw-bold" role="menuitem" href="{% url 'register' %}"><i class="fa-solid fa-user"></i> Sign Up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-color fw-bold" href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                        <a class="nav-link text-color fw-bold" role="menuitem" href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
                     </li>
                 </ul>
             {% endif %}
