@@ -65,7 +65,7 @@
 								<div class="form-floating mb-3">
 									{{ register_form.username }}
 									<label for="id_username" class="form-label" style="margin-left: 0px; color: #CDD1CC;">Username</label>
-									<div class="error-message" id="username-err-msg">
+									<div class="error-message" id="username-err-msg" aria-live="off">
 										<!-- Please enter a username. -->
 									</div>
 								</div>
@@ -95,7 +95,7 @@
 								<div class="form-floating mb-3">
 									{{ register_form.password1 }}
 									<label class="form-label" for="id_password1" style="color: #CDD1CC;">Password</label>
-									<div class="error-message" id="pw-err-msg">
+									<div class="error-message" id="pw-err-msg" aria-live="off">
 
 									</div>
 								</div>
@@ -148,6 +148,7 @@
 	const pw2Field = document.getElementById('id_password2');
 	const fields = [userField, fNameField, lNameField, emailField, pwField, pw2Field]
 
+	// errors
 	const userErr = document.getElementById('username-err-msg')
 	
 	
@@ -206,6 +207,7 @@
 			pwErrMsgDiv.classList.add('d-flex')
 			pwErrMsgDiv.classList.add('justify-content-center')
 			pwErrMsgDiv.classList.add('mb-1')
+			pwErrMsgDiv.setAttribute("aria-live", "polite")
 			pwErrMsgDiv.id = 'pw2-err-msg'
 			pwErrMsgDiv.innerText = err
 			document.getElementById('tos-div').insertAdjacentElement('beforebegin', pwErrMsgDiv);
@@ -214,10 +216,12 @@
 	function addUserErr(msg) {
 		userErr.textContent = msg
 		changeFieldToError(userField);
-		userField.addEventListener('keypress', () => {
+		userErr.setAttribute('aria-live', 'polite');
+		userField.addEventListener('input', () => {
 			changeFieldToValid(userField);
 			userField.style.boxShadow = '0 0 0 0.25rem rgb(25 135 84 / 25%)'
 			userErr.style.display = 'none'
+			userErr.setAttribute('aria-live', 'off');
 		})
 	}
 
@@ -239,7 +243,7 @@
 			addPasswordError(errMessages[1]);
 		}
 		if(errMessages.length == 2 && errMessages[1].startsWith("user")) {
-			addUserError(errMessages[1]);
+			addUserErr(errMessages[1]);
 		}
 
 	}
@@ -247,7 +251,7 @@
 	function displayUsernameError() {
 		const userField = document.getElementById('id_username')
 		userField.classList.add('form-is-invalid');
-
+		
 	}
 
 
@@ -271,12 +275,12 @@
 	// addRegisterBtn();
 
 
-	function checkIfPasswordsMatch(str1, str2) {
-		if(str1 == str2) {
-			return true;
-		}
-		return false;
-	}
+	// function checkIfPasswordsMatch(str1, str2) {
+	// 	if(str1 == str2) {
+	// 		return true;
+	// 	}
+	// 	return false;
+	// }
 	
 </script>
 
