@@ -31,7 +31,7 @@
             {% if user.is_authenticated %}
                 <ul class="navbar-nav ml-auto" role="menubar">
                     <li role="none" class="active nav-item"><a class="nav-link text-color fw-bold" href="{% url 'welcome_index' %}" role="menuitem"><i class="fa-solid fa-house"></i> Home</a></li>
-                    <li class="dropdown nav-item ml-auto" role="none"><a class="dropdown-toggle nav-link text-color fw-bold" data-bs-toggle="dropdown" href="#"><i class="fa-solid fa-user" role="menuitem"></i> Profile <span class="caret"></span></a>
+                    <li class="dropdown nav-item ml-auto" role="none"><a class="dropdown-toggle nav-link text-color fw-bold" data-bs-toggle="dropdown" href="#" ><i class="fa-solid fa-user" ></i> Profile <span class="caret"></span></a>
                         <ul class="dropdown-menu nav-item" style="background: #222224;">
                             <li class="nav-item" role="none">
                                 <a class="nav-link text-color fw-bold" href="{% url 'user_dashboard' %}" role="menuitem">Dashboard</a>
