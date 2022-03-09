@@ -16,20 +16,24 @@ body {
   width: 100%;
 }
 
-
 body {
   background-color: #121212;
-  color: #CDD1CC;
+  color: #cdd1cc;
   font-family: "Roboto", sans-serif;
-  background-image: url(/media/home_page/homeless_man.jpg);
-  background-position: center;
+}
+
+.container-wrap {
+  background-image: url("background-images/homeless-walking.jpg");
+  background-position: top center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  margin: 0;
+  width: 100%;
 }
 
 body h1 {
-  color: rgba(255, 255, 255, 0.80);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 a:link {
@@ -83,7 +87,7 @@ a:active {
   font-size: var(--font-size-large);
   letter-spacing: 2px;
   line-height: 2.875rem;
-  color: #CDD1CC;
+  color: #cdd1cc;
   text-align: center;
   background: #202123d3;
   border-top-right-radius: 0.625em;
@@ -99,8 +103,8 @@ a:active {
 }
 
 #right-register-buttons a {
-    color: black;
-    background: #0dce8a;
+  color: black;
+  background: #0dce8a;
 }
 
 #right-register-buttons a:hover {
@@ -125,12 +129,12 @@ a:active {
   background-size: 9.375em 9.375em;
   background-position: bottom left 3em;
   background-color: #202123d3;
-  color: #CDD1CC;
+  color: #cdd1cc;
 }
 
 .business-process h2 {
   font-weight: bold;
-  color: #CDD1CC;
+  color: #cdd1cc;
   font-size: var(--font-size-medium);
   margin-bottom: 1.25em;
   margin-top: 1.25em;
@@ -591,12 +595,12 @@ footer p {
 }
 
 @media only screen and (min-width: 1440px) {
-  body {
-    background-image: url(/media/home_page/homeless_man_wide.jpg);
-    background-position: center;
+  .container {
+    background-image: url("background-images/homeless-walking.jpg");
+    background-position: top center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-  
+    margin: 0;
     background-size: cover;
   }
 }
