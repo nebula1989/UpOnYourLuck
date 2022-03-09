@@ -25,7 +25,7 @@
                 <div class="card-body text-center">
                     <div class="img-container">
                         <img class="img-account-profile rounded-circle mb-4" src="{{profile_img.url}}" alt="Current profile picture" id="current_profile_img">
-                        <div class="small font-italic mb-4" id="img-label" style="color: #CDD1CC; display: none;">No JPG or PNG larger than 5 MB</div>
+                        <div class="small font-italic mb-4" id="img-label" style="color: #CDD1CC; display: none;" aria-live="off">No JPG or PNG larger than 5 MB</div>
                     </div>
                     
                     <input type="file" name="profile_img" id="id_profile_img" style="width: 13.75rem;">
@@ -159,7 +159,7 @@
             // display error to user
             imgLabel.style.display =  'block';
             imgLabel.style.color = 'red'
-
+            imgLabel.setAttribute('aria-live', 'polite')
             // remove imgInput
             imgInput.value = '';
         }
@@ -175,7 +175,8 @@
             profileImg.src = fileContent;
             // profileImg.style.maxHeight = '90%'
             // profileImg.style.maxWidth = '80%'
-
+            imgLabel.setAttribute('aria-live', 'off')
+            
         }
         }
         
