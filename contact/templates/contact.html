@@ -1,7 +1,40 @@
 {% include 'base.html' %}
-<h1>Contact Form</h1>
-<form action="" method="post">
-   {% csrf_token %}
-   {{ form }}
-   <input type="submit" value="Submit">
-</form>
+
+{% load static %}
+
+{% block content %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static '/user/styles.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+{% endblock %}
+
+<!--Title for the page-->
+<div class="row" style="width: 100%;">
+    <div class="col-lg-7 mx-auto text-center pt-5">
+        <h1 style="color: #CDD1CC;">Contact Form</h1>
+     </div>
+</div>
+
+
+
+<!--Form-->
+
+<div class="form group py-5 h-100 ">
+    <div class="row justify-content-center align-items-center h-100 " style="border-radius: 2rem;">
+        <div class="h-100 card" style="width: 45em; background-color: #292928; border-radius: 2rem; border-style: solid; border-color: #CDD1CC; border-width: 0.1rem; ">
+            <div class="col-lg-7 mx-auto text-left pt-5 50em">
+                <div class="col col-lg-10 col-xl-1" style="color: #CDD1CC" >
+
+                <form action="" method="post" >
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="Submit" class="btn btn-outline-dark rounded-pill btn-sm" style="transform: translateY(1rem); background-color: #26dda6;">
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
