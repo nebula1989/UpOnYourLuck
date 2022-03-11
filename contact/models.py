@@ -10,3 +10,8 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.email
+
+    class Meta:
+        db_table = 'Contact'
+        verbose_name = "Contact"
+        verbose_name_plural = "Contacts"
