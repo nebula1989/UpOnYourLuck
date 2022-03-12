@@ -23,8 +23,8 @@ body {
 }
 
 .container-wrap {
-  background-image: url("background-images/homeless-walking.jpg");
-  background-position: top center;
+  background-image: url("background-images/homeless_man.jpg");
+  background-position: left;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
