@@ -250,7 +250,7 @@ def logout_request(request):
 
 
 def generate_qr_code(request):
-    DOMAIN = 'https://www.pythonanywhere.com/'
+    DOMAIN = 'bwalters89.pythonanywhere.com/'
     profile_url = request.user.profile.profile_url
     user_profile_full_url = DOMAIN + profile_url + '?source=qr'
     qr_img = qrcode.make(user_profile_full_url)
