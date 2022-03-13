@@ -82,8 +82,8 @@ def visitor_to_profile(request, username=None):
     # Get number of followers and following
     current_user = username_obj.username
     logged_in_user = request.user.username
-    user_followers = len(FollowersCount.objects.filter(follower=current_user))
-    user_following = len(FollowersCount.objects.filter(following=current_user))
+    user_followers = len(FollowersCount.objects.filter(following=current_user))
+    user_following = len(FollowersCount.objects.filter(follower=current_user))
     follower_list = FollowersCount.objects.filter(following=current_user)
 
     # Loop through follower_list to check if requester is already following
