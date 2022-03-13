@@ -135,8 +135,8 @@ def followers_count(request):
 # For logged in users to see their own profile page
 def profile(request):
     logged_in_user = request.user.username
-    user_followers = len(FollowersCount.objects.filter(follower=logged_in_user))
-    user_following = len(FollowersCount.objects.filter(following=logged_in_user))
+    user_followers = len(FollowersCount.objects.filter(following=logged_in_user))
+    user_following = len(FollowersCount.objects.filter(follower=logged_in_user))
     follower_list = FollowersCount.objects.filter(following=logged_in_user)
 
     context = {
