@@ -15,8 +15,8 @@ import qrcode
 
 @login_required
 def dashboard(request):
-    user_followers = len(FollowersCount.objects.filter(follower=request.user.username))
-    user_following = len(FollowersCount.objects.filter(following=request.user.username))
+    user_following = len(FollowersCount.objects.filter(follower=request.user.username))
+    user_followers = len(FollowersCount.objects.filter(following=request.user.username))
     qr_scans = Profile.objects.get(user=request.user).qr_scan_count
 
     context = {
@@ -31,11 +31,11 @@ def dashboard(request):
 
 @login_required()
 def view_followers(request):
-    followers_list = FollowersCount.objects.filter(follower=request.user.username)
+    followers_list = FollowersCount.objects.filter(following=request.user.username)
     num_list = [1, 2, 3, 4, 5, 6]
     user_list = []
     for user in followers_list:
-        user_list.append(get_object_or_404(User, username=user.following))
+        user_list.append(get_object_or_404(User, username=user.follower))
 
     context = {
         'current_user': request.user,
@@ -48,12 +48,12 @@ def view_followers(request):
 
 @login_required()
 def view_following(request):
-    following_list = FollowersCount.objects.filter(following=request.user.username)
+    following_list = FollowersCount.objects.filter(follower=request.user.username)
     print(following_list)
     num_list = [1, 2, 3, 4, 5, 6]
     user_list = []
     for user in following_list:
-        user_list.append(get_object_or_404(User, username=user.follower))
+        user_list.append(get_object_or_404(User, username=user.following))
 
     context = {
         'current_user': request.user,
