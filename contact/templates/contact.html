@@ -4,48 +4,53 @@
 
 {% block content %}
 
-
-<!--Title for the page-->
-<div class="row" style="width: 100%;">
-    <div class="col-lg-7 mx-auto text-center pt-5">
-        <h1 style="color: #CDD1CC;">Contact Form</h1>
-     </div>
-</div>
-
 {% block css %}
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-    <link rel="stylesheet" type="text/css" href="{% static '/user/styles.css' %}" />
-
+    <link rel="stylesheet" type="text/css" href="{% static '/user/styles2.css' %}??{% now 'U' %}" />
+    
 {% endblock %}
 
 
-<!--Form-->
+<!--Title for the page-->
+<div id="container">
+    
 
-<div class="form group py-5" style="height: 100vh;">
-    <div class="row justify-content-center align-items-center h-100 " style="border-radius: 2rem;">
-        <div class="h-100 card" style="width: 45em; background-color: #292928; border-radius: 2rem; border-style: solid; border-color: #CDD1CC; border-width: 0.1rem; ">
-            <div class="col-lg-7 mx-auto text-left pt-5 50em">
-                <div class="col col-lg-10 col-xl-1" style="color: #CDD1CC; width: 100%;" >
 
-                <form action="" method="post" id="contact-form" style="display: flex; flex-direction: column;">
-                    {% csrf_token %}
-                    {{ form }}
-                    <input type="submit" value="Submit" class="btn btn-outline-dark rounded-pill btn-sm" style="transform: translateY(1rem); background-color: #26dda6;">
-                </form>
+
+    <!--Form-->
+
+    <div class="form group py-1" id="body-wrapper" style="">
+        
+        <div class="row justify-content-center align-items-center" style="border-radius: 2rem;">
+
+            <div class="h-100 card" id="inner-form-wrapper">
+                <div class="row" style="width: 100%;">
+                    <div class="col-lg-7 mx-auto text-center">
+                        <h1 style="color: #CDD1CC;">Contact Form</h1>
+                    </div>
+                </div>
+                <div class="col-lg-7 mx-auto text-left pt-2 50em">
+                    <div class="col col-lg-10 col-xl-1" style="color: #CDD1CC; width: 100%;" >
+
+                    <form action="" method="post" id="contact-form" style="display: flex; flex-direction: column;">
+                        {% csrf_token %}
+                        {{ form }}
+                        <input type="submit" value="Submit" class="btn btn-outline-dark rounded-pill btn-sm" style=" background-color: #26dda6;">
+                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
 <script>
     let form = document.getElementById('contact-form');
     let formElements = form.children;
     // console.log(formElements.style);
     for(ele of form.children) {
-        ele.style.marginTop = '10px';
+        ele.style.marginTop = '2%';
     }
 
 </script>
