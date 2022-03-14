@@ -113,7 +113,7 @@ def visitor_to_profile(request, username=None):
 
     return render(request, 'profile_for_visitor.html', context)
 
-
+@login_required()
 def followers_count(request):
     if request.method == 'POST':
         # Get form values
@@ -135,8 +135,8 @@ def followers_count(request):
 # For logged in users to see their own profile page
 def profile(request):
     logged_in_user = request.user.username
-    user_followers = len(FollowersCount.objects.filter(follower=logged_in_user))
-    user_following = len(FollowersCount.objects.filter(following=logged_in_user))
+    user_followers = len(FollowersCount.objects.filter(following=logged_in_user))
+    user_following = len(FollowersCount.objects.filter(follower=logged_in_user))
     follower_list = FollowersCount.objects.filter(following=logged_in_user)
 
     context = {
