@@ -4,7 +4,7 @@ from .base import *
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['bwalters89.pythonanywhere.com', 'www.uponyourluck.org']
+ALLOWED_HOSTS = ['bwalters89.pythonanywhere.com', 'www.uponyourluck.life', 'uponyourluck.life']
 
 
 DATABASES = {
