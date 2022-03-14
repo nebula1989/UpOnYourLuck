@@ -63,7 +63,7 @@ def view_following(request):
     }
     return render(request, 'welcome/show_all_users.html', context)
 
-@login_required()
+
 # for visitors going to a user's profile page
 def visitor_to_profile(request, username=None):
     if username:
