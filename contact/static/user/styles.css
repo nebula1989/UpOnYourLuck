@@ -1,21 +1,21 @@
 #dashboard-banner {
-    color: black;
+  color: black;
 }
 
-html, 
+html,
 body {
-    height: 100%;
-    width: 100%;
-    background-color: #121212;
+  height: 100vh;
+  width: 100%;
+  background-color: red;
 }
 
 .form-rounded {
-    border-radius: 1rem;
+  border-radius: 1rem;
 }
 
 .banner-img {
-    background-color: #222224;
-    height:200px; 
-    border-top: 1rem;
-    border-color: transparent;
+  background-color: #222224;
+  height: 900px;
+  border-top: 1rem;
+  border-color: transparent;
 }
