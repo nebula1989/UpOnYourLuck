@@ -63,7 +63,7 @@ def view_following(request):
     }
     return render(request, 'welcome/show_all_users.html', context)
 
-
+@login_required()
 # for visitors going to a user's profile page
 def visitor_to_profile(request, username=None):
     if username:
@@ -113,7 +113,7 @@ def visitor_to_profile(request, username=None):
 
     return render(request, 'profile_for_visitor.html', context)
 
-
+@login_required()
 def followers_count(request):
     if request.method == 'POST':
         # Get form values
@@ -131,7 +131,7 @@ def followers_count(request):
 
         return redirect('/' + following)
 
-
+@login_required()
 # For logged in users to see their own profile page
 def profile(request):
     logged_in_user = request.user.username
