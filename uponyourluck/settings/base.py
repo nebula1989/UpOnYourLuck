@@ -103,7 +103,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
 
-CONTACT_EMAIL = 'benwalterscoding@gmail.com'
+CONTACT_EMAIL = 'contact@uponyourluck.life'
 
 ADMIN_EMAILS = ['benwalterscoding@gmail.com', 'ldcollins@my.waketech.edu']
 

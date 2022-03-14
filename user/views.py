@@ -131,7 +131,7 @@ def followers_count(request):
 
         return redirect('/' + following)
 
-
+@login_required()
 # For logged in users to see their own profile page
 def profile(request):
     logged_in_user = request.user.username
@@ -257,7 +257,7 @@ def logout_request(request):
 
 
 def generate_qr_code(request):
-    DOMAIN = 'bwalters89.pythonanywhere.com/'
+    DOMAIN = 'uponyourluck.life/'
     profile_url = request.user.profile.profile_url
     user_profile_full_url = DOMAIN + profile_url + '?source=qr'
     qr_img = qrcode.make(user_profile_full_url)
