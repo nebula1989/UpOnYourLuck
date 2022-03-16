@@ -1,10 +1,4 @@
-{% block css %}
-    <style>
-        .text-color {
-            color: #CDD1CC;
-        }
-    </style>
-{% endblock %}
+
 
 <!-- Up On Your Luck Title -->
 <div class="container-wrap">
@@ -17,41 +11,46 @@
   </div>
   <!-- Banner Section -->
   <div class="register-cta">
-      <h1 class="text-color">Using QR Technology to Help People Experiencing Homelessness</h1>
+      <h1 class="text-color">Tell Your Story<br>Accept Cashless Donations</h1>
       <div id="right-register-buttons">
-        <a class="btn btn-lg rounded-pill px-4 btn-floating" href="{% url 'register' %}" role="button">Register Now</a>
+        <a class="btn btn-lg rounded-pill px-4 btn-floating" href="{% url 'register' %}" role="button">Make a Profile</a>
         <a class="btn btn-lg rounded-pill px-4 btn-floating" href="{% url 'show-all-users' %}" role="button">See Users in the Area</a>
       </div>
   </div>
 
-  <!-- About Section -->
-  <div class="business-process">
-      <h2 class="">How It Works</h2>
-      <ol>
-        <li id="business-process-li-1"><i class="fas fa-qrcode"></i><span><a href="{% url 'register' %}">Create an Account</a></span> and add a photo, biography, and CashApp or Venmo link to your profile page.</li>
-        <li id="business-process-li-1"><i class="fas fa-laptop-house"></i>Request your personalized QR Coded Sticker or print one yourself.</li>
-        <li id="business-process-li-1"><i class="fas fa-qrcode"></i>Place the QR Code Sticker on any sign while you are busking, or asking for donations.</li>
-        <li id="business-process-li-1"><i class="fas fa-mobile-alt"></i>When a Passerby scans your code, they will be taken to your profile page.</li>
-        <li id="business-process-li-1"><i class="fas fa-qrcode"></i>Need Help? <span><a href="{% url 'contact' %}">Click Here</a></span>.</li>
-      </ol>
-  </div>
-
+  <!-- Homeless Reasons to Sign up -->
   <div class="homeless-advantages">
-      <div class="homeless-advantages-left">
+    <div class="homeless-advantages-left">
 
-        <ul>
-            <h2 id="homeless-advantages-title">How can this app help you?</h2>
-            <li>Gives passersby a chance to give you a donation when they have no cash.</li>
-            <li>Gives you a chance to tell the world who you are, and how you got in your current situation.</li>
-        </ul>
-      </div>
+      <ul>
+          <h2 id="homeless-advantages-title">How can this app help you?</h2>
+          <li>Gives passersby a chance to give you a donation when they have no cash.</li>
+          <li>Gives you a chance to tell the world who you are, and how you got in your current situation.</li>
+      </ul>
+    </div>
 
-      <div class="homeless-advantages-right">
-        <img src="/media/home_page/holding_QR_code.jpeg" alt="Man holding QR code">
-      </div>
+    <div class="homeless-advantages-right">
+      <img src="/media/home_page/holding_QR_code.jpeg" alt="Man holding QR code">
+    </div>
 
   </div>
+
+   <!-- About Section -->
+   <div class="business-process">
+    <h2 class="">How It Works</h2>
+    <ol>
+      <li id="business-process-li-1"><i class="fas fa-qrcode"></i><span><a href="{% url 'register' %}">Create a Profile</a></span> and add a photo, biography, and CashApp or Venmo link to your profile page.</li>
+      <li id="business-process-li-1"><i class="fas fa-laptop-house"></i>Request your personalized QR Coded Sticker or print one yourself.</li>
+      <li id="business-process-li-1"><i class="fas fa-qrcode"></i>Place the QR Code Sticker on any sign while you are busking, or asking for donations.</li>
+      <li id="business-process-li-1"><i class="fas fa-mobile-alt"></i>When a Passerby scans your code, they will be taken to your profile page.</li>
+      <li id="business-process-li-1"><i class="fas fa-qrcode"></i>Need Help? <span><a href="{% url 'contact' %}">Click Here</a></span>.</li>
+    </ol>
 </div>
+</div>
+
+ 
+
+  
 
 
 <!-- Let's add this back in once we get some actual testimonials -->
