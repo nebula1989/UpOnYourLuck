@@ -1,18 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p>This is your Unique QR Code Sticker</p>
-    <p>When someone scans this code, they will be taken to your profile page.</p>
-    <p>You can also click the Sticker to print it.</p>
-    <div>
-        <img src="media/qr_code/{{ current_user }}.jpg" id="qr_code" style="cursor: pointer;" alt="..." width="450" class="rounded mb-2 img-thumbnail" onclick="printImg('media/qr_code/{{ current_user }}.jpg')">
+    <div style="padding-top: 0.5rem; padding-left: 1rem;">
+        <p>This is your Unique QR Code Sticker</p>
+        <p>When someone scans this code, they will be taken to your profile page.</p>
+        <p>You can also click the Sticker to print it.</p>
+        <div>
+            <img src="media/qr_code/{{ current_user }}.jpg" id="qr_code" style="cursor: pointer;" alt="..." width="450" class="rounded mb-2 img-thumbnail" onclick="printImg('media/qr_code/{{ current_user }}.jpg')">
+        </div>
     </div>
 
     <script>
         function printImg(url) {
             var win = window.open('');
-            win.document.write('<img src="' + url + '" height="75%" style='+'"' + 'display: block; margin-left: auto; margin-right: auto;'+'" onload="window.print();window.close()" />');
+            win.document.write('<img src="' + url + '" height="80%" style='+'"' + 'display: block; margin-left: auto; margin-right: auto;'+'" onload="window.print();window.close()" />');
             win.focus();
         }
     </script>
+
+    <style>
+        body {
+            height: 100%;
+            width: 100%;
+            background-color: #121212;
+            color: #CDD1CC;
+        }
+    </style>
 
 {% endblock %}

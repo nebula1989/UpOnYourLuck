@@ -5,9 +5,17 @@
 html, 
 body {
     height: 100%;
+    width: 100%;
+    background-color: #121212;
 }
 
 .form-rounded {
     border-radius: 1rem;
-    border-color: black;
+}
+
+.banner-img {
+    background-color: #222224;
+    height:200px; 
+    border-top: 1rem;
+    border-color: transparent;
 }

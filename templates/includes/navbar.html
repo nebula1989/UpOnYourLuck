@@ -1,51 +1,81 @@
 {% block css %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link id="dark-theme-style" rel="stylesheet" />
+    <style>
+        @media (min-width: 768px) { 
+            #navbar-toggler {
+            visibility: hidden;
+        }
+        }
+        
+    </style>
 {% endblock %}
 
-<nav class="navbar navbar-inverse navbar-expand-md navbar-dark navbar-fixed-top bg-dark">
+<nav class="navbar navbar-inverse navbar-expand-md navbar-dark navbar-fixed-top" style="background: transparent;">
     <div class="container-fluid">
 
     
     <!-- Home Page Link Text -->
-    <div class="navbar-header">
-        <a class="navbar-brand" href="{% url 'welcome_index' %}"><img src="/media/home_page/UpOnYourLuck_Logo_navbar.jpg" style="width: 75px; height: 75px">UpOnYourLuck</a>
+    <div class="navbar-header text-color">
+        <a class="navbar-brand fw-bold" href="{% url 'welcome_index' %}" style="color: #26dda6;"><img src="/media/home_page/UpOnYourLuck_Logo_transparent.png" style="width: 75px; height: 50px" alt="UpOnYourLuck logo">UpOnYourLuck</a>
     </div>
 
     <!-- Toggle Button -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
-        aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" id="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+        aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation" aria-hidden="false">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <!-- Logic to display dynamic data based on user authentication -->
-        <div class="collapse navbar-collapse" id="navbarMenu">
+        <div class="collapse navbar-collapse" id="navbarMenu" aria-label="submenu">
             {% if user.is_authenticated %}
-                <ul class="navbar-nav me-auto">
-                    <li class="active nav-item"><a class="nav-link" href="{% url 'welcome_index' %}"><i class="fa-solid fa-house"></i> Home</a></li>
-                    <li class="dropdown nav-item bg-dark me-auto"><a class="dropdown-toggle nav-link bg-dark" data-bs-toggle="dropdown" href="#"><i class="fa-solid fa-user"></i> Profile <span class="caret"></span></a>
-                        <ul class="dropdown-menu nav-item bg-dark">
-                            <li class="nav-item bg-dark">
-                                <a class="nav-link" href="{% url 'user_dashboard' %}">Dashboard</a>
+                <ul class="navbar-nav ml-auto" role="menubar">
+                    <li role="none" class="active nav-item"><a class="nav-link text-color fw-bold" href="{% url 'welcome_index' %}" role="menuitem"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li class="dropdown nav-item ml-auto" role="none"><a class="dropdown-toggle nav-link text-color fw-bold" data-bs-toggle="dropdown" href="#" ><i class="fa-solid fa-user" ></i> Profile <span class="caret"></span></a>
+                        <ul class="dropdown-menu nav-item" style="background: #222224;">
+                            <li class="nav-item" role="none">
+                                <a class="nav-link text-color fw-bold" href="{% url 'user_dashboard' %}" role="menuitem">Dashboard</a>
                             </li>
-                            <li class="nav-item bg-dark">
-                                <a class="nav-link" href="{% url 'profile' %}">View Profile</a>
+                            <li class="nav-item" role="none">
+                                <a class="nav-link text-color fw-bold" href="{% url 'profile' %}" role="menuitem">View Profile</a>
                             </li>
             
-                            <li class="nav-item bg-dark">
-                                <a class="nav-link" href="{% url 'update_profile' %}">Update Profile</a>
+                            <li class="nav-item" role="none">
+                                <a class="nav-link text-color fw-bold" href="{% url 'update_profile' %}" role="menuitem">Update Profile</a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}"><i class="fa-solid fa-right-to-bracket"></i> Logout</a>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link text-color fw-bold" href="{% url 'logout' %}" role="menuitem"><i class="fa-solid fa-right-to-bracket"></i> Logout</a>
                     </li>
                 </ul>
             {% else %}
-                <ul class="navbar-nav navbar-right me-auto">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}"><i class="fa-solid fa-user"></i> Sign Up</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+                <ul class="navbar-nav navbar-right ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-color fw-bold" role="menuitem" href="{% url 'register' %}"><i class="fa-solid fa-user"></i> Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-color fw-bold" role="menuitem" href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                    </li>
                 </ul>
             {% endif %}
         </div>
     </div>
 </nav>
+
+<script>
+    let hamburgerMenu = document.getElementById('navbar-toggler');
+    let width = window.innerWidth;
+    window.addEventListener("resize", resizeListener);
+    function resizeListener() {
+        width = window.innerWidth;
+        if(width >= 768) {
+            hamburgerMenu.setAttribute('aria-hidden', true);
+        }
+        else {
+            hamburgerMenu.setAttribute('aria-hidden', false);
+        }
+    }
+    
+
+</script>

@@ -59,6 +59,7 @@ class Profile(models.Model):
     payment_link_url = models.URLField(max_length=200, default="https://cash.app/$")
     city = models.CharField(default="Raleigh", max_length=60)
     state = USStateField(default="NC", blank=True)
+    qr_scan_count = models.IntegerField(default=0)
 
 
     class Meta:

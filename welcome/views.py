@@ -19,21 +19,6 @@ def show_all_users(request):
         'current_user': current_user,
         'list_of_users': list_of_active_nonstaff_users,
         'num_list': num_list,
+        'title': "People in your area",
     }
     return render(request, 'welcome/show_all_users.html', context)
-
-def followers_count(request):
-    if request.method == 'POST':
-        value = request.POST['value']
-        following = request.POST['following']
-        follower = request.POST['follower']
-        print(following)
-
-        if value == 'follow':
-            followers_cnt = FollowersCount.objects.create(follower=follower, following=following)
-            followers_cnt.save()
-        else:
-            followers_cnt = FollowersCount.objects.get(follower=follower, following=following)
-            followers_cnt.delete()
-            
-        return redirect('/'+following)

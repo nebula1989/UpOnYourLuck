@@ -10,25 +10,46 @@
   --font-size-medium-phone: 1rem;
 }
 
+html,
 body {
-  color: rgb(240, 242, 245);
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #121212;
+  color: #cdd1cc;
   font-family: "Roboto", sans-serif;
 }
 
+.container-wrap {
+  background-image: url("background-images/homeless_man.jpg");
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  margin: 0;
+  width: 100%;
+}
+
+body h1 {
+  color: rgba(255, 255, 255, 0.8);
+}
+
 a:link {
-  color: black;
+  color: #26dda6;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:visited {
-  color: blue;
+  color: #26dda6;
   /* background-color: transparent; */
   text-decoration: none;
 }
 
 a:hover {
-  color: darkblue;
+  color: #3bba9cec;
   background-color: transparent;
   text-decoration: underline;
 }
@@ -40,7 +61,6 @@ a:active {
 }
 
 #landing-page-title {
-  color: black;
   font-family: "JetBrains Mono ExtraBold", sans-serif;
   font-size: var(--font-size-large);
 }
@@ -56,7 +76,7 @@ a:active {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: right;
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
 }
 
 .register-cta h1 {
@@ -67,9 +87,9 @@ a:active {
   font-size: var(--font-size-large);
   letter-spacing: 2px;
   line-height: 2.875rem;
-  color: black;
+  color: #cdd1cc;
   text-align: center;
-  background: rgba(194, 213, 213, 80%);
+  background: #202123d3;
   border-top-right-radius: 0.625em;
   border-bottom-right-radius: 0.625em;
   display: flex;
@@ -80,6 +100,15 @@ a:active {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+#right-register-buttons a {
+  color: black;
+  background: #0dce8a;
+}
+
+#right-register-buttons a:hover {
+  background: #3bba9cec;
 }
 
 #right-register-buttons a:last-child {
@@ -99,10 +128,13 @@ a:active {
   background-repeat: no-repeat;
   background-size: 9.375em 9.375em;
   background-position: bottom left 3em;
-  background-color: rgb(96, 151, 134);
+  background-color: #202123d3;
+  color: #cdd1cc;
 }
 
 .business-process h2 {
+  font-weight: bold;
+  color: #cdd1cc;
   font-size: var(--font-size-medium);
   margin-bottom: 1.25em;
   margin-top: 1.25em;
@@ -139,12 +171,12 @@ a:active {
   min-height: 25em;
   display: flex;
   width: 100%;
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
   justify-content: space-evenly;
 }
 
 #homeless-advantages-title {
-  color: black;
+  color: rgba(255, 255, 255, 0.87);
 }
 
 .homeless-advantages-left {
@@ -161,7 +193,7 @@ a:active {
 
 .homeless-advantages-left li {
   font-size: var(--font-size-small);
-  color: black;
+  color: rgba(255, 255, 255, 0.87);
   /*list-style-type: none; */
   line-height: 4.375rem;
 }
@@ -229,13 +261,13 @@ a:active {
   font-size: var(--font-size-large);
   margin-top: 3.28125em;
   align-self: flex-start;
-  color: black;
+  color: rgba(255, 255, 255, 0.87);
 }
 
 .review {
   width: 18.75em;
   height: 16em;
-  background-color: black;
+  background-color: rgba(255, 255, 255, 0.87);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -258,7 +290,6 @@ a:active {
 /* Footer */
 footer {
   width: 100%;
-  background: black;
   color: white;
   height: 2.5em;
   padding-top: 0.5em;
@@ -560,5 +591,16 @@ footer p {
   /* Reviews section */
   .review p {
     font-size: var(--font-size-medium-phone);
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .container-wrap {
+    background-image: url("background-images/homeless_man_wide.jpg");
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    background-size: cover;
   }
 }
