@@ -23,12 +23,12 @@ body {
 }
 
 .container-wrap {
-  background-image: url("background-images/homeless_man.jpg");
-  background-position: top center;
+  background-image: url("background-images/homeless_man_wide.jpg");
+  background-position: 20% 85%;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover;
   margin: 0;
+  background-size: cover;
   width: 100%;
 }
 
@@ -123,7 +123,7 @@ a:active {
   flex-direction: column;
   justify-content: center;
   padding-left: 3.75em;
-  border-radius: 1.5625em;
+  /* border-radius: 1.5625em; */
   border-bottom-right-radius: 0px;
   background: url("background-images/tents.svg");
   background-repeat: no-repeat;
@@ -172,8 +172,7 @@ a:active {
   min-height: 25em;
   display: flex;
   width: 100%;
-  color: black;
-  background-color: rgba(13, 206, 138, 0.5);
+  background-color: rgba(13, 206, 138, 0.6);
   /* background-color: rgb(255, 255, 255); 255, 127, 80 */
   justify-content: space-evenly;
 }
@@ -198,7 +197,6 @@ a:active {
   font-size: var(--font-size-small);
   letter-spacing: 1px;
   color: rgba(255, 255, 255, 0.87);
-  color: rgb(58, 46, 77);
   /*list-style-type: none; */
   line-height: 4.375rem;
 }
@@ -308,10 +306,10 @@ footer p {
 
 /***************** Additional Media Query for small Desktops *************/
 
-@media (max-width: 1100px) {
+/* @media (max-width: 1100px) {
   .register-cta {
     flex-direction: column;
-    /* gap: 0; */
+    /* gap: 0; 
     height: 17em;
     justify-content: space-evenly;
   }
@@ -328,12 +326,7 @@ footer p {
   #right-register-buttons a:last-child {
     margin-top: 0px;
   }
-
-  #homeless-advantages-title,
-  .homeless-advantages-left li {
-    color: black;
-  }
-}
+} */
 
 /***************** Tablet Media Query *************/
 
@@ -437,6 +430,10 @@ footer p {
 
   .homeless-advantages-right img {
     max-width: 100%;
+  }
+
+  .homeless-advantages-right {
+    margin-left: auto;
   }
 
   .homeless-advantages-left {
@@ -593,6 +590,10 @@ footer p {
     line-height: 2.431rem;
   }
 
+  .homeless-advantages-right {
+    margin-left: 0;
+  }
+
   /* Donator Advantages section */
   .donator-advantages-right li {
     font-size: var(--font-size-large-phone);
@@ -609,7 +610,7 @@ footer p {
 @media only screen and (min-width: 1440px) {
   .container-wrap {
     background-image: url("background-images/homeless_man_wide.jpg");
-    background-position: top center;
+    background-position: 15% 85%;
     background-repeat: no-repeat;
     background-attachment: fixed;
     margin: 0;
