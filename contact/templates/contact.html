@@ -7,7 +7,7 @@
 {% block css %}
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-    <link rel="stylesheet" type="text/css" href="{% static '/user/styles2.css' %}??{% now 'U' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static '/contact/contact_styles.css' %}??{% now 'U' %}" />
     
 {% endblock %}
 
@@ -45,15 +45,6 @@
     </div>
 </div>
 
-<script>
-    let form = document.getElementById('contact-form');
-    let formElements = form.children;
-    // console.log(formElements.style);
-    for(ele of form.children) {
-        ele.style.marginTop = '2%';
-    }
-    
-
-</script>
+<script src="../static/contact/app.js"></script>
 
 {% endblock %}
