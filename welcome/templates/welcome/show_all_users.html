@@ -16,7 +16,7 @@
 <div class="container">
     <div class="main-body">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm justify-content-center">
-            {% for user in list_of_users %}
+            {% for user, value in user_list %}
                 <div class="col mb-3">
                     <div class="card" style="overflow: hidden; background-color: #202123;">
                     <img src="/media/banner_imgs/banner{{ num_list|random }}.jpg" alt="Cover" class="card-img-top">
@@ -33,10 +33,12 @@
                                 {%csrf_token%}
                                 <input type="hidden" name="following" value="{{current_user}}" readonly/>
                                 <input type="hidden" name="follower" value="{{user.username}}" readonly/>
-                                {% if follow_btn == 'follow' %}
-                                    <button class="btn btn-sm has-icon ml-2 rounded-pill px-4" type="button" style="border-color: #69707a; background-color: #bb86fc;"><i class="fa-solid fa-user-plus"></i></button>
+                                {% if value == 'unfollow' %}
+                                    <input type="hidden" name="value" value="unfollow" readonly/>
+                                    <button class="btn btn-sm has-icon ml-2 rounded-pill px-4" type="submit" style="border-color: #69707a; background-color: #bb86fc;"><i class="fa-solid fa-user-minus"></i></button>
                                 {% else %}
-                                    <button class="btn btn-sm has-icon ml-2 rounded-pill px-4" type="button" style="border-color: #69707a; background-color: #bb86fc;"><i class="fa-solid fa-user-minus"></i></button>
+                                    <input type="hidden" name="value" value="follow" readonly/>
+                                    <button class="btn btn-sm has-icon ml-2 rounded-pill px-4" type="submit" style="border-color: #69707a; background-color: #bb86fc;"><i class="fa-solid fa-user-plus"></i></button>
                                 {% endif %}
                             </form>
                         {% endif %}
