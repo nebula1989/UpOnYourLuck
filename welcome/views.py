@@ -21,8 +21,6 @@ def show_all_users(request):
 
     user_list = get_user_followers(list_of_active_nonstaff_users, request).items()
 
-
-    print(user_list)
     context = {
         'current_user': current_user,
         'list_of_users': list_of_active_nonstaff_users,
