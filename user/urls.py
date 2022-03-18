@@ -22,7 +22,7 @@ urlpatterns = [
     path('stickers/<str:username>/', sticker_views.sticker_index_for_visitor, name='visitor_to_qr_code'),
     path('profile/update/', views.update_profile, name='update_profile'),
     path('profile/update_security/', views.update_security, name='update_security'),
-    re_path('delete_profile', views.delete_profile, name='delete_profile'),
+    re_path('profile/update_security/delete_profile', views.delete_profile, name='delete_profile'),
     path('dashboard/followers/', views.view_followers, name='view_followers'),
     path('dashboard/following/', views.view_following, name='view_following'),
 ]
