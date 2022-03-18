@@ -203,9 +203,13 @@ def delete_profile(request):
         # Get Profile object of user
         profile = Profile.objects.get(user=request.user)
 
-        # Remove profile image and qr code
-        os.remove(profile.profile_img.path)
-        os.remove(f'/media/qr_code/{request.user.username}.jpg')
+        # Remove profile image and qr code if not default profile image
+        default_profile_pic = "f'/media/qr_code/default.jpg"
+        if default_profile_pic:
+            pass
+        else:
+            os.remove(profile.profile_img.path)
+            os.remove(f'/media/qr_code/{request.user.username}.jpg')
 
         # Delete user data
         profile.user.delete()
