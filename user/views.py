@@ -205,7 +205,7 @@ def delete_profile(request):
 
         # Remove profile image and qr code
         os.remove(profile.profile_img.path)
-        os.remove(f'media/qr_code/{request.user.username}.jpg')
+        os.remove(f'/media/qr_code/{request.user.username}.jpg')
 
 
         # Delete user data
