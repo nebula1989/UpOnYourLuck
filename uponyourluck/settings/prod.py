@@ -26,3 +26,5 @@ STATIC_ROOT = '/home/bwalters89/UpOnYourLuck/static'
 STATIC_URL = '/static/'
 
 TIME_ZONE = 'UTC'
+
+DOMAIN = 'uponyourluck.life/'

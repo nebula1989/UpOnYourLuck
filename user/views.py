@@ -3,6 +3,8 @@ import os
 from textwrap import fill
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
+
+from uponyourluck.settings import DOMAIN, MEDIA_ROOT
 from .forms import ChangePassword, LoginForm, NewUserForm, UpdateProfileForm, UpdateUserForm  # UpdateUserForm
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.contrib import messages
@@ -257,9 +259,14 @@ def logout_request(request):
 
 
 def generate_qr_code(request):
-    DOMAIN = 'uponyourluck.life/'
-    profile_url = request.user.profile.profile_url
-    user_profile_full_url = DOMAIN + profile_url + '?source=qr'
-    qr_img = qrcode.make(user_profile_full_url)
-    qr_img.save('/home/bwalters89/UpOnYourLuck/media/qr_code/' + request.user.username + '.jpg')
-    request.user.profile.qr_code_img = request.user.username + '.jpg'
+    try:
+        domain = DOMAIN
+        profile_url = request.user.profile.profile_url
+        user_profile_full_url = domain + profile_url + '/?source=qr'
+        qr_img = qrcode.make(user_profile_full_url)
+        qr_img.save(str(MEDIA_ROOT) + '/qr_code/' + request.user.username + '.jpg')
+        request.user.profile.qr_code_img = request.user.username + '.jpg'
+    except FileNotFoundError:
+        messages.error(request, "No path for file, going home")
+        return redirect("welcome_index")
+
