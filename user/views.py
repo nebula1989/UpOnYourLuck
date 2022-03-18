@@ -262,7 +262,7 @@ def generate_qr_code(request):
     try:
         domain = DOMAIN
         profile_url = request.user.profile.profile_url
-        user_profile_full_url = domain + profile_url + '/?source=qr'
+        user_profile_full_url = domain + '/' + profile_url + '/?source=qr'
         qr_img = qrcode.make(user_profile_full_url)
         qr_img.save(str(MEDIA_ROOT) + '/qr_code/' + request.user.username + '.jpg')
         request.user.profile.qr_code_img = request.user.username + '.jpg'
