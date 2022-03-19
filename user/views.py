@@ -51,7 +51,7 @@ def view_followers(request):
 @login_required()
 def view_following(request):
     following_list = FollowersCount.objects.filter(follower=request.user.username)
-    print(following_list)
+
     num_list = [1, 2, 3, 4, 5, 6]
     user_list = []
     for user in following_list:
@@ -122,13 +122,21 @@ def followers_count(request):
         value = request.POST['value']
         following = request.POST['following']
         follower = request.POST['follower']
+        
+        following_list = FollowersCount.objects.filter(following=request.user.username)
+        user_list = []
+        for user in following_list:
+            user_list.append(get_object_or_404(User, username=user.following))
+        
 
+        
         # If user is not following, create follower. Otherwise delete follower
         if value == 'follow':
             followers_cnt = FollowersCount.objects.create(follower=follower, following=following)
             followers_cnt.save()
         else:
             followers_cnt = FollowersCount.objects.get(follower=follower, following=following)
+            print(followers_cnt)
             followers_cnt.delete()
 
         return redirect('/' + following)

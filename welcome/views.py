@@ -1,8 +1,8 @@
 from pyexpat.errors import messages
 from django.http import QueryDict
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth import get_user_model
-
+from django.contrib.auth.models import User
 from user.models import FollowersCount
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -45,10 +45,23 @@ def get_user_followers(user_list: QueryDict, request):
 @login_required
 def followers_count(request):
     if request.method == 'POST':
+        
         # Get form values
         value = request.POST['value']
         following = request.POST['following']
         follower = request.POST['follower']
+
+        # Debugging code
+        following_list = FollowersCount.objects.filter(following=request.user.username)
+        print(following_list[0].follower)
+
+        # prints out each of profile's follower's after they press a follow button
+        for ele in following_list:
+            print(ele.follower)
+
+        user_list = []
+        for user in following_list:
+            user_list.append(get_object_or_404(User, username=user.following))
 
         # If user is not following, create follower. Otherwise delete follower
         if value == 'follow':
