@@ -27,4 +27,4 @@ STATIC_URL = 'static/'
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
-DOMAIN = 'http://127.0.0.1:8000/'
+DOMAIN = 'http://127.0.0.1:8000'
