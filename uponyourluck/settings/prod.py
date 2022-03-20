@@ -27,4 +27,4 @@ STATIC_URL = '/static/'
 
 TIME_ZONE = 'UTC'
 
-DOMAIN = 'http://www.uponyourluck.life'
+DOMAIN = 'www.uponyourluck.life'
