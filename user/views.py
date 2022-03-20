@@ -1,6 +1,4 @@
-from multiprocessing import context
 import os
-from textwrap import fill
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -8,7 +6,6 @@ from uponyourluck.settings import DOMAIN, MEDIA_ROOT
 from .forms import ChangePassword, LoginForm, NewUserForm, UpdateProfileForm, UpdateUserForm  # UpdateUserForm
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from .models import FollowersCount, Profile
 
@@ -115,6 +112,7 @@ def visitor_to_profile(request, username=None):
 
     return render(request, 'profile_for_visitor.html', context)
 
+
 @login_required()
 def followers_count(request):
     if request.method == 'POST':
@@ -140,6 +138,7 @@ def followers_count(request):
             followers_cnt.delete()
 
         return redirect('/' + following)
+
 
 @login_required()
 # For logged in users to see their own profile page
@@ -211,9 +210,13 @@ def delete_profile(request):
         # Get Profile object of user
         profile = Profile.objects.get(user=request.user)
 
-        # Remove profile image and qr code
-        os.remove(profile.profile_img.path)
-        os.remove(f'media/qr_code/{request.user.username}.jpg')
+        # remove qr code img upon account deletion
+        os.remove(str(MEDIA_ROOT) + f'/qr_code/{request.user.username}.jpg')
+        # remove profile image but not the default placeholder profile img
+        if profile.profile_img.path == str(MEDIA_ROOT) + '/profile_img/default.jpg':
+            pass
+        else:
+            os.remove(profile.profile_img.path)
 
         # Delete user data
         profile.user.delete()
