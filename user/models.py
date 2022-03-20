@@ -61,7 +61,6 @@ class Profile(models.Model):
     state = USStateField(default="NC", blank=True)
     qr_scan_count = models.IntegerField(default=0)
 
-
     class Meta:
         db_table = 'Profile'
         verbose_name = "Profile"
@@ -83,6 +82,7 @@ class Profile(models.Model):
     def get_profile_url(self):
         return self.profile_url
 
+
 class FollowersCount(models.Model):
     follower = models.CharField(max_length=1000)
     following = models.CharField(max_length=1000)
@@ -95,7 +95,7 @@ class FollowersCount(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        # set default values for profile url, and qr code img
+        # set default values
         Profile.objects.create(
             user=instance, profile_url=instance.username,
         )
