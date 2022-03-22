@@ -53,7 +53,7 @@
                 <div class="p-4" style="background-color: #3b3b3b; color: #CDD1CC;">
                     <div class="d-flex justify-content-between text-center py-1" id="followers_container">
                         <div id="followers_btn_form" class="mr-6">
-                            <form action="followers_count" method="POST" >
+                            <form action="follow_count" method="POST" >
                                 {%csrf_token%}
                                 <input type="hidden" name="following" value="{{current_user}}" readonly/>
                                 <input type="hidden" name="follower" value="{{user.username}}" readonly/>

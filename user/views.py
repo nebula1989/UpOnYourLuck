@@ -114,7 +114,8 @@ def visitor_to_profile(request, username=None):
 
 
 @login_required()
-def followers_count(request):
+def follow_count(request):
+    
     if request.method == 'POST':
         # Get form values
         value = request.POST['value']
@@ -134,7 +135,7 @@ def followers_count(request):
             followers_cnt.save()
         else:
             followers_cnt = FollowersCount.objects.get(follower=follower, following=following)
-            print(followers_cnt)
+            
             followers_cnt.delete()
 
         return redirect('/' + following)
