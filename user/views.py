@@ -47,13 +47,14 @@ def view_followers(request):
 
 @login_required()
 def view_following(request):
+    
+    # following_list is list of people I follow in QuerySet Object
     following_list = FollowersCount.objects.filter(follower=request.user.username)
-
     num_list = [1, 2, 3, 4, 5, 6]
+    # user_list is a list of people I follow
     user_list = []
     for user in following_list:
         user_list.append(get_object_or_404(User, username=user.following))
-
     context = {
         'current_user': request.user,
         'list_of_users': user_list,
