@@ -48,7 +48,7 @@ def followers_count(request):
         
         # Get form values
         value = request.POST['value']
-        print(request.user) # this is user requesting to follow/unfollow
+        # print(request.user) # this is user requesting to follow/unfollow
         current_user = request.POST['following']
         
         other_profile = request.POST['follower']
@@ -60,9 +60,9 @@ def followers_count(request):
         following_list = []
         for user in following_query_set.values():
             following_list.append(user['following'])
-        print(following_list)            
-        print(other_profile)
-        print(following_list)
+        # print(following_list)            
+        # print(other_profile)
+        # print(following_list)
         
         
         # This for loop below might not be necessary. 
