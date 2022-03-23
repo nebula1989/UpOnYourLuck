@@ -15,9 +15,9 @@ urlpatterns = [
     path("login/", user_views.login_request, name="login"),
     # logout url
     path("logout/", user_views.logout_request, name="logout"),
+    path('dashboard/', user_views.dashboard, name='user_dashboard'),
     path('dashboard/followers/', user_views.view_followers, name='view_followers'),
     path('dashboard/following/', user_views.view_following, name='view_following'),
-    path('dashboard/', user_views.dashboard, name='user_dashboard'),
     path('profile/', user_views.profile, name='profile'),
     re_path('follow_count', user_views.follow_count),
     path('<str:username>/', user_views.visitor_to_profile, name='visitor_to_profile'),
