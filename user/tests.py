@@ -1,18 +1,14 @@
 from django.test import TestCase
 
 
-# Create your tests here.
-def test_create_account():
+def test_create_account(self):
     pass
 
-
-def test_delete_account():
+def test_delete_account(self):
     pass
 
-
-def test_profile():
+def test_profile(self):
     pass
 
-
-def test_cashapp_link():
+def test_cashapp_link(self):
     pass
