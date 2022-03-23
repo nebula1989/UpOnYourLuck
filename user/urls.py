@@ -15,6 +15,8 @@ urlpatterns = [
     path("login/", user_views.login_request, name="login"),
     # logout url
     path("logout/", user_views.logout_request, name="logout"),
+    path('dashboard/followers/', user_views.view_followers, name='view_followers'),
+    path('dashboard/following/', user_views.view_following, name='view_following'),
     path('dashboard/', user_views.dashboard, name='user_dashboard'),
     path('profile/', user_views.profile, name='profile'),
     re_path('follow_count', user_views.follow_count),
@@ -23,8 +25,7 @@ urlpatterns = [
     path('profile/update/', user_views.update_profile, name='update_profile'),
     path('profile/update_security/', user_views.update_security, name='update_security'),
     re_path('profile/update_security/delete_profile', user_views.delete_profile, name='delete_profile'),
-    path('dashboard/followers/', user_views.view_followers, name='view_followers'),
-    path('dashboard/following/', user_views.view_following, name='view_following'),
+
 ]
 
 # Only add this when we in debug mode
