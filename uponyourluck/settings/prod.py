@@ -2,7 +2,7 @@ from .base import *
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['bwalters89.pythonanywhere.com', 'www.uponyourluck.life', 'uponyourluck.life']
 
