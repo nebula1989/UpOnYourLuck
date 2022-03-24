@@ -84,11 +84,11 @@ class Profile(models.Model):
 
 
 class FollowersCount(models.Model):
-    #follower = models.CharField(max_length=1000)
-    follows = models.CharField(max_length=1000)
+    follower = models.CharField(max_length=1000)
+    following = models.CharField(max_length=1000)
 
     def __str__(self):
-        return self.follows
+        return self.following
 
 
 # create a user profile automatically upon account creation using signals
