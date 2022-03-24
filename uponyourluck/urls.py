@@ -31,4 +31,4 @@ urlpatterns = [
 
 ]
 
-handler404 = "uponyourluck.views.page_not_found_view"
+#handler404 = "uponyourluck.views.page_not_found_view"
