@@ -1,10 +1,12 @@
 import os
 from django.contrib.auth.models import User
+from django.http import QueryDict
 from django.shortcuts import render, redirect, get_object_or_404
 
 from uponyourluck.settings import DOMAIN, MEDIA_ROOT
 from .forms import ChangePassword, LoginForm, NewUserForm, UpdateProfileForm, UpdateUserForm  # UpdateUserForm
-from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash, get_user_model
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import FollowersCount, Profile
@@ -31,6 +33,19 @@ def dashboard(request):
 @login_required()
 def view_followers(request):
     followers_list = FollowersCount.objects.filter(following=request.user.username)
+    user_model = get_user_model()
+    list_of_active_nonstaff_users = user_model.objects.all().filter(is_active=True, is_staff=False)
+    user_list = get_user_followers(list_of_active_nonstaff_users, request)
+    
+    list_of_followers_usernames = []
+    for name in followers_list:
+        list_of_followers_usernames.append(name.follower)
+
+    newDict = dict()
+    for key, value in user_list.items():
+        if str(key) in list_of_followers_usernames:
+            newDict[key] = value
+
     num_list = [1, 2, 3, 4, 5, 6]
     user_list = []
     for user in followers_list:
@@ -40,7 +55,8 @@ def view_followers(request):
         'current_user': request.user,
         'list_of_users': user_list,
         'num_list': num_list,
-        'title': "Your followers"
+        'title': "Your followers",
+        'user_followers_dict': newDict,
     }
     return render(request, 'welcome/show_all_users.html', context)
 
@@ -48,19 +64,48 @@ def view_followers(request):
 @login_required()
 def view_following(request):
     following_list = FollowersCount.objects.filter(follower=request.user.username)
-
+    user_model = get_user_model()
     num_list = [1, 2, 3, 4, 5, 6]
-    user_list = []
-    for user in following_list:
-        user_list.append(get_object_or_404(User, username=user.following))
+    following_list_usernames = []
+    list_of_active_nonstaff_users = user_model.objects.all().filter(is_active=True, is_staff=False)
+    user_list = get_user_followers(list_of_active_nonstaff_users, request)
+    newDict = dict()
+    for key, value in user_list.items():
+        if value == 'unfollow':
+            newDict[key] = value
 
+    for user in following_list:
+        following_list_usernames.append(get_object_or_404(User, username=user.following))
     context = {
         'current_user': request.user,
         'list_of_users': user_list,
         'num_list': num_list,
-        'title': "People you are following"
+        'title': "People you are following",
+        'user_followers_dict': newDict,
     }
     return render(request, 'welcome/show_all_users.html', context)
+
+def get_user_following(user_list: QueryDict, request):
+    user_dict= {}
+    for user in user_list:
+        following = request.user.username
+        obj = FollowersCount.objects.filter(follower=user.username, following=following)
+        if obj.exists():
+            user_dict.update({user: 'unfollow'})
+        else:
+            user_dict.update({user: 'follow'})
+    return user_dict
+
+def get_user_followers(user_list: QueryDict, request):
+    user_dict= {}
+    for user in user_list:
+        follower = request.user.username
+        obj = FollowersCount.objects.filter(follower=follower, following=user.username)
+        if obj.exists():
+            user_dict.update({user: 'unfollow'})
+        else:
+            user_dict.update({user: 'follow'})
+    return user_dict
 
 
 # for visitors going to a user's profile page
@@ -75,7 +120,6 @@ def visitor_to_profile(request, username=None):
     if "?source=qr" in request.build_absolute_uri():
         profile = Profile.objects.get(user=username_obj)
         profile.qr_scan_count += 1
-        print(profile.qr_scan_count)
         profile.save()
 
     # Get number of followers and following
@@ -134,7 +178,6 @@ def followers_count(request):
             followers_cnt.save()
         else:
             followers_cnt = FollowersCount.objects.get(follower=follower, following=following)
-            print(followers_cnt)
             followers_cnt.delete()
 
         return redirect('/' + following)

@@ -19,14 +19,13 @@ def show_all_users(request):
     list_of_active_nonstaff_users = user_model.objects.all().filter(is_active=True, is_staff=False)
     num_list = [1, 2, 3, 4, 5, 6]
 
-    user_list = get_user_followers(list_of_active_nonstaff_users, request).items()
-
+    user_list = get_user_followers(list_of_active_nonstaff_users, request)
     context = {
         'current_user': current_user,
         'list_of_users': list_of_active_nonstaff_users,
         'num_list': num_list,
         'title': "People in your area",
-        'user_list': user_list,
+        'user_followers_dict': user_list,
     }
     return render(request, 'welcome/show_all_users.html', context)
 
@@ -51,13 +50,7 @@ def followers_count(request):
         following = request.POST['following']
         follower = request.POST['follower']
 
-        # Debugging code
         following_list = FollowersCount.objects.filter(following=request.user.username)
-        print(following_list[0].follower)
-
-        # prints out each of profile's follower's after they press a follow button
-        for ele in following_list:
-            print(ele.follower)
 
         user_list = []
         for user in following_list:
