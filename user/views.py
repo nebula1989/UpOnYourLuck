@@ -210,6 +210,10 @@ def delete_profile(request):
         # Get Profile object of user
         profile = Profile.objects.get(user=request.user)
 
+        # Delete a Profile's associated FollowersCount objects
+        FollowersCount.objects.filter(follower=request.user.username).delete()
+        FollowersCount.objects.filter(following=request.user.username).delete()
+
         # remove qr code img upon account deletion
         os.remove(str(MEDIA_ROOT) + f'/qr_code/{request.user.username}.jpg')
         # remove profile image but not the default placeholder profile img
