@@ -37,12 +37,18 @@ body {
 }
 
 #inner-form-wrapper {
-  width: 45em;
+  width: 50em;
   background-color: #292928;
   border-radius: 2rem;
   border-style: solid;
   border-color: #cdd1cc;
   border-width: 0.1rem;
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+#title-form {
+  width: 85%;
 }
 
 .form-rounded {
@@ -54,6 +60,19 @@ body {
   height: 900px;
   border-top: 1rem;
   border-color: transparent;
+}
+
+#contact-form > * {
+  width: 80%;
+  margin-top: 0.5em;
+}
+
+#title-form {
+  margin: 0 auto;
+}
+
+#form-submit-btn {
+  margin-top: 1.5em;
 }
 
 @media (max-width: 450px) {

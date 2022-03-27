@@ -20,23 +20,23 @@
 
     <!--Form-->
 
-    <div class="form group py-1" id="body-wrapper" style="">
+    <div class="form group py-1" id="body-wrapper">
         
-        <div class="row justify-content-center align-items-center" style="border-radius: 2rem;">
+        <div class="row justify-content-center align-items-center" id="outer-form-wrapper" style="border-radius: 2rem;">
 
             <div class="h-100 card" id="inner-form-wrapper">
-                <div class="row" style="width: 100%;">
-                    <div class="col-lg-7 mx-auto text-center">
-                        <h1 style="color: #CDD1CC;">Contact Form</h1>
+                <div class="row" style="width: 100%;" id="title-outer-wrapper">
+                    <div class="col-lg-7 mx-auto text-center" id="title-inner-wrapper">
+                        <h1 style="color: #CDD1CC;" id="title-form">Contact Form</h1>
                     </div>
                 </div>
-                <div class="col-lg-7 mx-auto text-left pt-2 50em">
-                    <div class="col col-lg-10 col-xl-1" style="color: #CDD1CC; width: 100%;" >
+                <div class="col-lg-7 mx-auto text-left pt-2 50em" id="form-outer-body-wrapper">
+                    <div class="col col-lg-10 col-xl-1" style="color: #CDD1CC; width: 100%;" id="form-inner-body-wrapper" >
                         
-                    <form action="" method="post" id="contact-form" style="display: flex; flex-direction: column;">
+                    <form action="" method="post" id="contact-form" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                         {% csrf_token %}
                         {{ form }}
-                        <input type="submit" value="Submit" class="btn btn-outline-dark rounded-pill btn-sm" style=" background-color: #26dda6;">
+                        <input type="submit" value="Submit" class="btn btn-outline-dark rounded-pill btn-sm" id="form-submit-btn" style=" background-color: #26dda6;">
                     </form>
                     </div>
                 </div>
