@@ -7,7 +7,7 @@
 {% block css %}
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-    <link rel="stylesheet" type="text/css" href="{% static '/user/contact_styles.css' %}??{% now 'U' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static '/contact/contact_styles.css' %}??{% now 'U' %}" />
     
 {% endblock %}
 
@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-lg-7 mx-auto text-left pt-2 50em">
                     <div class="col col-lg-10 col-xl-1" style="color: #CDD1CC; width: 100%;" >
-
+                        
                     <form action="" method="post" id="contact-form" style="display: flex; flex-direction: column;">
                         {% csrf_token %}
                         {{ form }}
@@ -45,6 +45,13 @@
     </div>
 </div>
 
-<script src="../static/contact/app.js"></script>
+<div class="hiddenFields" style="display: none">
+    <div id="email_field">{{request.user.email}}</div>
+    <div id="username_field">{{request.user.username}}</div>
+</div>
 
+{% if request.user.is_authenticated %}
+    <script src="../static/contact/app.js"></script>
+    
+{% endif %}
 {% endblock %}
