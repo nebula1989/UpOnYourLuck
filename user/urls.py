@@ -8,7 +8,7 @@ from stickers import views as sticker_views
 
 urlpatterns = [
     # sticker url
-    path('sticker/', include('stickers.urls')),
+    path('stickers/', include('stickers.urls')),
     # create account url
     path("register/", user_views.register_request, name="register"),
     # login url
