@@ -4,6 +4,7 @@
         <p>This is your Unique QR Code Sticker</p>
         <p>When someone scans this code, they will be taken to your profile page.</p>
         <p>You can also click the Sticker to print it.</p>
+        <p>Click <a href="{% url 'ship_my_sticker' %}">Here</a> to have your unique QR Sticker sent to you.</p>
         <div>
             <img src="/media/qr_code/{{ current_user }}.jpg" id="qr_code" style="cursor: pointer;" alt="..." width="450" class="rounded mb-2 img-thumbnail" onclick="printImg('/media/qr_code/{{ current_user }}.jpg')">
         </div>

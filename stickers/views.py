@@ -1,9 +1,14 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from stickers.models import StickerShipment
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect, get_object_or_404
+from stickers.forms import ShipStickerForm
+
+from uponyourluck import settings
 
 
-# Create your views here.
 def sticker_index(request):
     args1 = {
         'current_user': request.user,
@@ -26,3 +31,19 @@ def sticker_index_for_visitor(request, username=None):
     }
 
     return render(request, 'sticker_index_for_visitor.html', context)
+
+
+@login_required
+def ship_sticker_view(request):
+    if request.method == 'POST':
+        qr_request_model = StickerShipment()
+        form = ShipStickerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            email_subject = f'QR Sticker Request for {request.user}'
+            email_message = qr_request_model.__str__()
+            send_mail(email_subject, email_message, settings.CONTACT_EMAIL, settings.ADMIN_EMAILS)
+            return render(request, 'success.html')
+    form = ShipStickerForm()
+    context = {'form': form}
+    return render(request, 'ship_sticker.html', context)
