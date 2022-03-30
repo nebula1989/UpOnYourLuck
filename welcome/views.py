@@ -47,23 +47,45 @@ def followers_count(request):
         
         # Get form values
         value = request.POST['value']
+
         following = request.POST['following']
         follower = request.POST['follower']
 
         following_list = FollowersCount.objects.filter(following=request.user.username)
 
-        user_list = []
-        for user in following_list:
-            user_list.append(get_object_or_404(User, username=user.following))
+        # print(request.user) # this is user requesting to follow/unfollow
+        current_user = request.POST['following']
 
-        # If user is not following, create follower. Otherwise delete follower
-        if value == 'follow':
-            followers_cnt = FollowersCount.objects.create(following=follower, follower=following)
+        other_profile = request.POST['follower']
+
+        # following_list is who I'm following essentially
+        following_query_set = FollowersCount.objects.filter(follower=current_user)
+
+
+        following_list = []
+        for user in following_query_set.values():
+            following_list.append(user['following'])
+        # print(following_list)
+        # print(other_profile)
+        # print(following_list)
+
+
+        # This for loop below might not be necessary.
+        # user_following_set = {}
+        # for user in following_list:
+        #     user_following_set.add(get_object_or_404(User, username=user))
+
+
+        # print(user_following_set)            
+
+        # If user is not following, create FollowerCount Obj. Otherwise delete FollowerCount Obj
+        if value == 'follow' and other_profile not in following_list:
+            followers_cnt = FollowersCount.objects.create(following=other_profile, follower=current_user)
             followers_cnt.save()
-            messages.success(request, f'Now following {follower}')
+            messages.success(request, f'Now following {other_profile}')
         else:
-            followers_cnt = FollowersCount.objects.get(following=follower, follower=following)
+            followers_cnt = FollowersCount.objects.get(following=other_profile, follower=current_user)
             followers_cnt.delete()
-            messages.warning(request, f'Unfollowed {follower}')
+            messages.warning(request, f'Unfollowed {other_profile}')
 
         return redirect('show-all-users')

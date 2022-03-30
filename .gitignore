@@ -11,6 +11,7 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
+assets
 media
 uponyourluck/settings/secrets.py
 uponyourluck/settings/config.json

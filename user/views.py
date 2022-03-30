@@ -63,7 +63,10 @@ def view_followers(request):
 
 @login_required()
 def view_following(request):
+    
+    # following_list is list of people I follow in QuerySet Object
     following_list = FollowersCount.objects.filter(follower=request.user.username)
+
     user_model = get_user_model()
     num_list = [1, 2, 3, 4, 5, 6]
     following_list_usernames = []
@@ -76,6 +79,13 @@ def view_following(request):
 
     for user in following_list:
         following_list_usernames.append(get_object_or_404(User, username=user.following))
+
+    num_list = [1, 2, 3, 4, 5, 6]
+    # user_list is a list of people I follow
+    user_list = []
+    for user in following_list:
+        user_list.append(get_object_or_404(User, username=user.following))
+
     context = {
         'current_user': request.user,
         'list_of_users': user_list,
@@ -158,7 +168,8 @@ def visitor_to_profile(request, username=None):
 
 
 @login_required()
-def followers_count(request):
+def follow_count(request):
+    
     if request.method == 'POST':
         # Get form values
         value = request.POST['value']
@@ -178,6 +189,7 @@ def followers_count(request):
             followers_cnt.save()
         else:
             followers_cnt = FollowersCount.objects.get(follower=follower, following=following)
+
             followers_cnt.delete()
 
         return redirect('/' + following)
