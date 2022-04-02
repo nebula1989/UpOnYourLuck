@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'welcome/styles.css' %}??{% now 'U' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'welcome/about_us_styles.css' %}??{% now 'U' %}" />
+    
+{% endblock %}
+
+{% block content %}
+
+
+<div class="about-us-container">
+    <div class="left">
+        <div class="left-container">
+            <div class="about-container">
+                <div class="about-title">
+                    <h1>About Us</h1>
+                </div>
+                <div class="about-description">
+                    <p>We are a group of students doing a semester project at Wake Technical Community College. This website aims to provide funding to the homeless through anonymous donations. </p>
+                </div>
+            </div>
+            <div class="contributors-container">
+                <div class="contibutors-title">
+                    <h1>Contributors</h1>
+                </div>
+                <div class="contributors-description">
+                    <div class="contrib-author">Benjamin Walters</div>
+                    <div class="contrib-author">Lucas Collins</div>
+                    <div class="contrib-author">Andrew Hughes</div>
+                    <div class="contrib-author">Gabriela Rodriguez</div>
+                    <div class="contrib-author">Seth Butler-Hargett</div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="right">
+        <img class="card-img-top" id="main-image" src="{% static 'welcome/background-images/business.jpg' %}" alt="Card image">
+    </div>
+</div>
+
+
+{% endblock content %}

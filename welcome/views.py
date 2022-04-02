@@ -12,6 +12,9 @@ from django.contrib import messages
 def index(request):
     return render(request, 'welcome/welcome_base.html')
 
+def about_us(request):
+    return render(request, 'welcome/about_us.html')    
+
 
 def show_all_users(request):
     user_model = get_user_model()
