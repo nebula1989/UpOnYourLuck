@@ -8,6 +8,10 @@
         }
         }
         
+        #right-nav-links {
+            margin-left: auto;
+            margin-right: 1.5em;
+        }
     </style>
 {% endblock %}
 
@@ -49,6 +53,15 @@
                         <a class="nav-link text-color fw-bold" href="{% url 'logout' %}" role="menuitem"><i class="fa-solid fa-right-to-bracket"></i> Logout</a>
                     </li>
                 </ul>
+                <ul class="navbar-nav navbar-right"  id="right-nav-links">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-color fw-bold" role="menuitem" href="{% url 'contact' %}"><i class="fa-solid fa-phone-flip"></i> Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-color fw-bold" role="menuitem" href="{% url 'about-us' %}"><i class="fa-solid fa-address-card"></i> About Us</a>
+                    </li>
+                </ul>
             {% else %}
                 <ul class="navbar-nav navbar-right ml-auto">
                     <li class="nav-item">
@@ -56,6 +69,16 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-color fw-bold" role="menuitem" href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                    </li>
+                    
+                </ul>
+                <ul class="navbar-nav ml-auto"  id="right-nav-links">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-color fw-bold" role="menuitem" href="{% url 'contact' %}"><i class="fa-solid fa-phone-flip"></i> Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-color fw-bold" role="menuitem" href="{% url 'about-us' %}"><i class="fa-solid fa-address-card"></i> About Us</a>
                     </li>
                 </ul>
             {% endif %}
