@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 
 from . import views as user_views
 from stickers import views as sticker_views
+from contact import views as contact_views
 
 
 urlpatterns = [
@@ -25,6 +26,7 @@ urlpatterns = [
     path('profile/update/', user_views.update_profile, name='update_profile'),
     path('profile/update_security/', user_views.update_security, name='update_security'),
     re_path('profile/update_security/delete_profile', user_views.delete_profile, name='delete_profile'),
+    path('password_reset/', contact_views.password_reset_request, name='password_reset'),
 
 ]
 
