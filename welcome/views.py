@@ -12,6 +12,7 @@ from django.contrib import messages
 def index(request):
     return render(request, 'welcome/welcome_base.html')
 
+
 def about_us(request):
     return render(request, 'welcome/about_us.html')    
 
@@ -31,6 +32,7 @@ def show_all_users(request):
         'user_followers_dict': user_list,
     }
     return render(request, 'welcome/show_all_users.html', context)
+
 
 def get_user_followers(user_list: QueryDict, request):
     user_dict= {}
@@ -64,22 +66,9 @@ def followers_count(request):
         # following_list is who I'm following essentially
         following_query_set = FollowersCount.objects.filter(follower=current_user)
 
-
         following_list = []
         for user in following_query_set.values():
             following_list.append(user['following'])
-        # print(following_list)
-        # print(other_profile)
-        # print(following_list)
-
-
-        # This for loop below might not be necessary.
-        # user_following_set = {}
-        # for user in following_list:
-        #     user_following_set.add(get_object_or_404(User, username=user))
-
-
-        # print(user_following_set)            
 
         # If user is not following, create FollowerCount Obj. Otherwise delete FollowerCount Obj
         if value == 'follow' and other_profile not in following_list:
