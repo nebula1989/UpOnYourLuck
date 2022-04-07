@@ -1,6 +1,4 @@
 from django.conf import settings
-from django.core.mail import send_mail
-from django.shortcuts import render
 
 from uponyourluck.settings import DOMAIN
 from .forms import ContactForm
@@ -33,18 +31,29 @@ def contact_view(request):
     return render(request, 'contact.html', context)
 
 
+# DEBUG STUFF
+import logging
+logging.basicConfig(level=logging.INFO)
+
 def password_reset_request(request):
+    logging.info("PASSWORD RESET VIEW")
     domain = DOMAIN
+    logging.info("DOMAIN: %s" % domain)
     if request.method == "POST":
+        logging.info("Line 43")
         password_reset_form = PasswordResetForm(request.POST)
         if password_reset_form.is_valid():
+            logging.info("Line 46")
             data = password_reset_form.cleaned_data['email']
+            logging.info('data: %s' % data)
             associated_users = User.objects.filter(Q(email=data))
+            logging.info(f'associated_users: {associated_users}')
             if associated_users.exists():
+                logging.info("Line 50")
                 for user in associated_users:
                     subject = "Password Reset Requested"
                     email_template_name = "password_reset_email.txt"
-                    c = {
+                    context = {
                         "email": user.email,
                         'domain': domain,
                         'site_name': 'Website',
@@ -52,16 +61,27 @@ def password_reset_request(request):
                         'token': default_token_generator.make_token(user),
                         'protocol': 'http',
                     }
-                    email = render_to_string(email_template_name, c)
+                    email = render_to_string(email_template_name, context)
+                    logging.info("Line 63")
 
                     try:
+                        logging.info("TRY SEND MAIL")
                         send_mail(subject, email, settings.CONTACT_EMAIL, settings.ADMIN_EMAILS, fail_silently=False)
 
                     except BadHeaderError:
+                        logging.info("BAD HEADER")
                         return HttpResponse('Invalid header found.')
 
+                    logging.info("MESSAGE SUCCESS")
                     messages.success(request, 'A message with reset password instructions has been sent to your inbox.')
                     return redirect("/")
+            else:
+                messages.error(request, "Password Reset Fail!")
+                return redirect('/')
 
     password_reset_form = PasswordResetForm()
-    return render(request=request, template_name="password_reset.html", context={"password_reset_form": password_reset_form})
+    return render(
+        request=request,
+        template_name="password_reset.html",
+        context={"password_reset_form": password_reset_form}
+    )
