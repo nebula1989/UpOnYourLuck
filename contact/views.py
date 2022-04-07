@@ -66,7 +66,7 @@ def password_reset_request(request):
 
                     try:
                         logging.info("TRY SEND MAIL")
-                        send_mail(subject, email, user.email, fail_silently=False)
+                        send_mail(subject, email, user.email, settings.ADMIN_EMAILS, fail_silently=False)
 
                     except BadHeaderError:
                         logging.info("BAD HEADER")
