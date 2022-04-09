@@ -18,8 +18,8 @@ import qrcode
 from twilio.rest import Client
 # Find your Account SID and Auth Token at twilio.com/console
 # and set the environment variables. See http://twil.io/secure
-account_sid = 'AC3df5291a271c14712b8c3a974bc5d1a6'
-auth_token = 'a008f0df76a867d5549f68cba480e2f7'
+account_sid = os.environ['TWILIO_ACCOUNT_SID']
+auth_token = os.environ['TWILIO_AUTH_TOKEN']
 client = Client(account_sid, auth_token)
 service = client.verify.services.get(sid='VA3392117dfb2a75a6e28c3dbc039e5664')
 
