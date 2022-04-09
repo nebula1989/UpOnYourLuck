@@ -35,6 +35,7 @@ def contact_view(request):
 import logging
 logging.basicConfig(level=logging.INFO)
 
+# from Jaysha's tutorial at https://ordinarycoders.com/blog/article/django-password-reset
 def password_reset_request(request):
     logging.info("PASSWORD RESET VIEW")
     domain = DOMAIN
@@ -58,8 +59,7 @@ def password_reset_request(request):
                         'domain': domain,
                         'site_name': 'Website',
                         "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                        'token': default_token_generator.make_token(user),
-                        'protocol': 'http',
+                        'token': default_token_generator.make_token(user)
                     }
                     email = render_to_string(email_template_name, context)
                     logging.info("Line 63")
