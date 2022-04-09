@@ -23,6 +23,7 @@
               <form method="POST" class="was-validated row g-2 justify-content-center">
                 {% csrf_token %}
 
+                <input type="hidden" id="visitor_id" name="visitor_id" value="" readonly/>
                 
                 <div class="form-floating mb-3 col-md-8">
                   {{ login_form.username }}
@@ -53,4 +54,25 @@
     </div>
   </div>
 </div>
+
+<script>
+  // Initialize the agent at application startup.
+  const fpPromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.onload = resolve;
+    script.onerror = reject;
+    script.async = true;
+    script.src = 'https://cdn.jsdelivr.net/npm/'
+      + '@fingerprintjs/fingerprintjs-pro@3/dist/fp.min.js';
+    document.head.appendChild(script);
+  })
+    .then(() => FingerprintJS.load({
+      apiKey: 'KM1f74ibMtHQQb7YsEhp'
+    }));
+  var hidden = document.getElementById('visitor_id');
+  // Get the visitor identifier when you need it.
+  fpPromise
+    .then(fp => fp.get())
+    .then(result => hidden.value=result.visitorId);
+</script>
 {% endblock %}

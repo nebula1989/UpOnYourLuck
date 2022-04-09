@@ -143,3 +143,13 @@ class UpdateProfileForm(forms.ModelForm):
         widgets = {
             'payment_link_url': forms.URLInput(attrs={'placeholder': 'https://cash.app/$yourcashtag'}),
         }
+
+class UpdateTwoFactor(forms.ModelForm):
+    CHOICES=[('0','Off'),
+         ('1','On')]
+
+    two_factor_enabled = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
+
+    class Meta:
+        model = Profile
+        fields = ('two_factor_enabled', 'phone_number')

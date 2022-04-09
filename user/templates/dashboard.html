@@ -9,6 +9,9 @@
 {% block content %}
 
 <div class="container-fluid">
+    {% if user.last_login|date:"SHORT_DATETIME_FORMAT" == user.date_joined|date:"SHORT_DATETIME_FORMAT" or user.last_login == None %}
+        <input type="hidden" value='true' id="id_qr_prompt">
+    {% endif %}
     <div class="row" style="padding-bottom: 3rem;">
         <div class="col-lg-7 mx-auto text-center pt-5">
             <h1 class="display-4" id="dashboard-banner" style="color: #CDD1CC;">Welcome to your personal Dashboard.</h1>
@@ -65,9 +68,64 @@
         </div> 
   </div> 
 </div>  
+<!-- QR Prompt -->
+<div class="modal fade" id="newMainModal" tabindex="-1" role="dialog" aria-labelledby="threadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color: #202123; width: 100%;">
+            <form method="post" enctype="multipart/form-data" action="new_main_subject">
+                {%csrf_token%}
+                <!-- <input type="hidden" name="category" value="{{category}}" readonly/> -->
+                <div class="modal-header text-white" style="background-color: #bb86fc;">
+                    <h6 class="modal-title mb-0" id="threadModalLabel">Welcome</h6>
+                    <button type="button" class="btn-close btn-danger-soft" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row gx-3 mb-3 text-center">
+                        <div class="mb-3">
+                            <h5 class="display-6 text-white">Welcome to UpOnYourLuck!</h5>
+                            <p class="text-muted">This is your QR Code. You can click the Print Code button below to print it.</p>
+                        </div>
+                        <div class="mb-3">
+                            <img src="/media/qr_code/{{current_user}}.jpg">
+                        </div>
+                    </div>
+                    <textarea class="form-control summernote" style="display: none;"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning fw-bold" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="printImg('/media/qr_code/{{ current_user }}.jpg')">Print Code</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var display = document.getElementById('id_qr_prompt');
+        if (display.value == 'true') {
+            $('#newMainModal').modal('show');
+        }
+    });
+
+    function printImg(url) {
+        var win = window.open('');
+        win.document.write('<img src="' + url + '" height="80%" style='+'"' + 'display: block; margin-left: auto; margin-right: auto;'+'" onload="window.print();window.close()" />');
+        win.focus();
+    }
+</script>
 
 <style>
+    .btn-primary {
+        background-color: #26dda6;
+        border-color: #22aa81;
+        color: #121212;
+        font-weight: bold;
+    }
+    .btn-primary:hover {
+        background-color: rgb(25, 173, 129);
+        border-color: #22aa81;
+    }
     .circle-tile {
         margin-bottom: 15px;
         text-align: center;
