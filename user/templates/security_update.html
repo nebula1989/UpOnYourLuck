@@ -76,7 +76,7 @@
                             
                             <div class="mt-3" id="test" style="padding-bottom: 1rem;">
                                 <label class="small mb-1" for="twoFactorSMS" style="color: #CDD1CC;">SMS Number</label>
-                                <input class="form-control" name="phone_number" id="id_phone_number" type="tel" placeholder="Enter a phone number" value="+1 (123) 456-7890" style="background-color: #3b3b3b; color: #CDD1CC;">
+                                <input class="form-control" name="phone_number" id="id_phone_number" type="tel" placeholder="+1 (123) 456-7890" value="" style="background-color: #3b3b3b; color: #CDD1CC;">
                                 <div class="invalid-feedback">Must be in +1 (123) 456-7890 format</div>
                             </div>
                         {% endif %}
@@ -131,7 +131,9 @@
     });
 
     on_button.addEventListener('click', function(event) {
-        save_button.removeAttribute("disabled");
+        if (document.getElementById('id_phone_number').value != "") {
+            save_button.removeAttribute("disabled");
+        } 
     });
 
     function check_number(number) {
