@@ -32,3 +32,4 @@ urlpatterns = [
 ]
 
 handler404 = "uponyourluck.views.page_not_found_view"
+handler500 = "uponyourluck.views.server_error_view"
