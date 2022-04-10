@@ -291,14 +291,19 @@ def delete_profile(request):
 def register_request(request):
     args = {}
     if request.method == "POST":
+        
         user_form = NewUserForm(request.POST)
+        
         if user_form.is_valid():
             user = user_form.save()
-            login(request, user)
-            generate_qr_code(request)
-            messages.success(request, "Registration successful.")
-
-            return redirect('user_dashboard')
+            if user is not None:
+                login(request, user)
+                generate_qr_code(request)
+                messages.success(request, "Registration successful.")
+                return redirect('user_dashboard')
+            else:
+                messages.error(request, f"Email already in use.")
+                return redirect('register')    
         else:
             messages.error(request, f"{user_form.errors}")
             return redirect('register')
