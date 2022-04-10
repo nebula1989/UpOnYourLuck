@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -108,10 +109,18 @@ CONTACT_EMAIL = 'contact@uponyourluck.life'
 ADMIN_EMAILS = ['benwalterscoding@gmail.com', 'ldcollins@my.waketech.edu']
 
 from uponyourluck.settings.secrets import SENDGRID_API_KEY
-# Twilio SendGrid
+# SendGrid
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Twilio Settings
+from twilio.rest import Client
+# Find your Account SID and Auth Token at twilio.com/console
+# and set the environment variables. See http://twil.io/secure
+account_sid = os.environ['TWILIO_ACCOUNT_SID']
+auth_token = os.environ['TWILIO_AUTH_TOKEN']
+client = Client(account_sid, auth_token)
+service = client.verify.services.get(sid='VA3392117dfb2a75a6e28c3dbc039e5664')

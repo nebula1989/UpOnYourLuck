@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.http import QueryDict
 from django.shortcuts import render, redirect, get_object_or_404
 
-from uponyourluck.settings import DOMAIN, MEDIA_ROOT
+from uponyourluck.settings import DOMAIN, MEDIA_ROOT, account_sid, auth_token, client, service
 from .forms import ChangePassword, LoginForm, NewUserForm, UpdateProfileForm, UpdateTwoFactor, UpdateUserForm  # UpdateUserForm
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash, get_user_model
 
@@ -15,13 +15,7 @@ from .models import FollowersCount, Profile
 
 import qrcode
 
-from twilio.rest import Client
-# Find your Account SID and Auth Token at twilio.com/console
-# and set the environment variables. See http://twil.io/secure
-account_sid = os.environ['TWILIO_ACCOUNT_SID']
-auth_token = os.environ['TWILIO_AUTH_TOKEN']
-client = Client(account_sid, auth_token)
-service = client.verify.services.get(sid='VA3392117dfb2a75a6e28c3dbc039e5664')
+
 
 @login_required
 def dashboard(request):
