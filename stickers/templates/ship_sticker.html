@@ -20,13 +20,13 @@
 
     <!--Form-->
 
-    <div class="form group py-1" id="body-wrapper" style="">
+    <div class="form group py-1" id="body-wrapper">
         
         <div class="row justify-content-center align-items-center" style="border-radius: 2rem;">
 
             <div class="h-100 card" id="inner-form-wrapper">
                 <div class="row" style="width: 100%;">
-                    <div class="col-lg-7 mx-auto text-center">
+                    <div class="col-lg-7 mx-auto text-center pt-3">
                         <h1 style="color: #CDD1CC;">Ship Sticker Form</h1>
                     </div>
                 </div>
@@ -35,8 +35,154 @@
 
                     <form action="" method="post" id="ship-sticker-form" style="display: flex; flex-direction: column;">
                         {% csrf_token %}
-                        {{ form }}
-                        <input type="submit" value="Submit" class="btn btn-outline-dark rounded-pill btn-sm" style=" background-color: #26dda6;">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="id_full_name" style="margin-top: 2%;">Full name:</label>
+                                <input class="form-control form-rounded" type="text" name="full_name" value="{{user.first_name}} {{user.last_name}}" maxlength="50" required="" id="id_full_name" style="margin-top: 2%;">
+                            </div>
+                            
+                            <div class="col-md-8 mb-3">
+                                <label class="form-label" for="id_street_name_and_number" style="margin-top: 2%;">Street Address:</label>
+                                <input class="form-control form-rounded" type="text" name="street_name_and_number" value="" placeholder="100 ABC st" maxlength="99" required="" id="id_street_name_and_number" style="margin-top: 2%;">
+                            </div>
+                        
+                            <div class="col-md-6">
+                                <label class="form-label" for="id_city" style="margin-top: 2%;">City:</label>
+                                <input class="form-control form-rounded" type="text" name="city" value="Raleigh" maxlength="50" required="" id="id_city" style="margin-top: 2%;">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label" for="id_state" style="margin-top: 2%;">State:</label>
+                                <select class="form-control form-rounded" name="state" id="id_state" style="margin-top: 2%; padding-left: 1rem;">
+                                    <option value="AL">Alabama</option>
+                                
+                                    <option value="AK">Alaska</option>
+                                
+                                    <option value="AS">American Samoa</option>
+                                
+                                    <option value="AZ">Arizona</option>
+                                
+                                    <option value="AR">Arkansas</option>
+                                
+                                    <option value="AA">Armed Forces Americas</option>
+                                
+                                    <option value="AE">Armed Forces Europe</option>
+                                
+                                    <option value="AP">Armed Forces Pacific</option>
+                                
+                                    <option value="CA">California</option>
+                                
+                                    <option value="CO">Colorado</option>
+                                
+                                    <option value="CT">Connecticut</option>
+                                
+                                    <option value="DE">Delaware</option>
+                                
+                                    <option value="DC">District of Columbia</option>
+                                
+                                    <option value="FL">Florida</option>
+                                
+                                    <option value="GA">Georgia</option>
+                                
+                                    <option value="GU">Guam</option>
+                                
+                                    <option value="HI">Hawaii</option>
+                                
+                                    <option value="ID">Idaho</option>
+                                
+                                    <option value="IL">Illinois</option>
+                                
+                                    <option value="IN">Indiana</option>
+                                
+                                    <option value="IA">Iowa</option>
+                                
+                                    <option value="KS">Kansas</option>
+                                
+                                    <option value="KY">Kentucky</option>
+                                
+                                    <option value="LA">Louisiana</option>
+                                
+                                    <option value="ME">Maine</option>
+                                
+                                    <option value="MD">Maryland</option>
+                                
+                                    <option value="MA">Massachusetts</option>
+                                
+                                    <option value="MI">Michigan</option>
+                                
+                                    <option value="MN">Minnesota</option>
+                                
+                                    <option value="MS">Mississippi</option>
+                                
+                                    <option value="MO">Missouri</option>
+                                
+                                    <option value="MT">Montana</option>
+                                
+                                    <option value="NE">Nebraska</option>
+                                
+                                    <option value="NV">Nevada</option>
+                                
+                                    <option value="NH">New Hampshire</option>
+                                
+                                    <option value="NJ">New Jersey</option>
+                                
+                                    <option value="NM">New Mexico</option>
+                                
+                                    <option value="NY">New York</option>
+                                
+                                    <option value="NC" selected="">North Carolina</option>
+                                
+                                    <option value="ND">North Dakota</option>
+                                
+                                    <option value="MP">Northern Mariana Islands</option>
+                                
+                                    <option value="OH">Ohio</option>
+                                
+                                    <option value="OK">Oklahoma</option>
+                                
+                                    <option value="OR">Oregon</option>
+                                
+                                    <option value="PA">Pennsylvania</option>
+                                
+                                    <option value="PR">Puerto Rico</option>
+                                
+                                    <option value="RI">Rhode Island</option>
+                                
+                                    <option value="SC">South Carolina</option>
+                                
+                                    <option value="SD">South Dakota</option>
+                                
+                                    <option value="TN">Tennessee</option>
+                                
+                                    <option value="TX">Texas</option>
+                                
+                                    <option value="UT">Utah</option>
+                                
+                                    <option value="VT">Vermont</option>
+                                
+                                    <option value="VI">Virgin Islands</option>
+                                
+                                    <option value="VA">Virginia</option>
+                                
+                                    <option value="WA">Washington</option>
+                                
+                                    <option value="WV">West Virginia</option>
+                                
+                                    <option value="WI">Wisconsin</option>
+                                
+                                    <option value="WY">Wyoming</option>
+                                
+                                </select>
+                            </div>
+                            <div class="col-md-3 mt-3">
+                                <label class="form-label" for="id_zipcode">Zipcode:</label>
+                                <input class="form-control form-rounded" type="text" name="zipcode" value="27513" maxlength="10" required="" id="id_zipcode" style="margin-top: 2%;">
+                            </div>
+                        </div>
+
+                        <div class="d-flex mb-3 justify-content-center">
+                            <input type="submit" value="Submit" class="btn btn-primary rounded-pill btn-sm px-5">
+                        </div>
                     </form>
                     </div>
                 </div>

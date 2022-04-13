@@ -60,6 +60,9 @@ class Profile(models.Model):
     city = models.CharField(default="Raleigh", max_length=60)
     state = USStateField(default="NC", blank=True)
     qr_scan_count = models.IntegerField(default=0)
+    two_factor_enabled = models.BooleanField(default=False)
+    phone_number = models.CharField(max_length=25, default="0")
+    visitor_id = models.CharField(default='0', max_length=200)
 
     class Meta:
         db_table = 'Profile'

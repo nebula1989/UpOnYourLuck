@@ -1,10 +1,12 @@
 import os
+from os.path import exists
+from PIL import Image
 from django.contrib.auth.models import User
 from django.http import QueryDict
 from django.shortcuts import render, redirect, get_object_or_404
 
-from uponyourluck.settings import DOMAIN, MEDIA_ROOT
-from .forms import ChangePassword, LoginForm, NewUserForm, UpdateProfileForm, UpdateUserForm  # UpdateUserForm
+from uponyourluck.settings import DOMAIN, MEDIA_ROOT, account_sid, auth_token, client, service
+from .forms import ChangePassword, LoginForm, NewUserForm, UpdateProfileForm, UpdateTwoFactor, UpdateUserForm  # UpdateUserForm
 from django.contrib.auth import login, logout, authenticate, update_session_auth_hash, get_user_model
 
 from django.contrib import messages
@@ -12,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from .models import FollowersCount, Profile
 
 import qrcode
+
 
 
 @login_required
@@ -272,7 +275,7 @@ def delete_profile(request):
         # remove qr code img upon account deletion
         os.remove(str(MEDIA_ROOT) + f'/qr_code/{request.user.username}.jpg')
         # remove profile image but not the default placeholder profile img
-        if profile.profile_img.path == str(MEDIA_ROOT) + '/profile_img/default.jpg':
+        if profile.profile_img.path == 'profile_img/default.jpg':
             pass
         else:
             os.remove(profile.profile_img.path)
@@ -288,38 +291,144 @@ def delete_profile(request):
 def register_request(request):
     args = {}
     if request.method == "POST":
+        
         user_form = NewUserForm(request.POST)
+        
         if user_form.is_valid():
             user = user_form.save()
-            login(request, user)
-            generate_qr_code(request)
-            messages.success(request, "Registration successful.")
-            return redirect("user_dashboard")
-
-        # messages.error(request, f"{user_form.errors}")
+            if user is not None:
+                login(request, user)
+                generate_qr_code(request)
+                messages.success(request, "Registration successful.")
+                return redirect('user_dashboard')
+            else:
+                messages.error(request, f"Email already in use.")
+                return redirect('register')    
+        else:
+            messages.error(request, f"{user_form.errors}")
+            return redirect('register')
     else:
         user_form = NewUserForm()
     return render(request=request, template_name="register.html",
                   context={"register_form": user_form, "user": request.user, "errors": user_form.errors})
 
 
+""" 
+    Function: login_request()
+    Params: None
+    Purpose: View to allow users to login to existing accounts, and requests 2FA as needed.
+"""
 def login_request(request):
+    # On post
     if request.method == "POST":
+        # Get login form
         form = LoginForm(request, data=request.POST)
+        # If form is valid
         if form.is_valid():
+            # Get cleaned data from the form
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
+            # Check if user can be authenticated
             user = authenticate(username=username, password=password)
+            # If user can be authenticated
             if user is not None:
-                login(request, user)
-                messages.info(request, f"You are now logged in as {username}.")
-                return redirect("user_dashboard")
+                # If fingerprint is recognized
+                if user.profile.visitor_id == request.POST['visitor_id']:
+                    # Login user
+                    login(request, user)
+                    # Display success
+                    messages.info(request, f"You are now logged in as {username}.")
+                    # Redirect to homepage
+                    return redirect("welcome_index")
+                # If fingerprint not recognized
+                else:
+                    # If user has two factor authentication enabled
+                    if user.profile.two_factor_enabled:
+                        # Generate and send verifcation code
+                        verification = service.verifications \
+                            .create(to=user.profile.phone_number, channel='sms')
+                        # Render login verifcation page
+                        return render(request, template_name='login_verify.html', context={'user_id': user.id, 'user': user})
+                    # If user not using 2FA
+                    else:
+                        # Log user in
+                        login(request, user)
+                        # Display success
+                        messages.info(request, f"You are now logged in as {username}.")
+                        # Redirect to homepage
+                        return redirect("welcome_index")
             else:
+                # If user cannot be authenticated, display error
                 messages.error(request, "Invalid username or password.")
         else:
+            # If form isnt valid alert user
             messages.error(request, "Invalid username or password.")
+    # Generate login form
     form = LoginForm()
+    # Render login page
     return render(request=request, template_name="login.html", context={"login_form": form})
+
+""" 
+    Function: login_verification()
+    Params: None
+    Purpose: Verifies users with 2FA enabled
+"""
+def login_verification(request):
+    # On post
+    if request.method == "POST":
+        # Get user ID from post data
+        user_id = request.POST['user_id']
+        # Get user object from user ID
+        user = Profile.objects.get(user_id=user_id)
+        
+        # Get verification code entered by user
+        code = ''
+        for i in range(1, 7):
+            code += request.POST[f'digit{i}']
+
+        # Check if code entered by user matches generated one
+        verification_check = service \
+            .verification_checks \
+            .create(to=user.phone_number, code=code)
+
+        # If code approved
+        if verification_check.status == "approved":
+            # Get user object from user ID
+            user = User.objects.get(id=user.user_id)
+            # Set users fingerprint and save
+            user.profile.visitor_id = request.POST['visitor_id']
+            user.profile.save()
+            # Log user in
+            login(request, user)
+
+            # Display success and redirect to homepage
+            messages.info(request, f"You are now logged in as {user.username}.")
+            return redirect("welcome_index")
+        # If code wasn't approved
+        else:
+            # Display error to user and return to login page
+            messages.error(request, "The code you entered was incorrect.")
+            return redirect("login")
+
+""" 
+    Function: toggle_two_factor()
+    Params: None
+    Purpose: Allows users to toggle two factor authentication.
+"""
+def toggle_two_factor(request):
+    form = UpdateTwoFactor(request.POST, request.user.profile)
+
+    if form.is_valid():
+        profile = Profile.objects.get(user_id=request.user.id)
+        form_data = form.save(commit=False)
+        profile.two_factor_enabled = form_data.two_factor_enabled
+        profile.phone_number = form_data.phone_number
+        profile.save()
+        messages.success(request, "You have updated your Two Factor Authentication Information!")
+        return redirect('update_security')
+    else:
+        messages.error(request, form.errors)
+        return redirect('update_security')
 
 
 def logout_request(request):
@@ -327,15 +436,100 @@ def logout_request(request):
     messages.info(request, "You have successfully logged out.")
     return redirect("welcome_index")
 
-
-def generate_qr_code(request):
+""" 
+    Function: generate_qr_code()
+    Params: Username - Username of user creating QR Code
+    Purpose: Generates a QR code for a user. Includes UpOnYourLuck logo.
+"""
+def generate_qr_code(request, username=None):
+    # Domain of the site
     domain = DOMAIN
-    profile_url = request.user.profile.profile_url
-    user_profile_full_url = domain + '/' + profile_url + '/?source=qr'
-    qr_img = qrcode.make(user_profile_full_url)
-    qr_img.save(str(MEDIA_ROOT) + '/qr_code/' + request.user.username + '.jpg')
-    request.user.profile.qr_code_img = request.user.username + '.jpg'
 
+    # Statement to check if our username value was passed
+    # Sets profile_url accordingly
+    if username == None:
+        profile_url = request.user.profile.profile_url
+    else:
+        profile_url = username.profile.profile_url
+
+    # Creates profile URL link to embed into QR Code
+    user_profile_full_url = domain + '/' + profile_url + '/?source=qr'
+
+======= main
 
 def terms_and_conditions(request):
     return render(request, 'terms_and_conditions.html')
+=======
+    # Open and resize the UpOnYourLuck Logo
+    logo = Image.open(str(MEDIA_ROOT) + '/home_page/UpOnYourLuck_Logo_transparent.jpg')
+    logo.thumbnail((150,150), Image.ANTIALIAS)
+
+    # Create a new QR code with maximum error correction
+    qr_img = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
+
+    # Add the profile url to the QR code, and generate image.
+    qr_img.add_data(user_profile_full_url)
+    qr_img.make()
+
+    # Convert to RGB so Logo has color
+    qr_code = qr_img.make_image().convert('RGB')
+    
+    # Set the logo position in the center of the QR Code
+    logo_pos = ((qr_code.size[0] - logo.size[0]) // 2, (qr_code.size[1] - logo.size[1]) // 2)
+
+    # Place the logo in the QR Code
+    qr_code.paste(logo, logo_pos)
+
+    # Save file and update database with path to qr code
+    if username == None:
+        qr_code.save(str(MEDIA_ROOT) + '/qr_code/' + request.user.username + '.jpg')
+        request.user.profile.qr_code_img = request.user.username + '.jpg'
+    else:
+        qr_code.save(str(MEDIA_ROOT) + '/qr_code/' + username.username + '.jpg')
+        username.profile.qr_code_img = username.username + '.jpg'
+
+""" 
+    Function: regenerate_qr_code()
+    Params: None
+    Purpose: Regenerates a QR code for a user. Includes UpOnYourLuck logo.
+"""
+def regenerate_qr_code(request):
+    # Get expected path of the QR Code
+    qr_path = str(MEDIA_ROOT) + '/qr_code/' + request.user.username + '.jpg'
+
+    # If QR Code already exists, remove it and regenerate it.
+    # Otherwise generate a new code
+    if exists(qr_path):
+        os.remove(qr_path)
+        generate_qr_code(request=request)   
+    else:
+        generate_qr_code(request=request)
+
+    # Display success and return to sticker page
+    messages.success(request, "You have created a new QR Code!")
+    return redirect('sticker_index')
+
+""" 
+    Function: regenerate_user_qr_code()
+    Params: Username - Username of user creating QR Code
+    Purpose: Admin function to regenerate a users QR Code.
+"""
+def regenerate_user_qr_code(request, username=None):
+    # Get username object from user sticker page
+    username_obj = get_object_or_404(User, username=username)
+
+    # Get expected path of the QR Code
+    qr_path = str(MEDIA_ROOT) + '/qr_code/' + username_obj.username + '.jpg'
+
+    # If QR Code already exists, remove it and regenerate it.
+    # Otherwise generate a new code
+    if exists(qr_path):
+        os.remove(qr_path)
+        generate_qr_code(request=request, username=username_obj)
+    else:
+        generate_qr_code(request=request, username=username_obj)
+
+    # Display success and return to users sticker page
+    messages.success(request, "You have created a new QR Code for this user!")
+    return redirect('sticker_index_for_visitor', username_obj)
+======= main

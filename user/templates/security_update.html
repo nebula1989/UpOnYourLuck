@@ -34,8 +34,10 @@
                             <label class="small mb-1" for="confirmPassword" style="color: #CDD1CC;">Confirm Password</label>
                             {{p_form.new_password2}}
                         </div>
-                        <button class="btn btn-primary btn-sm rounded-pill btn-outline-dark text-black px-4" type="submit" style="background-color: #26dda6;">Save</button>
-                        <a class="btn btn-sm rounded-pill text-black" href="{% url 'profile' %}" style="border-color: #69707a; background-color: #bb86fc;">Cancel</a>
+                        <div class="pt-2">
+                            <button class="btn btn-primary btn-sm rounded-pill btn-outline-dark text-black px-4" type="submit" style="background-color: #26dda6;">Save</button>
+                            <a class="btn btn-sm rounded-pill text-black" href="{% url 'profile' %}" style="border-color: #69707a; background-color: #bb86fc;">Cancel</a>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -45,19 +47,40 @@
                 <div class="card-header" style="color: #CDD1CC;">Two-Factor Authentication</div>
                 <div class="card-body">
                     <p style="color: #CDD1CC;">Add another level of security to your account by enabling two-factor authentication. We will send you a text message to verify your login attempts on unrecognized devices and browsers.</p>
-                    <form>
-                        <div class="form-check">
-                            <input class="form-check-input" id="twoFactorOn" type="radio" name="twoFactor" checked="">
-                            <label class="form-check-label" for="twoFactorOn" style="color: #CDD1CC;">On</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" id="twoFactorOff" type="radio" name="twoFactor">
-                            <label class="form-check-label" for="twoFactorOff" style="color: #CDD1CC;">Off</label>
-                        </div>
-                        <div class="mt-3">
-                            <label class="small mb-1" for="twoFactorSMS" style="color: #CDD1CC;">SMS Number</label>
-                            <input class="form-control" id="twoFactorSMS" type="tel" placeholder="Enter a phone number" value="123-456-7890" style="background-color: #3b3b3b; color: #CDD1CC;">
-                        </div>
+                    <form action="toggle_two_factor" id="form" method="post">
+                        {% csrf_token %}
+                        {% if user.profile.two_factor_enabled %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="two_factor_enabled" value="1" required="" id="id_two_factor_enabled_1" checked="">
+                                <label class="form-check-label" for="id_two_factor_enabled_1">On</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="two_factor_enabled" value="0" required="" id="id_two_factor_enabled_0">
+                                <label class="form-check-label" for="id_two_factor_enabled_0">Off</label>
+                            </div>
+                            
+                            <div class="mt-3" id="test" style="padding-bottom: 1rem;">
+                                <label class="small mb-1" for="twoFactorSMS" style="color: #CDD1CC;">SMS Number</label>
+                                <input class="form-control" name="phone_number" id="id_phone_number" type="tel" placeholder="Enter a phone number" value="{{user.profile.phone_number}}" style="background-color: #3b3b3b; color: #CDD1CC;">
+                                <div class="invalid-feedback">Must be in +1 (123) 456-7890 format</div>
+                            </div>
+                        {% else %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="two_factor_enabled" value="1" required="" id="id_two_factor_enabled_1">
+                                <label class="form-check-label" for="id_two_factor_enabled_1">On</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="two_factor_enabled" value="0" required="" id="id_two_factor_enabled_0" checked="">
+                                <label class="form-check-label" for="id_two_factor_enabled_0">Off</label>
+                            </div>
+                            
+                            <div class="mt-3" id="test" style="padding-bottom: 1rem;">
+                                <label class="small mb-1" for="twoFactorSMS" style="color: #CDD1CC;">SMS Number</label>
+                                <input class="form-control" name="phone_number" id="id_phone_number" type="tel" placeholder="+1 (123) 456-7890" value="" style="background-color: #3b3b3b; color: #CDD1CC;">
+                                <div class="invalid-feedback">Must be in +1 (123) 456-7890 format</div>
+                            </div>
+                        {% endif %}
+                        <button class="btn btn-sm rounded-pill btn-outline-dark text-black px-3" type="submit" id="save" disabled style="background-color: #26dda6;">Save</button>
                     </form>
                 </div>
             </div>
@@ -92,6 +115,41 @@
         </form>
     </div>
 </div>
+
+<script type="text/javascript">
+    var sms_input = document.getElementById("id_phone_number");
+    var save_button = document.getElementById("save");
+    var off_button = document.getElementById('id_two_factor_enabled_0');
+    var on_button = document.getElementById('id_two_factor_enabled_1');
+
+    sms_input.addEventListener('keyup', function (event) {
+        check_number(sms_input);
+    });
+
+    off_button.addEventListener('click', function(event) {
+        save_button.removeAttribute("disabled");
+    });
+
+    on_button.addEventListener('click', function(event) {
+        if (document.getElementById('id_phone_number').value != "") {
+            save_button.removeAttribute("disabled");
+        } 
+    });
+
+    function check_number(number) {
+        var regex = /^[+][0-9]+ [(]([0-9]){3}[)] ([0-9]){3}-([0-9]){4}$/g;
+        if (regex.test(number.value)) {
+            number.classList.remove('is-invalid');
+            save_button.removeAttribute("disabled");
+            number.classList.add('is-valid');
+        }
+        else {
+            number.classList.remove('is-valid');
+            number.classList.add('is-invalid');
+            save_button.addAttribute("disabled");
+        }
+    }
+</script>
 
 <style>
 body {
