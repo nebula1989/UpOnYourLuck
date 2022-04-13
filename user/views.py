@@ -336,3 +336,6 @@ def generate_qr_code(request):
     qr_img.save(str(MEDIA_ROOT) + '/qr_code/' + request.user.username + '.jpg')
     request.user.profile.qr_code_img = request.user.username + '.jpg'
 
+
+def terms_and_conditions(request):
+    return render(request, 'terms_and_conditions.html')
