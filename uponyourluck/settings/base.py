@@ -108,7 +108,7 @@ CONTACT_EMAIL = 'contact@uponyourluck.life'
 
 ADMIN_EMAILS = ['benwalterscoding@gmail.com', 'ldcollins@my.waketech.edu']
 
-from uponyourluck.settings.secrets import SENDGRID_API_KEY
+from uponyourluck.settings.secrets import SENDGRID_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN
 # SendGrid
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
@@ -120,7 +120,7 @@ EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 from twilio.rest import Client
 # Find your Account SID and Auth Token at twilio.com/console
 # and set the environment variables. See http://twil.io/secure
-account_sid = os.environ['TWILIO_ACCOUNT_SID']
-auth_token = os.environ['TWILIO_AUTH_TOKEN']
+account_sid = TWILIO_ACCOUNT_SID
+auth_token = TWILIO_AUTH_TOKEN
 client = Client(account_sid, auth_token)
 service = client.verify.services.get(sid='VA3392117dfb2a75a6e28c3dbc039e5664')
