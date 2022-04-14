@@ -23,7 +23,7 @@ body {
 }
 
 .container-wrap {
-  background-image: url("background-images/homeless_man_wide.jpg");
+  background-image: url("background-images/homeless_royaltyfree.jpg");
   background-position: 20% 85%;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -125,7 +125,7 @@ a:active {
   padding-left: 3.75em;
   /* border-radius: 1.5625em; */
   border-bottom-right-radius: 0px;
-  background: url("background-images/tents.svg");
+  background: url("background-images/tent_royaltyfree.svg");
   background-repeat: no-repeat;
   background-size: 9.375em 9.375em;
   background-position: bottom left 3em;
@@ -609,7 +609,7 @@ footer p {
 
 @media only screen and (min-width: 1440px) {
   .container-wrap {
-    background-image: url("background-images/homeless_man_wide.jpg");
+    background-image: url("background-images/homeless_royaltyfree.jpg");
     background-position: 15% 85%;
     background-repeat: no-repeat;
     background-attachment: fixed;
