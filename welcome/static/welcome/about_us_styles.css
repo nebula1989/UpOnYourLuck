@@ -4,7 +4,7 @@
   justify-content: center;
   height: calc(100vh - 66px);
   gap: 4em;
-  background-image: url("background-images/tech_background.jpg");
+  background-image: url("background-images/aboutus_royaltyfree.jpg");
   background-position: 20% 85%;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -14,8 +14,8 @@
 }
 
 .left {
-  height: 25em;
-  width: 45%;
+  height: 62em;
+  width: 100%;
 }
 
 .left-container {
@@ -24,7 +24,7 @@
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   background-color: #202123d3;
 }
 
@@ -68,6 +68,24 @@ h1 {
   text-align: center;
 }
 
+.how-to-help-container {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.how-to-help-title {
+  text-align: center;
+}
+
+.how-to-help-description {
+  text-align: center;
+  display: block;
+  grid-template-columns: auto auto auto;
+  column-gap: 2rem;
+  row-gap: 1rem;
+}
+
 .about-title {
   text-align: center;
 }
@@ -76,6 +94,11 @@ h1 {
   .contributors-description {
     grid-template-columns: auto auto;
   }
+
+  .how-to-help-description {
+    grid-template-columns: auto auto;
+  }
+
 }
 
 @media only screen and (max-width: 1000px) {
@@ -108,6 +131,10 @@ h1 {
   .contributors-description {
     grid-template-columns: auto;
   }
+
+  .how-to-help-description {
+    grid-template-columns: auto;
+  }
 }
 
 @media only screen and (max-width: 500px) {
@@ -120,6 +147,10 @@ h1 {
   }
 
   .contributors-description {
+    grid-template-columns: auto auto;
+  }
+
+  .how-to-help-description {
     grid-template-columns: auto auto;
   }
 
