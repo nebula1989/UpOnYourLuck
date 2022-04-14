@@ -1,9 +1,16 @@
 .about-us-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   height: calc(100vh - 66px);
   gap: 4em;
+  background-image: url("background-images/tech_background.jpg");
+  background-position: 20% 85%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+  background-size: cover;
+  width: 100%;
 }
 
 .left {
@@ -18,17 +25,20 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  background-color: #202123d3;
 }
 
 .left-container > * {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
+  
 }
 
 .about-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  
 }
 
 .right img {
@@ -36,7 +46,8 @@
 }
 
 .contributors-description {
-  display: inline-grid;
+  text-align: center;
+  display: block;
   grid-template-columns: auto auto auto;
   column-gap: 2rem;
   row-gap: 1rem;
@@ -48,9 +59,17 @@ h1 {
 }
 
 .contributors-container {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+.contributors-title {
+  text-align: center;
+}
+
+.about-title {
+  text-align: center;
 }
 
 @media only screen and (max-width: 1100px) {
