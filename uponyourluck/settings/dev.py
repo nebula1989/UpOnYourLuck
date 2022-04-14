@@ -4,9 +4,9 @@ from .base import *
 SECRET_KEY = 'django-insecure-$+q!xad&zz*z64&j49cbkc#v$q=u)g9hg(l=+ru!m$=7wwi8d6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -23,6 +23,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
