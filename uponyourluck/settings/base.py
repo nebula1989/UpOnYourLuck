@@ -124,3 +124,7 @@ account_sid = TWILIO_ACCOUNT_SID
 auth_token = TWILIO_AUTH_TOKEN
 client = Client(account_sid, auth_token)
 service = client.verify.services.get(sid='VA3392117dfb2a75a6e28c3dbc039e5664')
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True     # opional, as this will log you out when browser is closed
+SESSION_COOKIE_AGE = 3600                  # 0r 60 * 60, same thing
+SESSION_SAVE_EVERY_REQUEST = True          # Will prevent from logging you out after 3600 seconds if you're interacting with the site
