@@ -4,9 +4,9 @@ from .base import *
 SECRET_KEY = 'django-insecure-$+q!xad&zz*z64&j49cbkc#v$q=u)g9hg(l=+ru!m$=7wwi8d6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = []
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
