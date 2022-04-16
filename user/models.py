@@ -39,7 +39,7 @@ class OverwriteStorage(FileSystemStorage):
 
         #Checks for other file extensions to remove
         for ext in ext_list:
-            filename = 'profile_img/{}{}'.format(file, ext)
+            filename = 'profile_img/{}.{}'.format(file, ext)
 
             if filename == 'profile_img/default.jpg':
                 pass
