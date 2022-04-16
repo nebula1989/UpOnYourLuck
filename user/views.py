@@ -275,7 +275,7 @@ def delete_profile(request):
         # remove qr code img upon account deletion
         os.remove(str(MEDIA_ROOT) + f'/qr_code/{request.user.username}.jpg')
         # remove profile image but not the default placeholder profile img
-        if profile.profile_img.path == 'profile_img/default.jpg':
+        if profile.profile_img == 'profile_img/default.jpg':
             pass
         else:
             os.remove(profile.profile_img.path)
