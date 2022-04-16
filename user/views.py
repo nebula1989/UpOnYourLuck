@@ -446,13 +446,15 @@ def terms_and_conditions(request):
     Params: Username - Username of user creating QR Code
     Purpose: Generates a QR code for a user. Includes UpOnYourLuck logo.
 """
+
+
 def generate_qr_code(request, username=None):
     # Domain of the site
     domain = DOMAIN
 
     # Statement to check if our username value was passed
     # Sets profile_url accordingly
-    if username == None:
+    if username is None:
         profile_url = request.user.profile.profile_url
     else:
         profile_url = username.profile.profile_url
@@ -488,11 +490,14 @@ def generate_qr_code(request, username=None):
         qr_code.save(str(MEDIA_ROOT) + '/qr_code/' + username.username + '.jpg')
         username.profile.qr_code_img = username.username + '.jpg'
 
+
 """ 
     Function: regenerate_qr_code()
     Params: None
     Purpose: Regenerates a QR code for a user. Includes UpOnYourLuck logo.
 """
+
+
 def regenerate_qr_code(request):
     # Get expected path of the QR Code
     qr_path = str(MEDIA_ROOT) + '/qr_code/' + request.user.username + '.jpg'
@@ -509,11 +514,14 @@ def regenerate_qr_code(request):
     messages.success(request, "You have created a new QR Code!")
     return redirect('sticker_index')
 
+
 """ 
     Function: regenerate_user_qr_code()
     Params: Username - Username of user creating QR Code
     Purpose: Admin function to regenerate a users QR Code.
 """
+
+
 def regenerate_user_qr_code(request, username=None):
     # Get username object from user sticker page
     username_obj = get_object_or_404(User, username=username)

@@ -40,7 +40,10 @@ class OverwriteStorage(FileSystemStorage):
         #Checks for other file extensions to remove
         for ext in ext_list:
             filename = 'profile_img/{}{}'.format(file, ext)
-            if self.exists(filename) and file != 'default':
+
+            if filename == 'profile_img/default.jpg':
+                pass
+            elif self.exists(filename):
                 os.remove(os.path.join('media', filename))
         return name
 
