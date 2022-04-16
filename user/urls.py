@@ -27,7 +27,7 @@ urlpatterns = [
     path('profile/update_security/', user_views.update_security, name='update_security'),
     re_path('profile/update_security/delete_profile', user_views.delete_profile, name='delete_profile'),
     # terms and conditions url
-    path('login/terms_and_conditions/', user_views.terms_and_conditions, name='terms_and_conditions'),
+    path('register/terms_and_conditions/', user_views.terms_and_conditions, name='terms_and_conditions'),
     re_path('profile/update_security/toggle_two_factor', user_views.toggle_two_factor, name='toggle_two_factor'),
     re_path('login/login_verification', user_views.login_verification, name='login_verification'),
 
