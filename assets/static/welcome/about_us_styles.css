@@ -1,9 +1,4 @@
 .about-us-container {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  height: calc(100vh - 66px);
-  gap: 4em;
   background-image: url("background-images/aboutus_royaltyfree.jpg");
   background-position: 20% 85%;
   background-repeat: no-repeat;
@@ -11,166 +6,46 @@
   margin: 0;
   background-size: cover;
   width: 100%;
+  font-size: 1.5rem;
+  padding: 0 1em;
 }
 
-.left {
-  height: 62em;
-  width: 100%;
-}
-
-.left-container {
-  height: 100%;
-
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
+.about-us-inner-container {
   background-color: #202123d3;
 }
 
-.left-container > * {
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-  
-}
-
-.about-container {
+.about-description {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  
 }
 
-.right img {
-  max-width: 44.63em;
+.about-description-main p {
+  margin: 0 1em 1em 0;
+}
+
+.about-description-quote h2 {
+  font-weight: 700;
+  margin: 0 1em 0 1em;
+}
+
+.about-component {
+  margin: 1em 0;
 }
 
 .contributors-description {
-  text-align: center;
-  display: block;
-  grid-template-columns: auto auto auto;
-  column-gap: 2rem;
-  row-gap: 1rem;
-}
-
-h1 {
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.contributors-container {
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.contributors-title {
-  text-align: center;
-}
-
-.how-to-help-container {
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.how-to-help-title {
-  text-align: center;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
 }
 
 .how-to-help-description {
-  text-align: center;
-  display: block;
+  display: grid;
   grid-template-columns: auto auto auto;
-  column-gap: 2rem;
-  row-gap: 1rem;
+  gap: 1em;
 }
 
-.about-title {
+.contributors-title h1 {
   text-align: center;
 }
 
-@media only screen and (max-width: 1100px) {
-  .contributors-description {
-    grid-template-columns: auto auto;
-  }
-
-  .how-to-help-description {
-    grid-template-columns: auto auto;
-  }
-
-}
-
-@media only screen and (max-width: 1000px) {
-  .about-us-container {
-    flex-direction: column;
-  }
-  .left {
-    width: 87%;
-    height: 20em;
-    align-items: center;
-    display: flex;
-  }
-
-  .left-container {
-    flex-direction: row;
-    width: 100%;
-    height: 70%;
-  }
-
-  .about-container {
-    width: 50%;
-  }
-
-  .about-title {
-    width: 100%;
-  }
-}
-
-@media only screen and (max-width: 750px) {
-  .contributors-description {
-    grid-template-columns: auto;
-  }
-
-  .how-to-help-description {
-    grid-template-columns: auto;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  h1 {
-    text-align: center;
-  }
-
-  .left-container {
-    flex-direction: column;
-  }
-
-  .contributors-description {
-    grid-template-columns: auto auto;
-  }
-
-  .how-to-help-description {
-    grid-template-columns: auto auto;
-  }
-
-  .about-container {
-    width: 90%;
-  }
-
-  .contributors-container {
-    width: 95%;
-  }
-
-  .about-us-container {
-    justify-content: space-evenly;
-    gap: 2em;
-  }
-}
-
-@media only screen and (max-width: 350px) {
-  .about-us-container {
-    min-height: 110vh;
-    max-height: 120vh;
-  }
+.how-to-help-title h1 {
+  text-align: center;
 }
