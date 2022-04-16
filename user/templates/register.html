@@ -57,7 +57,7 @@
 						{% endif %}
 						{% if not user.is_authenticated %}
 							
-						<h2 class="text-center mb-5" style="color: #CDD1CC;">Create an account</h2>
+						<h2 class="text-center mb-5" style="color: #CDD1CC;">Create a New Account</h2>
 						<form method="POST" class="was-validated row g-2 justify-content-center">
 							{% csrf_token %}
 								
@@ -120,9 +120,9 @@
 							<div class="d-flex justify-content-center">
 								<button type="submit" class="btn btn-primary rounded-pill btn-outline-dark px-4 text-black" style=" background-color: #26dda6;">Register</button>
 							</div>
-							<p class="text-center mt-5 mb-0" style="color: #CDD1CC;">Already have an account?
+							<p class="text-center mt-5 mb-0" style="color: #CDD1CC;">Already have an account? Great,
 								<a href="{% url 'login' %}" class="fw-bold text-body">
-									<u style="color: #26dda6">Login here</u>
+									<u style="color: #26dda6">Sign in here!</u>
 								</a>
 							</p>
 						</form>
