@@ -11,8 +11,8 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
-assets
-#media
+#assets
+media
 media/profile_img/bwalters.jpg
 media/profile_img/default.jpg
 media/qr_code/bwalters.jpg
