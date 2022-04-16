@@ -436,6 +436,11 @@ def logout_request(request):
     messages.info(request, "You have successfully logged out.")
     return redirect("welcome_index")
 
+
+def terms_and_conditions(request):
+    return render(request, 'terms_and_conditions.html')
+
+
 """ 
     Function: generate_qr_code()
     Params: Username - Username of user creating QR Code
