@@ -275,7 +275,7 @@ def delete_profile(request):
         # remove qr code img upon account deletion
         os.remove(str(MEDIA_ROOT) + f'/qr_code/{request.user.username}.jpg')
         # remove profile image but not the default placeholder profile img
-        if profile.profile_img.path == 'profile_img/default.jpg':
+        if profile.profile_img == 'profile_img/default.jpg':
             pass
         else:
             os.remove(profile.profile_img.path)
@@ -436,6 +436,11 @@ def logout_request(request):
     messages.info(request, "You have successfully logged out.")
     return redirect("welcome_index")
 
+
+def terms_and_conditions(request):
+    return render(request, 'terms_and_conditions.html')
+
+
 """ 
     Function: generate_qr_code()
     Params: Username - Username of user creating QR Code
@@ -456,7 +461,7 @@ def generate_qr_code(request, username=None):
     user_profile_full_url = domain + '/' + profile_url + '/?source=qr'
 
     # Open and resize the UpOnYourLuck Logo
-    logo = Image.open(str(MEDIA_ROOT) + '/home_page/UpOnYourLuck_Logo_transparent.jpg')
+    logo = Image.open(str(MEDIA_ROOT) + '/home_page/UpOnYourLuck_Logo_transparent')
     logo.thumbnail((150,150), Image.ANTIALIAS)
 
     # Create a new QR code with maximum error correction

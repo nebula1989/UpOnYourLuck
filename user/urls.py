@@ -12,7 +12,9 @@ urlpatterns = [
     path('stickers/', include('stickers.urls')),
     # create account url
     path("register/", user_views.register_request, name="register"),
-    # login url
+
+    # terms and conditions url
+    path('register/terms_and_conditions/', user_views.terms_and_conditions, name='terms_and_conditions'),
     path("login/", user_views.login_request, name="login"),
     # logout url
     path("logout/", user_views.logout_request, name="logout"),
@@ -26,6 +28,9 @@ urlpatterns = [
     path('profile/update/', user_views.update_profile, name='update_profile'),
     path('profile/update_security/', user_views.update_security, name='update_security'),
     re_path('profile/update_security/delete_profile', user_views.delete_profile, name='delete_profile'),
+
+
+
     re_path('profile/update_security/toggle_two_factor', user_views.toggle_two_factor, name='toggle_two_factor'),
     re_path('login/login_verification', user_views.login_verification, name='login_verification'),
 
