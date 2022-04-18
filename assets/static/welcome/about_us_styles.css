@@ -49,3 +49,12 @@
 .how-to-help-title h1 {
   text-align: center;
 }
+
+.contrib-author-links {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.contrib-author-name {
+  text-align: center;
+}
