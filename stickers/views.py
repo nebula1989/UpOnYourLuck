@@ -41,9 +41,11 @@ def ship_sticker_view(request):
         if form.is_valid():
             form.save()
             email_subject = f'QR Sticker Request for {request.user}'
-            email_message = qr_request_model.__str__()
+            email_message = qr_request_model.street_name_and_number
             send_mail(email_subject, email_message, settings.CONTACT_EMAIL, settings.ADMIN_EMAILS)
             return render(request, 'success.html')
+        elif not form.is_valid():
+            messages.error(request, "Your request failed.")
     form = ShipStickerForm()
     context = {'form': form}
     return render(request, 'ship_sticker.html', context)
