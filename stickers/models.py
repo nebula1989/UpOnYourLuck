@@ -14,6 +14,3 @@ class StickerShipment(models.Model):
         db_table = 'Sticker_Shipment'
         verbose_name = "Sticker_Shipment"
         verbose_name_plural = "Sticker_Shipments"
-
-    def __str__(self):
-        return self.street_name_and_number + " "

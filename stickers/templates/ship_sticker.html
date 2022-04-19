@@ -33,7 +33,26 @@
                     <div class="col col-lg-10 col-xl-1" style="color: #CDD1CC; width: 100%;" >
                         <form action="" name="form" method="post">
                             {% csrf_token %}
-                            {{ form }}
+                            <div class="form-group">
+                                <label class="inline_label">Full Name</label>
+                                {{ form.full_name }}
+                            </div>
+                            <div class="form-group">
+                                <label class="inline_label">Address</label>
+                                {{ form.street_name_and_number }}
+                            </div>
+                            <div class="form-group">
+                                <label class="inline_label">City</label>
+                                {{ form.city }}
+                            </div>
+                            <div class="form-group">
+                                <label class="inline_label">State</label>
+                                {{ form.state }}
+                            </div>
+                            <div class="form-group">
+                                <label class="inline_label">Zipcode</label>
+                                {{ form.zipcode }}
+                            </div>
                             <input type="submit" value="Submit">
                         </form>
                     </div>
