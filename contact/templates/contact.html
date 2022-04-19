@@ -14,10 +14,6 @@
 
 <!--Title for the page-->
 <div id="container">
-    
-
-
-
     <!--Form-->
 
     <div class="form group py-1" id="body-wrapper">
@@ -86,14 +82,9 @@
 </div>
 
 {% if request.user.is_authenticated %}
-    <script src="../static/contact/app.js"></script>
-    
+    <script src="/contact/contact_app.js"></script>
 {% endif %}
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-{% endblock %}
 
-<script>
-    function Verify(e) {
-        document.getElementById('form-submit').removeAttribute('disabled');
-      }
-</script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+{% endblock %}
