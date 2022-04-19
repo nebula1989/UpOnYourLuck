@@ -14,30 +14,61 @@
 
 <!--Title for the page-->
 <div id="container">
-    
-
-
-
     <!--Form-->
 
     <div class="form group py-1" id="body-wrapper">
         
         <div class="row justify-content-center align-items-center" id="outer-form-wrapper" style="border-radius: 2rem;">
-
+            
             <div class="h-100 card" id="inner-form-wrapper">
                 <div class="row" style="width: 100%;" id="title-outer-wrapper">
                     <div class="col-lg-7 mx-auto text-center" id="title-inner-wrapper">
                         <h1 style="color: #CDD1CC;" id="title-form">Contact Form</h1>
+                        <div style="color: #CDD1CC;">
+                            <p>Need Help? - Want to Help? - Need to get in touch with us?</p>
+                            <p>Reach out to us here!</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-7 mx-auto text-left pt-2 50em" id="form-outer-body-wrapper">
+               
+                <div class="col-lg-7 mx-auto text-left pt-2 inner-content" id="form-outer-body-wrapper">
                     <div class="col col-lg-10 col-xl-1" style="color: #CDD1CC; width: 100%;" id="form-inner-body-wrapper" >
                         
                     <form action="" method="post" id="contact-form" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                         {% csrf_token %}
-                        {{ form }}
-                        <input type="submit" value="Submit" class="btn btn-outline-dark rounded-pill btn-sm" id="form-submit-btn" style=" background-color: #26dda6;">
-                    </form>
+
+                        {% if user.is_authenticated %}
+                            <label class="form-label" for="id_username">Username:</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text bg-transparent"><i class="fas fa-user"></i></span>
+                                <input class="form-control form-rounded" type="text" name="username" maxlength="100" required="" id="id_username" placeholder="Enter Username">    
+                            </div>
+                        {% endif %}
+
+                        <label class="form-label" for="id_email">Email:</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent"><i class="fa-solid fa-envelope"></i></span>
+                            <input class="form-control form-rounded" type="email" name="email" maxlength="254" required="" id="id_email" placeholder="Enter Email Address">    
+                        </div>
+
+                        <label class="form-label" for="id_subject">Subject:</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent"><i class="fa-solid fa-envelope-open-text"></i></span>
+                            <input class="form-control form-rounded" type="text" name="subject" maxlength="255" required="" id="id_subject" placeholder="Enter Subject">    
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="id_message">Message:</label>
+                            <textarea class="form-control form-rounded" name="message" cols="40" rows="10" required="" id="id_message"></textarea>    
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <div class="g-recaptcha" data-sitekey="6Ld0wFYfAAAAADaMx0MczUKY_Lj1djKQZoMYmr49" data-callback="Verify"></div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <input type="submit" class="btn btn-primary rounded-pill btn-sm px-5" disabled id="form-submit"></input>
+                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -51,7 +82,9 @@
 </div>
 
 {% if request.user.is_authenticated %}
-    <script src="../static/contact/app.js"></script>
-    
+    <script src="/contact/contact_app.js"></script>
 {% endif %}
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 {% endblock %}

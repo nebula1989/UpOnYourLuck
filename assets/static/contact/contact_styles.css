@@ -1,0 +1,63 @@
+#dashboard-banner {
+  color: green;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100%;
+  background-color: #121212;
+}
+
+.form-rounded {
+  border-radius: 1rem;
+}
+
+.banner-img {
+  background-color: #222224;
+  height: 900px;
+  border-top: 1rem;
+  border-color: transparent;
+}
+
+#dashboard-banner {
+  color: black;
+}
+
+#container {
+  height: calc(100vh - 66px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#contact-form > textarea {
+  resize: none;
+}
+
+#inner-form-wrapper {
+  width: 45em;
+  background-color: #292928;
+  border-radius: 2rem;
+  border-style: solid;
+  border-color: #cdd1cc;
+  border-width: 0.1rem;
+}
+
+.form-rounded {
+  border-radius: 1rem;
+}
+
+.banner-img {
+  background-color: #222224;
+  height: 900px;
+  border-top: 1rem;
+  border-color: transparent;
+}
+
+@media (max-width: 450px) {
+}
+
+@media only screen and (min-width: 1440px) {
+}

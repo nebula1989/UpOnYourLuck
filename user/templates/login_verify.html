@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block css %}
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="{% static '/user/styles.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+{% endblock %}
+{% block content %}
+
+<div class="container h-75">
+    <div class="row h-100">
+        <div class="col-lg-5 col-md-7 mx-auto my-auto">
+            <div class="card">
+                <div class="card-body px-lg-5 py-lg-5 text-center">
+                    <img src="{{user.profile.profile_img.url}}" class="rounded-circle avatar-lg img-thumbnail mb-4" alt="profile-image">
+                    <h5 class="text-white pb-4 fw-bold">
+                        @{{user.username}}
+                    </h5>
+                    <h2 class="" style="color: #26dda6;">Authenticator</h2>
+                    <p class="mb-4 text-secondary">Please enter the 6-digit code we sent you.</p>
+                    <form method="post" action="login_verification">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{user_id}}" readonly/>
+                        <input type="hidden" id="visitor_id" name="visitor_id" value="" readonly/>
+                        <div class="row mb-4" id="container">
+                            <div class="col-lg-2 col-md-2 col-2 ps-0 ps-md-2">
+                                <input type="text" id="digit1" name="digit1" class="form-control text-lg text-center" placeholder="-" aria-label="2fa" maxlength="1" inputmode="NUMERIC" pattern="[0-9]*" autocomplete="one-time-code">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-2 ps-0 ps-md-2">
+                                <input type="text" id="digit2" name="digit2" class="form-control text-lg text-center" placeholder="-" aria-label="2fa" maxlength="1" inputmode="NUMERIC" pattern="[0-9]*" autocomplete="one-time-code">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-2 ps-0 ps-md-2">
+                                <input type="text" id="digit3" name="digit3" class="form-control text-lg text-center" placeholder="-" aria-label="2fa" maxlength="1" inputmode="NUMERIC" pattern="[0-9]*" autocomplete="one-time-code">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-2 pe-0 pe-md-2">
+                                <input type="text" id="digit4" name="digit4" class="form-control text-lg text-center" placeholder="-" aria-label="2fa" maxlength="1" inputmode="NUMERIC" pattern="[0-9]*" autocomplete="one-time-code">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-2 pe-0 pe-md-2">
+                                <input type="text" id="digit5" name="digit5" class="form-control text-lg text-center" placeholder="-" aria-label="2fa" maxlength="1" inputmode="NUMERIC" pattern="[0-9]*" autocomplete="one-time-code">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-2 pe-0 pe-md-2">
+                                <input type="text" id="digit6" name="digit6" class="form-control text-lg text-center" placeholder="-" aria-label="2fa" maxlength="1" inputmode="NUMERIC" pattern="[0-9]*" autocomplete="one-time-code">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-lg my-4" style="background-color: #26dda6; font-weight: bold;">Continue</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var first_input = document.querySelectorAll('.form-control');
+    first_input.forEach(function(element) {
+        element.addEventListener('keyup', function(e) {
+            if (element.value.length == element.maxLength) {
+                $(element).parent().next().find('input').focus();
+            }
+        })
+    }) 
+    // Initialize the agent at application startup.
+    const fpPromise = new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.onload = resolve;
+        script.onerror = reject;
+        script.async = true;
+        script.src = 'https://cdn.jsdelivr.net/npm/'
+        + '@fingerprintjs/fingerprintjs-pro@3/dist/fp.min.js';
+        document.head.appendChild(script);
+    })
+        .then(() => FingerprintJS.load({
+        apiKey: 'KM1f74ibMtHQQb7YsEhp'
+        }));
+    var hidden = document.getElementById('visitor_id');
+    // Get the visitor identifier when you need it.
+    fpPromise
+        .then(fp => fp.get())
+        .then(result => hidden.value=result.visitorId);
+</script>
+
+<style>
+    body,html {
+        height: 100%;
+    }
+    input[type="submit"]:hover,
+    button[type="submit"]:hover {
+        background-color: #2aa781 !important
+    }
+    input[type="text"] {
+        background-color: #3b3b3b; 
+        color: #CDD1CC; 
+        border-color: transparent;
+    }
+    input[type="text"]:focus {
+        background-color: #3b3b3b; 
+        color: #CDD1CC; 
+        border-color: transparent;
+    }
+    .card {
+        box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+    }
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #202123;
+        background-clip: border-box;
+        border: 0 solid rgba(0,0,0,.125);
+        border-radius: 1rem;
+    }
+    .img-thumbnail {
+        padding: .25rem;
+        background-color: #ecf2f5;
+        border: 1px solid #dee2e6;
+        border-radius: .25rem;
+        max-width: 100%;
+        height: auto;
+    }
+    .avatar-lg {
+        height: 150px;
+        width: 150px;
+    }
+</style>
+{% endblock %}

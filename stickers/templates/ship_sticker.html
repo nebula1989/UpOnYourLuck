@@ -20,25 +20,43 @@
 
     <!--Form-->
 
-    <div class="form group py-1" id="body-wrapper" style="">
-        
+    <div class="form group py-1" id="body-wrapper">
         <div class="row justify-content-center align-items-center" style="border-radius: 2rem;">
-
             <div class="h-100 card" id="inner-form-wrapper">
                 <div class="row" style="width: 100%;">
-                    <div class="col-lg-7 mx-auto text-center">
+                    <div class="col-lg-7 mx-auto text-center pt-3">
                         <h1 style="color: #CDD1CC;">Ship Sticker Form</h1>
                     </div>
                 </div>
                 <div class="col-lg-7 mx-auto text-left pt-2 50em">
-                    <div class="col col-lg-10 col-xl-1" style="color: #CDD1CC; width: 100%;" >
 
-                    <form action="" method="post" id="ship-sticker-form" style="display: flex; flex-direction: column;">
-                        {% csrf_token %}
-                        {{ form }}
-                        <input type="submit" value="Submit" class="btn btn-outline-dark rounded-pill btn-sm" style=" background-color: #26dda6;">
-                    </form>
+                    <div class="col col-lg-10 col-xl-1" style="color: #CDD1CC; width: 100%;" >
+                        <form action="" name="form" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label class="inline_label">Full Name</label>
+                                {{ form.full_name }}
+                            </div>
+                            <div class="form-group">
+                                <label class="inline_label">Address</label>
+                                {{ form.street_name_and_number }}
+                            </div>
+                            <div class="form-group">
+                                <label class="inline_label">City</label>
+                                {{ form.city }}
+                            </div>
+                            <div class="form-group">
+                                <label class="inline_label">State</label>
+                                {{ form.state }}
+                            </div>
+                            <div class="form-group">
+                                <label class="inline_label">Zipcode</label>
+                                {{ form.zipcode }}
+                            </div>
+                            <input type="submit" value="Submit">
+                        </form>
                     </div>
+
                 </div>
             </div>
         </div>

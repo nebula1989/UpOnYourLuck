@@ -36,14 +36,15 @@ def sticker_index_for_visitor(request, username=None):
 @login_required
 def ship_sticker_view(request):
     if request.method == 'POST':
-        qr_request_model = StickerShipment()
         form = ShipStickerForm(request.POST)
         if form.is_valid():
             form.save()
             email_subject = f'QR Sticker Request for {request.user}'
-            email_message = qr_request_model.__str__()
+            email_message = form.cleaned_data['full_name'] + "\n" + form.cleaned_data['street_name_and_number'] + "\n" + form.cleaned_data['city'] + ", " + form.cleaned_data['state'] + "\n" + form.cleaned_data['zipcode']
             send_mail(email_subject, email_message, settings.CONTACT_EMAIL, settings.ADMIN_EMAILS)
             return render(request, 'success.html')
+        elif not form.is_valid():
+            messages.error(request, "Your request failed.")
     form = ShipStickerForm()
     context = {'form': form}
     return render(request, 'ship_sticker.html', context)

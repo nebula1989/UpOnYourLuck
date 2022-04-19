@@ -11,8 +11,13 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
-assets
+#assets
 media
+media/profile_img/bwalters.jpg
+media/profile_img/default.jpg
+media/qr_code/bwalters.jpg
+media/qr_code/throwaway.jpg
+
 uponyourluck/settings/secrets.py
 uponyourluck/settings/config.json
 

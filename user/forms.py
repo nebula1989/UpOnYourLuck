@@ -64,9 +64,10 @@ class NewUserForm(UserCreationForm):
     def save(self, commit=True):
         user = super(NewUserForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
-        if commit:
+        if commit and len(User.objects.filter(email=user.email)) == 0:
             user.save()
-        return user
+            return user
+        return None    
 
 class LoginForm(AuthenticationForm):
     username = UsernameField(required=True,
@@ -143,3 +144,13 @@ class UpdateProfileForm(forms.ModelForm):
         widgets = {
             'payment_link_url': forms.URLInput(attrs={'placeholder': 'https://cash.app/$yourcashtag'}),
         }
+
+class UpdateTwoFactor(forms.ModelForm):
+    CHOICES=[('0','Off'),
+         ('1','On')]
+
+    two_factor_enabled = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
+
+    class Meta:
+        model = Profile
+        fields = ('two_factor_enabled', 'phone_number')
