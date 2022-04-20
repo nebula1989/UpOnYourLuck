@@ -3,7 +3,7 @@
 
 {% block content %}
 {% block css %}
-    <link rel="stylesheet" type="text/css" href="{% static '/user/styles.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static '/user/user_styles.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
         
 {% endblock %}
@@ -58,12 +58,12 @@
                         </div>
                     </div>
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <p class="lead fw-normal mb-1" style="color: #CDD1CC;">Donation Link</h5>
+                    <p class="lead fw-normal mb-1" style="color: #CDD1CC;">Donation Link</p>
                 </div>
                 <div class="row g-2">
                     {% if payment_link_url != 'https://cash.app/$' %}
                         <a href="{{ payment_link_url }}" target="_blank"><img src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_100,w_100,f_auto,q_auto:eco,dpr_1/r0mqzkkha3nmbnsvodqm" alt="Cash App Link"></a>
-                    {% else %}
+                                    {% else %}
                         <div class="p-4" style="background-color: #3b3b3b; color: #CDD1CC;">
                             <p class="font-italic mb-1" style="color: #9e9e9e;">You have not setup a donation link yet.</p>
                         </div>
@@ -74,9 +74,6 @@
       </div>
     </div>
 </div>
-
-<script>
-
-</script>
+</div>
               
 {% endblock %}
