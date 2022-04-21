@@ -38,7 +38,7 @@ body {
 
 #inner-form-wrapper {
   width: 45em;
-  background-color: #292928;
+  background-color: #202123;
   border-radius: 2rem;
   border-style: solid;
   border-color: #cdd1cc;
@@ -53,6 +53,18 @@ body {
   background-color: #222224;
   height: 900px;
   border-top: 1rem;
+  border-color: transparent;
+}
+.form-control {
+  background-color: #3b3b3b;
+  color: #CDD1CC;
+  border-color: transparent;
+  padding-left: 1rem;
+}
+
+input[type="text"]:focus {
+  background-color: #3b3b3b;
+  color: #CDD1CC;
   border-color: transparent;
 }
 
