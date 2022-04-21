@@ -30,30 +30,161 @@
                 </div>
                 <div class="col-lg-7 mx-auto text-left pt-2 50em">
 
-                    <div class="col col-lg-10 col-xl-1" style="color: #CDD1CC; width: 100%;" >
+                    <div class="d-flex row" style="color: #CDD1CC; width: 100%;" >
                         <form action="" name="form" method="post">
                             {% csrf_token %}
-                            <div class="form-group">
-                                <label class="inline_label">Full Name</label>
-                                {{ form.full_name }}
+                            <div class="col-lg-6 mb-3">
+                                <label class="form-label">Full Name</label>
+                                {% if user.is_authenticated %}
+                                    <input class="form-control form-rounded" type="text" name="full_name" maxlength="50" required="" id="id_full_name" placeholder="Full Name" value="{{user.first_name}} {{user.last_name}}">
+                                {% else %}
+                                    <input class="form-control form-rounded" type="text" name="full_name" maxlength="50" required="" id="id_full_name" placeholder="Full Name">
+                                {% endif %}
                             </div>
-                            <div class="form-group">
-                                <label class="inline_label">Address</label>
-                                {{ form.street_name_and_number }}
+                            <div class="col-lg-10 mb-3">
+                                <label class="form-label">Address</label>
+                                <input class="form-control form-rounded" type="text" name="street_name_and_number" maxlength="99" required="" id="id_street_name_and_number" placeholder="Address">
                             </div>
-                            <div class="form-group">
-                                <label class="inline_label">City</label>
-                                {{ form.city }}
+                            <div class="row gx-3 mb-3">
+                                <div class="col-lg-6 mb-3">
+                                    <label class="form-label">City</label>
+                                    {% if user.is_authenticated %}
+                                        <input class="form-control form-rounded" type="text" name="city" maxlength="50" required="" id="id_city" placeholder="City" value="{{user.profile.city}}">
+                                    {% else %}
+                                        <input class="form-control form-rounded" type="text" name="city" maxlength="50" required="" id="id_city" placeholder="City">
+                                    {% endif %}
+                                </div>
+                                <div class="col-lg-6 mb-3">
+                                    <label class="form-label">State</label>
+                                    <select class="form-control form-rounded" name="state" id="id_state">
+                                        <option value="AL">Alabama</option>
+    
+                                        <option value="AK">Alaska</option>
+    
+                                        <option value="AS">American Samoa</option>
+    
+                                        <option value="AZ">Arizona</option>
+    
+                                        <option value="AR">Arkansas</option>
+    
+                                        <option value="AA">Armed Forces Americas</option>
+    
+                                        <option value="AE">Armed Forces Europe</option>
+    
+                                        <option value="AP">Armed Forces Pacific</option>
+    
+                                        <option value="CA">California</option>
+    
+                                        <option value="CO">Colorado</option>
+    
+                                        <option value="CT">Connecticut</option>
+    
+                                        <option value="DE">Delaware</option>
+    
+                                        <option value="DC">District of Columbia</option>
+    
+                                        <option value="FL">Florida</option>
+    
+                                        <option value="GA">Georgia</option>
+    
+                                        <option value="GU">Guam</option>
+    
+                                        <option value="HI">Hawaii</option>
+    
+                                        <option value="ID">Idaho</option>
+    
+                                        <option value="IL">Illinois</option>
+    
+                                        <option value="IN">Indiana</option>
+    
+                                        <option value="IA">Iowa</option>
+    
+                                        <option value="KS">Kansas</option>
+    
+                                        <option value="KY">Kentucky</option>
+    
+                                        <option value="LA">Louisiana</option>
+    
+                                        <option value="ME">Maine</option>
+    
+                                        <option value="MD">Maryland</option>
+    
+                                        <option value="MA">Massachusetts</option>
+    
+                                        <option value="MI">Michigan</option>
+    
+                                        <option value="MN">Minnesota</option>
+    
+                                        <option value="MS">Mississippi</option>
+    
+                                        <option value="MO">Missouri</option>
+    
+                                        <option value="MT">Montana</option>
+    
+                                        <option value="NE">Nebraska</option>
+    
+                                        <option value="NV">Nevada</option>
+    
+                                        <option value="NH">New Hampshire</option>
+    
+                                        <option value="NJ">New Jersey</option>
+    
+                                        <option value="NM">New Mexico</option>
+    
+                                        <option value="NY">New York</option>
+    
+                                        <option value="NC">North Carolina</option>
+    
+                                        <option value="ND">North Dakota</option>
+    
+                                        <option value="MP">Northern Mariana Islands</option>
+    
+                                        <option value="OH">Ohio</option>
+    
+                                        <option value="OK">Oklahoma</option>
+    
+                                        <option value="OR">Oregon</option>
+    
+                                        <option value="PA">Pennsylvania</option>
+    
+                                        <option value="PR">Puerto Rico</option>
+    
+                                        <option value="RI">Rhode Island</option>
+    
+                                        <option value="SC">South Carolina</option>
+    
+                                        <option value="SD">South Dakota</option>
+    
+                                        <option value="TN">Tennessee</option>
+    
+                                        <option value="TX">Texas</option>
+    
+                                        <option value="UT">Utah</option>
+    
+                                        <option value="VT">Vermont</option>
+    
+                                        <option value="VI">Virgin Islands</option>
+    
+                                        <option value="VA">Virginia</option>
+    
+                                        <option value="WA">Washington</option>
+    
+                                        <option value="WV">West Virginia</option>
+    
+                                        <option value="WI">Wisconsin</option>
+    
+                                        <option value="WY">Wyoming</option>
+    
+                                        </select>
+                                </div>
+                                <div class="col-lg-5 mb-3">
+                                    <label class="form-label">Zipcode</label>
+                                    <input class="form-control form-rounded" type="text" name="zipcode" maxlength="10" required="" id="id_zipcode" placeholder="Zipcode">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label class="inline_label">State</label>
-                                {{ form.state }}
+                            <div class="d-flex justify-content-center mb-3">
+                                <input type="submit" class="btn btn-primary rounded-pill btn-sm px-5" id="form-submit"></input>
                             </div>
-                            <div class="form-group">
-                                <label class="inline_label">Zipcode</label>
-                                {{ form.zipcode }}
-                            </div>
-                            <input type="submit" value="Submit">
                         </form>
                     </div>
 
