@@ -461,7 +461,7 @@ def generate_qr_code(request, username=None):
     user_profile_full_url = domain + '/' + profile_url + '/?source=qr'
 
     # Open and resize the UpOnYourLuck Logo
-    logo = Image.open(str(MEDIA_ROOT) + '/home_page/UpOnYourLuck_Logo_transparent')
+    logo = Image.open(str(MEDIA_ROOT) + '/home_page/UpOnYourLuck_Logo_transparent.jpg')
     logo.thumbnail((150,150), Image.ANTIALIAS)
 
     # Create a new QR code with maximum error correction
