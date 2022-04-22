@@ -1,12 +1,10 @@
 {% extends "base.html" %}
-{% load crispy_forms_filters %}
-{% load crispy_forms_tags %}
 
 {% load static %}
 
 {% block css %}
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
-    <link rel="stylesheet" type="text/css" href="{% static '/user/styles.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static '/user/user_styles.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 {% endblock %}
 {% block content %}
@@ -57,78 +55,5 @@
 </div>
 
 
-<script>
-    var first_input = document.querySelectorAll('.form-control');
-    first_input.forEach(function(element) {
-        element.addEventListener('keyup', function(e) {
-            if (element.value.length == element.maxLength) {
-                $(element).parent().next().find('input').focus();
-            }
-        })
-    }) 
-    // Initialize the agent at application startup.
-    const fpPromise = new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.onload = resolve;
-        script.onerror = reject;
-        script.async = true;
-        script.src = 'https://cdn.jsdelivr.net/npm/'
-        + '@fingerprintjs/fingerprintjs-pro@3/dist/fp.min.js';
-        document.head.appendChild(script);
-    })
-        .then(() => FingerprintJS.load({
-        apiKey: 'KM1f74ibMtHQQb7YsEhp'
-        }));
-    var hidden = document.getElementById('visitor_id');
-    // Get the visitor identifier when you need it.
-    fpPromise
-        .then(fp => fp.get())
-        .then(result => hidden.value=result.visitorId);
-</script>
-
-<style>
-    body,html {
-        height: 100%;
-    }
-    input[type="submit"]:hover,
-    button[type="submit"]:hover {
-        background-color: #2aa781 !important
-    }
-    input[type="text"] {
-        background-color: #3b3b3b; 
-        color: #CDD1CC; 
-        border-color: transparent;
-    }
-    input[type="text"]:focus {
-        background-color: #3b3b3b; 
-        color: #CDD1CC; 
-        border-color: transparent;
-    }
-    .card {
-        box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
-    }
-    .card {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-        word-wrap: break-word;
-        background-color: #202123;
-        background-clip: border-box;
-        border: 0 solid rgba(0,0,0,.125);
-        border-radius: 1rem;
-    }
-    .img-thumbnail {
-        padding: .25rem;
-        background-color: #ecf2f5;
-        border: 1px solid #dee2e6;
-        border-radius: .25rem;
-        max-width: 100%;
-        height: auto;
-    }
-    .avatar-lg {
-        height: 150px;
-        width: 150px;
-    }
-</style>
+<script src="{% static 'user/login_verify.js' %}"></script>
 {% endblock %}

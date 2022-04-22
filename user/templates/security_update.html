@@ -1,10 +1,11 @@
 {% extends "base.html" %}
-{% load crispy_forms_filters %}
+{% load static %}
 
 {% block title %}Profile Page{% endblock title %}
 
 {% block css %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link rel="stylesheet" href="{% static 'user/twofactor_styles.css' %}"/>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 {% endblock %}
 {% block content %}
@@ -116,109 +117,6 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    var sms_input = document.getElementById("id_phone_number");
-    var save_button = document.getElementById("save");
-    var off_button = document.getElementById('id_two_factor_enabled_0');
-    var on_button = document.getElementById('id_two_factor_enabled_1');
-
-    sms_input.addEventListener('keyup', function (event) {
-        check_number(sms_input);
-    });
-
-    off_button.addEventListener('click', function(event) {
-        save_button.removeAttribute("disabled");
-    });
-
-    on_button.addEventListener('click', function(event) {
-        if (document.getElementById('id_phone_number').value != "") {
-            save_button.removeAttribute("disabled");
-        } 
-    });
-
-    function check_number(number) {
-        var regex = /^[+][0-9]+ [(]([0-9]){3}[)] ([0-9]){3}-([0-9]){4}$/g;
-        if (regex.test(number.value)) {
-            number.classList.remove('is-invalid');
-            save_button.removeAttribute("disabled");
-            number.classList.add('is-valid');
-        }
-        else {
-            number.classList.remove('is-valid');
-            number.classList.add('is-invalid');
-            save_button.addAttribute("disabled");
-        }
-    }
-</script>
-
-<style>
-body {
-    margin-top:auto;
-    background-color:#121212;
-    color:#69707a;
-}
-.img-account-profile {
-    height: 10rem;
-}
-.rounded-circle {
-    border-radius: 50% !important;
-}
-.card {
-    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
-}
-.card .card-header {
-    font-weight: 500;
-}
-.card-header:first-child {
-    border-radius: 0.35rem 0.35rem 0 0;
-}
-.card-header {
-    padding: 1rem 1.35rem;
-    margin-bottom: 0;
-    background-color: rgba(33, 40, 50, 0.03);
-    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
-}
-.form-control, .dataTable-input {
-    display: block;
-    width: 100%;
-    padding: 0.875rem 1.125rem;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1;
-    color: #69707a;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid;
-    border-color: transparent;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border-radius: 0.35rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.nav-borders .nav-link.active {
-    color: #0061f2;
-    border-bottom-color: #0061f2;
-}
-.nav-borders .nav-link {
-    color: #69707a;
-    border-bottom-width: 0.125rem;
-    border-bottom-style: solid;
-    border-bottom-color: transparent;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
-
-.btn-danger-soft {
-    color: #000;
-    background-color: #f1e0e3;
-    border-color: #f1e0e3;
-}
-</style>
+<script src="{% static 'user/two_factor.js' %}" type="text/javascript"></script>
 
 {% endblock content %}
