@@ -4,6 +4,7 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   margin: 0;
+
   background-size: cover;
   width: 100%;
   font-size: 1.5rem;
@@ -12,6 +13,7 @@
 
 .about-us-inner-container {
   background-color: #202123d3;
+  padding-top: 2em;
 }
 
 .about-description {
@@ -19,7 +21,7 @@
 }
 
 .about-description-main p {
-  margin: 0 1em 1em 0;
+  margin: 0 1em 1em 1em;
 }
 
 .about-description-quote h2 {
@@ -27,8 +29,8 @@
   margin: 0 1em 0 1em;
 }
 
-.about-component {
-  margin: 2em 0;
+.contributors-container {
+  margin-top: 2em;
 }
 
 .contributors-description {
@@ -40,7 +42,11 @@
   display: grid;
   grid-template-columns: auto auto auto;
   gap: 1em;
-  margin-top: 1.5em;
+  margin: 1.5em 0.5em 0 0.5em;
+}
+
+.how-to-help-container {
+  margin-top: 2em;
 }
 
 .contributors-title h1 {
@@ -62,7 +68,7 @@
   text-align: center;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 800px) {
   .about-description {
     flex-direction: column;
   }
