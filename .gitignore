@@ -16,7 +16,6 @@ media
 media/profile_img/bwalters.jpg
 media/profile_img/default.jpg
 media/qr_code/bwalters.jpg
-media/qr_code/throwaway.jpg
 
 uponyourluck/settings/secrets.py
 uponyourluck/settings/config.json
