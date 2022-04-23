@@ -63,6 +63,7 @@ class Profile(models.Model):
     two_factor_enabled = models.BooleanField(default=False)
     phone_number = models.CharField(max_length=25, default="0")
     visitor_id = models.CharField(default='0', max_length=200)
+    accepted_terms_and_conditions = models.BooleanField(default=True)
 
     class Meta:
         db_table = 'Profile'
