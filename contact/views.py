@@ -22,7 +22,7 @@ from django.contrib import messages
 
 
 def contact_view(request):
-    project_id = 'Recaptcha'
+    project_id = '6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E'
     recaptcha_action = 'submit'
     recaptcha_site_key = '6Lfyj1QiAAAAAGJ8'
 
