@@ -37,10 +37,9 @@
                         <div class="col col-lg-10 col-xl-1" style="color: #CDD1CC; width: 100%;"
                              id="form-inner-body-wrapper">
 
-                            <form action="" method="post" id="contact-form"
-                                  style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <form action="" method="post" id="contact-form" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                                 {% csrf_token %}
-
+                                <div class="g-recaptcha" data-sitekey="6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E" data-action="SUBMIT"></div>
                                 {% if user.is_authenticated %}
                                     <label class="form-label" for="id_username">Username:</label>
                                     <div class="input-group mb-3">
@@ -90,12 +89,11 @@
                                          data-callback="Verify"></div>
                                 </div>
                                 <div class="d-flex justify-content-center mb-3">
-                                    <input type="submit"
-                                           class="g-recaptcha btn btn-primary rounded-pill btn-sm px-5"
-                                           id="form-submit"
-                                           data-sitekey="6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E"
-                                           data-callback='onSubmit'
-                                           data-action='submit'>
+                                    <button class="g-recaptcha btn btn-primary rounded-pill btn-sm px-5"
+                                            data-sitekey="6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E"
+                                            data-callback='onSubmit'
+                                            data-action='submit'>Submit
+                                    </button>
                                 </div>
 
 
@@ -111,20 +109,6 @@
         <div id="email_field">{{ request.user.email }}</div>
         <div id="username_field">{{ request.user.username }}</div>
     </div>
-
-
-
-    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E"></script>
-
-    <script>
-        grecaptcha.enterprise.ready(function () {
-            grecaptcha.enterprise.execute('6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E', {action: 'submit'}).then(function onSubmit(token) {
-                    document.getElementById("form-submit").submit();
-            });
-        });
-    </script>
-
-    <script src="https://www.google.com/recaptcha/api.js"></script>
 
 
 
