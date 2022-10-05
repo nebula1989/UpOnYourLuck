@@ -1,6 +1,11 @@
 import os
 from pathlib import Path
 
+# api keys
+from uponyourluck.settings.secrets import SENDGRID_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, GOOGLE_APPLICATION_CREDENTIALS
+# Twilio Settings
+from twilio.rest import Client
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -102,7 +107,7 @@ CONTACT_EMAIL = 'contact@uponyourluck.life'
 
 ADMIN_EMAILS = ['benwalterscoding@gmail.com', 'ldcollins@my.waketech.edu']
 
-from uponyourluck.settings.secrets import SENDGRID_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN
+
 # SendGrid
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
@@ -110,8 +115,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 
-# Twilio Settings
-from twilio.rest import Client
+
 # Find your Account SID and Auth Token at twilio.com/console
 # and set the environment variables. See http://twil.io/secure
 account_sid = TWILIO_ACCOUNT_SID
