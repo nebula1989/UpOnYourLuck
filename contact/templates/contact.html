@@ -112,7 +112,6 @@
         <div id="username_field">{{ request.user.username }}</div>
     </div>
 
-    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E"></script>
     <script>
         grecaptcha.enterprise.ready(function () {
             grecaptcha.enterprise.execute('6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E', {action: 'contact'}).then(function (token) {
@@ -123,5 +122,6 @@
         });
     </script>
 
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E"></script>
 
 {% endblock %}
