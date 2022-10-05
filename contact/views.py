@@ -28,10 +28,9 @@ def contact_view(request):
 
     if request.method == 'POST':
         form = ContactForm(request.POST)
-        token = request.POST['g-recaptcha-response']
-        create_assessment(project_id, recaptcha_action, recaptcha_site_key, token)
-
         if form.is_valid():
+            token = request.POST['g-recaptcha-response']
+            create_assessment(project_id, recaptcha_action, recaptcha_site_key, token)
             form.save()
             email_subject = f'New contact {form.cleaned_data["email"]}: {form.cleaned_data["subject"]}'
             email_message = form.cleaned_data['message']

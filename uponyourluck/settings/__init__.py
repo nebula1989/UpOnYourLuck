@@ -16,3 +16,4 @@ except KeyError:
     from .dev import *
 
 SECRET_KEY = config['SECRET_KEY']
+GOOGLE_APPLICATION_CREDENTIALS = config['GOOGLE_APPLICATION_CREDENTIALS']

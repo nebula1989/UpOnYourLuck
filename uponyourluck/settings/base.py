@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 # api keys
-from uponyourluck.settings.secrets import SENDGRID_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, GOOGLE_APPLICATION_CREDENTIALS
+from uponyourluck.settings.secrets import SENDGRID_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN
 # Twilio Settings
 from twilio.rest import Client
 
