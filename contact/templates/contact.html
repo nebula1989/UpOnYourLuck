@@ -118,7 +118,7 @@
 
     <script>
         grecaptcha.enterprise.ready(function () {
-            grecaptcha.enterprise.execute('6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E', {action: 'contact'}).then(function onSubmit(token) {
+            grecaptcha.enterprise.execute('6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E', {action: 'submit'}).then(function onSubmit(token) {
                     document.getElementById("form-submit").submit();
             });
         });
