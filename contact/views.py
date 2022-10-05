@@ -22,9 +22,9 @@ from django.contrib import messages
 
 
 def contact_view(request):
-    project_id = '6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E'
-    recaptcha_action = 'submit'
-    recaptcha_site_key = '6Lfyj1QiAAAAAGJ8'
+    project_id = 'recaptcha-354614'
+    recaptcha_action = 'SUBMIT'
+    recaptcha_site_key = '6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E'
 
     if request.method == 'POST':
         form = ContactForm(request.POST)
