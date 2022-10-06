@@ -2,7 +2,7 @@ import os
 
 from django.conf import settings
 
-from uponyourluck.settings import DOMAIN, GOOGLE_APPLICATION_CREDENTIALS, config
+from uponyourluck.settings import DOMAIN, config
 from .forms import ContactForm
 
 # Google
