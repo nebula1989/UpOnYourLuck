@@ -2,7 +2,7 @@ import os
 
 from django.conf import settings
 
-from uponyourluck.settings import DOMAIN, GOOGLE_APPLICATION_CREDENTIALS
+from uponyourluck.settings import DOMAIN, GOOGLE_APPLICATION_CREDENTIALS, config
 from .forms import ContactForm
 
 # Google
@@ -111,7 +111,7 @@ def create_assessment(
         token: The token obtained from the client on passing the recaptchaSiteKey.
         recaptcha_action: Action name corresponding to the token.
     """
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = GOOGLE_APPLICATION_CREDENTIALS
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = config['GOOGLE_APPLICATION_CREDENTIALS']
 
     client = recaptchaenterprise_v1.RecaptchaEnterpriseServiceClient()
 
