@@ -19,6 +19,7 @@ media/qr_code/bwalters.jpg
 
 uponyourluck/settings/secrets.py
 uponyourluck/settings/config.json
+uponyourluck/settings/google_cred.json
 
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
