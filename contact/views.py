@@ -1,7 +1,6 @@
 import os
 
 from django.conf import settings
-from google.oauth2 import service_account
 
 from uponyourluck.settings import DOMAIN
 from .forms import ContactForm
@@ -111,10 +110,12 @@ def create_assessment(
         recaptcha_site_key: Site key obtained by registering a domain/app to use recaptcha services.
         token: The token obtained from the client on passing the recaptchaSiteKey.
         recaptcha_action: Action name corresponding to the token.
-    """
+
     filename = "/home/bwalters89/UpOnYourLuck/uponyourluck/settings/google_cred.json"
     credentials = service_account.Credentials.from_service_account_file(filename)
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials
+    """
+
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/bwalters89/UpOnYourLuck/uponyourluck/settings/google_cred.json"
     client = recaptchaenterprise_v1.RecaptchaEnterpriseServiceClient()
 
     # Set the properties of the event to be tracked.
