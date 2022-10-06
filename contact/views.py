@@ -1,3 +1,5 @@
+import os
+
 from django.conf import settings
 
 from uponyourluck.settings import DOMAIN, GOOGLE_APPLICATION_CREDENTIALS
@@ -109,8 +111,9 @@ def create_assessment(
         token: The token obtained from the client on passing the recaptchaSiteKey.
         recaptcha_action: Action name corresponding to the token.
     """
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = GOOGLE_APPLICATION_CREDENTIALS
 
-    client = recaptchaenterprise_v1.RecaptchaEnterpriseServiceClient(credentials=GOOGLE_APPLICATION_CREDENTIALS)
+    client = recaptchaenterprise_v1.RecaptchaEnterpriseServiceClient()
 
     # Set the properties of the event to be tracked.
     event = recaptchaenterprise_v1.Event()
