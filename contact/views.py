@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from uponyourluck.settings import DOMAIN
+from uponyourluck.settings import DOMAIN, GOOGLE_APPLICATION_CREDENTIALS
 from .forms import ContactForm
 
 # Google
@@ -110,7 +110,7 @@ def create_assessment(
         recaptcha_action: Action name corresponding to the token.
     """
 
-    client = recaptchaenterprise_v1.RecaptchaEnterpriseServiceClient()
+    client = recaptchaenterprise_v1.RecaptchaEnterpriseServiceClient(credentials=GOOGLE_APPLICATION_CREDENTIALS)
 
     # Set the properties of the event to be tracked.
     event = recaptchaenterprise_v1.Event()
