@@ -112,7 +112,7 @@ def create_assessment(
         token: The token obtained from the client on passing the recaptchaSiteKey.
         recaptcha_action: Action name corresponding to the token.
     """
-    filename = "google_cred.json"
+    filename = "../uponyourluck/settings/google_cred.json"
     credentials = service_account.Credentials.from_service_account_file(filename)
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials
     client = recaptchaenterprise_v1.RecaptchaEnterpriseServiceClient()
