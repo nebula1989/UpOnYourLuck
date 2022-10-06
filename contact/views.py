@@ -111,8 +111,8 @@ def create_assessment(
         token: The token obtained from the client on passing the recaptchaSiteKey.
         recaptcha_action: Action name corresponding to the token.
     """
-    #os.chdir('..')
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = '~/UpOnYourLuck/uponyourluck/settings/google_cred.json'
+    credential_path = "~/UpOnYourLuck/uponyourluck/settings/google_cred.json"
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credential_path
     client = recaptchaenterprise_v1.RecaptchaEnterpriseServiceClient()
 
     # Set the properties of the event to be tracked.
