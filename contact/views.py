@@ -112,8 +112,7 @@ def create_assessment(
         recaptcha_action: Action name corresponding to the token.
     """
     os.chdir('..')
-    prev_dir = os.getcwd()
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = prev_dir + '/settings/google_cred.json'
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = 'uponyourluck/settings/google_cred.json'
     client = recaptchaenterprise_v1.RecaptchaEnterpriseServiceClient()
 
     # Set the properties of the event to be tracked.
