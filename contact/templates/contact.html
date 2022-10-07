@@ -1,4 +1,4 @@
-{% include 'base.html' %}
+{% extends 'base.html' %}
 
 {% load static %}
 
@@ -13,8 +13,8 @@
     {% endblock %}
 
 
-    <!--Title for the page-->
-    <div id="container">
+
+    <div id="container-wrap">
         <!--Form-->
 
         <div class="form group py-1" id="body-wrapper">
@@ -37,7 +37,8 @@
                         <div class="col col-lg-10 col-xl-1" style="color: #CDD1CC; width: 100%;"
                              id="form-inner-body-wrapper">
 
-                            <form action="" method="post" id="contact-form" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <form action="" method="post" id="contact-form"
+                                  style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
                                 {% csrf_token %}
                                 {% if user.is_authenticated %}
                                     <label class="form-label" for="id_username">Username:</label>
@@ -83,9 +84,9 @@
                                               required="" id="id_message"></textarea>
                                 </div>
 
-                                <div class="g-recaptcha" data-sitekey="6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E" data-action="SUBMIT"></div>
+                                <div class="g-recaptcha" data-sitekey="6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E"
+                                     data-action="SUBMIT"></div>
                                 <input type="submit" value="Submit" id="submit">
-
 
 
                             </form>
