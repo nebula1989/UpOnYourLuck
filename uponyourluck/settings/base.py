@@ -105,7 +105,7 @@ LOGIN_URL = 'login'
 
 CONTACT_EMAIL = 'contact@uponyourluck.life'
 
-ADMIN_EMAILS = ['benwalterscoding@gmail.com', 'ldcollins@my.waketech.edu']
+ADMIN_EMAILS = ['benwalterscoding@gmail.com']
 
 
 # SendGrid
