@@ -24,15 +24,15 @@ from django.contrib import messages
 
 
 def contact_view(request):
-    project_id = '6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E'
+    project_id = 'recaptcha-354614'
+    recaptcha_site_key = '6Lfyj1QiAAAAAGJ8-iFk22fmSJu8p4gmAdhKBE5E'
     recaptcha_action = 'SUBMIT'
-    recaptcha_site_key = 'recaptcha-354614'
 
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
             token = request.POST['g-recaptcha-response']
-            create_assessment(project_id, recaptcha_action, recaptcha_site_key, token)
+            create_assessment(project_id, recaptcha_site_key, token, recaptcha_action)
             form.save()
             email_subject = f'New contact {form.cleaned_data["email"]}: {form.cleaned_data["subject"]}'
             email_message = form.cleaned_data['message']
