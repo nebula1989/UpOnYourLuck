@@ -35,14 +35,16 @@ def contact_view(request):
             token = request.POST['g-recaptcha-response']
             try:
                 create_assessment(project_id, recaptcha_site_key, token, recaptcha_action)
+                form.save()
+                email_subject = f'New contact {form.cleaned_data["email"]}: {form.cleaned_data["subject"]}'
+                email_message = form.cleaned_data['message']
+                send_mail(email_subject, email_message, settings.CONTACT_EMAIL, settings.ADMIN_EMAILS)
+
+                return render(request, 'success.html')
+
             except google_exceptions.InvalidArgument:
                 messages.error(request, "Please check the captcha.")
                 redirect('contact')
-            form.save()
-            email_subject = f'New contact {form.cleaned_data["email"]}: {form.cleaned_data["subject"]}'
-            email_message = form.cleaned_data['message']
-            send_mail(email_subject, email_message, settings.CONTACT_EMAIL, settings.ADMIN_EMAILS)
-            return render(request, 'success.html')
 
         else:
             messages.error(request, "Your message did not get sent.")
@@ -53,7 +55,9 @@ def contact_view(request):
 
 # DEBUG STUFF
 import logging
+
 logging.basicConfig(level=logging.INFO)
+
 
 # from Jaysha's tutorial at https://ordinarycoders.com/blog/article/django-password-reset
 def password_reset_request(request):
@@ -108,7 +112,7 @@ def password_reset_request(request):
 
 
 def create_assessment(
-    project_id: str, recaptcha_site_key: str, token: str, recaptcha_action: str
+        project_id: str, recaptcha_site_key: str, token: str, recaptcha_action: str
 ) -> Assessment:
     """Create an assessment to analyze the risk of a UI action.
     Args:
@@ -121,7 +125,8 @@ def create_assessment(
     credentials = service_account.Credentials.from_service_account_file(filename)
     """
 
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/bwalters89/UpOnYourLuck/uponyourluck/settings/google_cred.json"
+    os.environ[
+        "GOOGLE_APPLICATION_CREDENTIALS"] = "/home/bwalters89/UpOnYourLuck/uponyourluck/settings/google_cred.json"
     client = recaptchaenterprise_v1.RecaptchaEnterpriseServiceClient()
 
     # Set the properties of the event to be tracked.
@@ -171,4 +176,3 @@ def create_assessment(
         assessment_name = client.parse_assessment_path(response.name).get("assessment")
         print(f"Assessment name: {assessment_name}")
     return response
-
