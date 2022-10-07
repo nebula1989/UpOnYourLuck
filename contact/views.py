@@ -8,6 +8,7 @@ from .forms import ContactForm
 # Google
 from google.cloud import recaptchaenterprise_v1
 from google.cloud.recaptchaenterprise_v1 import Assessment
+from google.api_core import exceptions as google_exceptions
 
 # Andrew's imports
 from django.shortcuts import render, redirect
@@ -32,12 +33,17 @@ def contact_view(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             token = request.POST['g-recaptcha-response']
-            create_assessment(project_id, recaptcha_site_key, token, recaptcha_action)
+            try:
+                create_assessment(project_id, recaptcha_site_key, token, recaptcha_action)
+            except google_exceptions.InvalidArgument:
+                messages.error(request, "Please check the captcha.")
+                redirect('contact')
             form.save()
             email_subject = f'New contact {form.cleaned_data["email"]}: {form.cleaned_data["subject"]}'
             email_message = form.cleaned_data['message']
             send_mail(email_subject, email_message, settings.CONTACT_EMAIL, settings.ADMIN_EMAILS)
             return render(request, 'success.html')
+
         else:
             messages.error(request, "Your message did not get sent.")
     form = ContactForm()
