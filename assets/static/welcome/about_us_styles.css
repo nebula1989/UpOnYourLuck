@@ -1,19 +1,18 @@
 .about-us-container {
-  background-image: url("background-images/aboutus_royaltyfree.jpg");
-  background-position: 20% 85%;
+  background-image: url("background-images/homeless-woman.jpg");
+  background-position: 2% 20%;
   background-repeat: no-repeat;
   background-attachment: fixed;
   margin: 0;
-
   background-size: cover;
   width: 100%;
   font-size: 1.5rem;
-  padding: 0 1em;
+  padding: 1%;
 }
 
 .about-us-inner-container {
   background-color: #202123d3;
-  padding-top: 2em;
+  padding: 1%;
 }
 
 .about-description {
@@ -22,6 +21,7 @@
 
 .about-description-main p {
   margin: 0 1em 1em 1em;
+
 }
 
 .about-description-quote h2 {
