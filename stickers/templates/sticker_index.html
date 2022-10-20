@@ -8,8 +8,9 @@
             <img src="/media/qr_code/{{ current_user }}.jpg" id="qr_code" alt="..." width="450" class="rounded mb-2 img-thumbnail">
         </div>
 
-        <a class="btn btn-warning" href="{% url 'regenerate_qr_code' %}">Regenerate QR Code</a>
+        {% comment %}<a class="btn btn-warning" href="{% url 'regenerate_qr_code' %}">Regenerate QR Code</a> {% endcomment %}
         <a class="btn btn-primary" onclick="printImg('/media/qr_code/{{ current_user }}.jpg')">Print QR Code</a>
+        <a class="btn btn-warning" href="{% url 'ship_my_sticker' %}">Ship My QR Code</a>
     </div>
 
     <script>
