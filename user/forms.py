@@ -133,7 +133,7 @@ class UpdateUserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name']
+        fields = ['email', 'first_name', 'last_name']
         widgets = {
             'first_name': forms.TextInput(
                 attrs={'class': 'form-control form-control-lg form-rounded', 'placeholder': 'First Name'}),
