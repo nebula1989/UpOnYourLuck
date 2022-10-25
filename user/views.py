@@ -2,123 +2,28 @@ import os
 from os.path import exists
 from PIL import Image
 from django.contrib.auth.models import User
-from django.http import QueryDict
 from django.shortcuts import render, redirect, get_object_or_404
 
-from uponyourluck.settings import DOMAIN, MEDIA_ROOT, account_sid, auth_token, client, service
-from .forms import ChangePassword, LoginForm, NewUserForm, UpdateProfileForm, UpdateTwoFactor, UpdateUserForm  # UpdateUserForm
-from django.contrib.auth import login, logout, authenticate, update_session_auth_hash, get_user_model
+from uponyourluck.settings import DOMAIN, MEDIA_ROOT, service
+from .forms import ChangePassword, LoginForm, NewUserForm, UpdateProfileForm, UpdateTwoFactor, UpdateUserForm
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import FollowersCount, Profile
+from .models import Profile
 
 import qrcode
 
-
-
 @login_required
 def dashboard(request):
-    user_following = len(FollowersCount.objects.filter(follower=request.user.username))
-    user_followers = len(FollowersCount.objects.filter(following=request.user.username))
     qr_scans = Profile.objects.get(user=request.user).qr_scan_count
 
     context = {
         'current_user': request.user,
-        'user_followers': user_followers,
-        'user_following': user_following,
         'qr_scans': qr_scans,
     }
 
     return render(request, 'dashboard.html', context)
-
-
-@login_required()
-def view_followers(request):
-    followers_list = FollowersCount.objects.filter(following=request.user.username)
-    user_model = get_user_model()
-    list_of_active_nonstaff_users = user_model.objects.all().filter(is_active=True, is_staff=False)
-    user_list = get_user_followers(list_of_active_nonstaff_users, request)
-    
-    list_of_followers_usernames = []
-    for name in followers_list:
-        list_of_followers_usernames.append(name.follower)
-
-    newDict = dict()
-    for key, value in user_list.items():
-        if str(key) in list_of_followers_usernames:
-            newDict[key] = value
-
-    num_list = [1, 2, 3, 4, 5, 6]
-    user_list = []
-    for user in followers_list:
-        user_list.append(get_object_or_404(User, username=user.follower))
-
-    context = {
-        'current_user': request.user,
-        'list_of_users': user_list,
-        'num_list': num_list,
-        'title': "Your followers",
-        'user_followers_dict': newDict,
-    }
-    return render(request, 'welcome/show_all_users.html', context)
-
-
-@login_required()
-def view_following(request):
-    
-    # following_list is list of people I follow in QuerySet Object
-    following_list = FollowersCount.objects.filter(follower=request.user.username)
-
-    user_model = get_user_model()
-    num_list = [1, 2, 3, 4, 5, 6]
-    following_list_usernames = []
-    list_of_active_nonstaff_users = user_model.objects.all().filter(is_active=True, is_staff=False)
-    user_list = get_user_followers(list_of_active_nonstaff_users, request)
-    newDict = dict()
-    for key, value in user_list.items():
-        if value == 'unfollow':
-            newDict[key] = value
-
-    for user in following_list:
-        following_list_usernames.append(get_object_or_404(User, username=user.following))
-
-    num_list = [1, 2, 3, 4, 5, 6]
-    # user_list is a list of people I follow
-    user_list = []
-    for user in following_list:
-        user_list.append(get_object_or_404(User, username=user.following))
-
-    context = {
-        'current_user': request.user,
-        'list_of_users': user_list,
-        'num_list': num_list,
-        'title': "People you are following",
-        'user_followers_dict': newDict,
-    }
-    return render(request, 'welcome/show_all_users.html', context)
-
-def get_user_following(user_list: QueryDict, request):
-    user_dict= {}
-    for user in user_list:
-        following = request.user.username
-        obj = FollowersCount.objects.filter(follower=user.username, following=following)
-        if obj.exists():
-            user_dict.update({user: 'unfollow'})
-        else:
-            user_dict.update({user: 'follow'})
-    return user_dict
-
-def get_user_followers(user_list: QueryDict, request):
-    user_dict= {}
-    for user in user_list:
-        follower = request.user.username
-        obj = FollowersCount.objects.filter(follower=follower, following=user.username)
-        if obj.exists():
-            user_dict.update({user: 'unfollow'})
-        else:
-            user_dict.update({user: 'follow'})
-    return user_dict
 
 
 # for visitors going to a user's profile page
@@ -138,27 +43,13 @@ def visitor_to_profile(request, username=None):
     # Get number of followers and following
     current_user = username_obj.username
     logged_in_user = request.user.username
-    user_followers = len(FollowersCount.objects.filter(following=current_user))
-    user_following = len(FollowersCount.objects.filter(follower=current_user))
-    follower_list = FollowersCount.objects.filter(following=current_user)
 
-    # Loop through follower_list to check if requester is already following
-    user_list = []
-    for x in follower_list:
-        follower_list = x.follower
-        user_list.append(follower_list)
-    if logged_in_user in user_list:
-        follow_btn = 'unfollow'
-    else:
-        follow_btn = 'follow'
+
 
     if username_obj.username == request.user.username:
         return redirect('profile')
     context = {
         'current_user': current_user,
-        'user_followers': user_followers,
-        'user_following': user_following,
-        'follow_btn': follow_btn,
         'profile_username': username_obj.username,
         'payment_link_url': username_obj.profile.payment_link_url,
         'life_story': username_obj.profile.life_story,
@@ -171,45 +62,12 @@ def visitor_to_profile(request, username=None):
 
 
 @login_required()
-def follow_count(request):
-    
-    if request.method == 'POST':
-        # Get form values
-        value = request.POST['value']
-        following = request.POST['following']
-        follower = request.POST['follower']
-        
-        following_list = FollowersCount.objects.filter(following=request.user.username)
-        user_list = []
-        for user in following_list:
-            user_list.append(get_object_or_404(User, username=user.following))
-        
-
-        
-        # If user is not following, create follower. Otherwise delete follower
-        if value == 'follow':
-            followers_cnt = FollowersCount.objects.create(follower=follower, following=following)
-            followers_cnt.save()
-        else:
-            followers_cnt = FollowersCount.objects.get(follower=follower, following=following)
-
-            followers_cnt.delete()
-
-        return redirect('/' + following)
-
-
-@login_required()
 # For logged in users to see their own profile page
 def profile(request):
     logged_in_user = request.user.username
-    user_followers = len(FollowersCount.objects.filter(following=logged_in_user))
-    user_following = len(FollowersCount.objects.filter(follower=logged_in_user))
-    follower_list = FollowersCount.objects.filter(following=logged_in_user)
 
     context = {
         'current_user': request.user,
-        'user_followers': user_followers,
-        'user_following': user_following,
         'payment_link_url': request.user.profile.payment_link_url,
         'life_story': request.user.profile.life_story,
         'profile_img': request.user.profile.profile_img,
@@ -268,10 +126,6 @@ def delete_profile(request):
         # Get Profile object of user
         profile = Profile.objects.get(user=request.user)
 
-        # Delete a Profile's associated FollowersCount objects
-        FollowersCount.objects.filter(follower=request.user.username).delete()
-        FollowersCount.objects.filter(following=request.user.username).delete()
-
         # remove qr code img upon account deletion
         os.remove(str(MEDIA_ROOT) + f'/qr_code/{request.user.username}.jpg')
         # remove profile image but not the default placeholder profile img
@@ -313,12 +167,12 @@ def register_request(request):
                   context={"register_form": user_form, "user": request.user, "errors": user_form.errors})
 
 
-""" 
-    Function: login_request()
-    Params: None
-    Purpose: View to allow users to login to existing accounts, and requests 2FA as needed.
-"""
 def login_request(request):
+    """
+        Function: login_request()
+        Params: None
+        Purpose: View to allow users to login to existing accounts, and requests 2FA as needed.
+    """
     # On post
     if request.method == "POST":
         # Get login form
@@ -368,12 +222,13 @@ def login_request(request):
     # Render login page
     return render(request=request, template_name="login.html", context={"login_form": form})
 
-""" 
-    Function: login_verification()
-    Params: None
-    Purpose: Verifies users with 2FA enabled
-"""
+
 def login_verification(request):
+    """
+        Function: login_verification()
+        Params: None
+        Purpose: Verifies users with 2FA enabled
+    """
     # On post
     if request.method == "POST":
         # Get user ID from post data
@@ -410,12 +265,13 @@ def login_verification(request):
             messages.error(request, "The code you entered was incorrect.")
             return redirect("login")
 
-""" 
-    Function: toggle_two_factor()
-    Params: None
-    Purpose: Allows users to toggle two factor authentication.
-"""
+
 def toggle_two_factor(request):
+    """
+        Function: toggle_two_factor()
+        Params: None
+        Purpose: Allows users to toggle two factor authentication.
+    """
     form = UpdateTwoFactor(request.POST, request.user.profile)
 
     if form.is_valid():
@@ -441,12 +297,12 @@ def terms_and_conditions(request):
     return render(request, 'terms_and_conditions.html')
 
 
-""" 
-    Function: generate_qr_code()
-    Params: Username - Username of user creating QR Code
-    Purpose: Generates a QR code for a user. Includes UpOnYourLuck logo.
-"""
 def generate_qr_code(request, username=None):
+    """
+        Function: generate_qr_code()
+        Params: Username - Username of user creating QR Code
+        Purpose: Generates a QR code for a user. Includes UpOnYourLuck logo.
+    """
     # Domain of the site
     domain = DOMAIN
 
@@ -488,12 +344,14 @@ def generate_qr_code(request, username=None):
         qr_code.save(str(MEDIA_ROOT) + '/qr_code/' + username.username + '.jpg')
         username.profile.qr_code_img = username.username + '.jpg'
 
-""" 
-    Function: regenerate_qr_code()
-    Params: None
-    Purpose: Regenerates a QR code for a user. Includes UpOnYourLuck logo.
-"""
+
 def regenerate_qr_code(request):
+    """
+        Function: regenerate_qr_code()
+        Params: None
+        Purpose: Regenerates a QR code for a user. Includes UpOnYourLuck logo.
+    """
+
     # Get expected path of the QR Code
     qr_path = str(MEDIA_ROOT) + '/qr_code/' + request.user.username + '.jpg'
 
@@ -509,12 +367,13 @@ def regenerate_qr_code(request):
     messages.success(request, "You have created a new QR Code!")
     return redirect('sticker_index')
 
-""" 
-    Function: regenerate_user_qr_code()
-    Params: Username - Username of user creating QR Code
-    Purpose: Admin function to regenerate a users QR Code.
-"""
+
 def regenerate_user_qr_code(request, username=None):
+    """
+        Function: regenerate_user_qr_code()
+        Params: Username - Username of user creating QR Code
+        Purpose: Admin function to regenerate a users QR Code.
+    """
     # Get username object from user sticker page
     username_obj = get_object_or_404(User, username=username)
 

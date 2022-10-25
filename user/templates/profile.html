@@ -8,7 +8,7 @@
         
 {% endblock %}
 <div class="row" style="width: 100%;">
-    <div class="col-lg-7 mx-auto text-center pt-5">
+    <div class="col-lg-7 mx-auto text-center pt-5">F
         <h1 class="display-4" style="color: #CDD1CC;">Hello, {{ current_user }} this is your public profile.</h1>
     </div>
 </div>
@@ -37,16 +37,7 @@
                     <div class="mr-6">
                         <a href="{% url 'update_profile' %}" class="btn btn-outline-dark rounded-pill btn-sm" style="transform: translateY(1rem); background-color: #26dda6;" role="button">Edit profile</a>
                     </div>
-                    <div class="followers-labels d-flex">
-                        <div class="px-3">
-                            <a class="mb-1 h5 px-4" href="{% url 'view_followers' %}" style="text-decoration: none; color: #26dda6;">{{user_followers}}</a>
-                            <p class="small mb-0" style="color: #9e9e9e;">Followers</p>
-                        </div>
-                        <div>
-                            <a class="mb-1 h5 px-4" href="{% url 'view_following' %}" style="text-decoration: none; color: #26dda6;">{{user_following}}</a>
-                            <p class="small mb-0" style="color: #9e9e9e;">Following</p>
-                        </div>
-                    </div>
+
                     
                 </div>
                 </div>

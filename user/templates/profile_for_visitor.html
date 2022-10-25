@@ -6,11 +6,6 @@
 {% block css %}
     <link rel="stylesheet" type="text/css" href="{% static '/user/user_styles.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
-    <style>
-        #followers_container {
-            align-items: center;
-        }
-    </style>
 {% endblock %}
 
 <div class="row"> 
@@ -28,22 +23,7 @@
                     <div class="rounded-top d-flex flex-row banner-img" style="color: #CDD1CC;">
                     <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; transform: translateY(1.5rem);">
                         <img src="{{profile_img.url}}" alt="User Profile Picture" class="img-fluid img-thumbnail mt-4 mb-2" style="z-index: 1; transform: translateY(-1rem); min-height: 9.375rem; min-width: 9.375rem;">
-                        <!-- <form action="followers_count" method="POST">
-                            {%csrf_token%}
-                            <input type="hidden" name="following" value="{{current_user}}" readonly/>
-                            <input type="hidden" name="follower" value="{{user.username}}" readonly/>
-                            {% if follow_btn == 'follow' %}
-                                <button type="submit" class="btn btn-outline-dark rounded-pill btn-sm" style="transform: translateY(-1rem);">
-                                    <input type="hidden" name="value" value="follow" readonly/>
-                                    Follow
-                                </button>
-                            {% else %}
-                                <button type="submit" class="btn btn-outline-dark rounded-pill btn-sm" style="transform: translateY(-1rem);">
-                                    <input type="hidden" name="value" value="unfollow" readonly/>
-                                    Unfollow
-                                </button>
-                            {% endif %}
-                        </form> -->
+
                     </div>
                     <div class="ms-3" style="margin-top: 130px;">
                         <h5>{{ profile_username }}</h5>
@@ -51,37 +31,7 @@
                     </div>
                 </div>
                 <div class="p-4" style="background-color: #3b3b3b; color: #CDD1CC;">
-                    <div class="d-flex justify-content-between text-center py-1" id="followers_container">
-                        <div id="followers_btn_form" class="mr-6">
-                            <form action="follow_count" method="POST" >
-                                {%csrf_token%}
-                                <input type="hidden" name="following" value="{{current_user}}" readonly/>
-                                <input type="hidden" name="follower" value="{{user.username}}" readonly/>
-                                {% if follow_btn == 'follow' %}
-                                    <button type="submit" class="btn btn-outline-dark rounded-pill btn-sm" style="background-color: #26dda6;">
-                                        <input type="hidden" name="value" value="follow" readonly/>
-                                        Follow
-                                    </button>
-                                {% else %}
-                                    <button type="submit" class="btn btn-outline-dark rounded-pill btn-sm" style="background-color: #26dda6;">
-                                        <input type="hidden" name="value" value="unfollow" readonly/>
-                                        Unfollow
-                                    </button>
-                                {% endif %}
-                            </form>
-                        </div>
-                        <div class="followers-labels d-flex">
-                            <div class="px-3" id="followers_cnt_container">
-                                <p class="mb-1 h5" style="text-decoration: none; color: #26dda6;">{{user_followers}}</p>
-                                <p class="small mb-0" style="color: #9e9e9e;">Followers</p>
-                            </div>
-                            <div>
-                                <p class="mb-1 h5" id="following_cnt_container" style="text-decoration: none; color: #26dda6;">{{user_following}}</p>
-                                <p class="small mb-0" style="color: #9e9e9e;">Following</p>
-                            </div>
-                        </div>
-                        
-                    </div>
+
                 </div>
                 <div class="card-body p-4" style="background-color: #3b3b3b; color: #CDD1CC;">
                     <div class="mb-5">

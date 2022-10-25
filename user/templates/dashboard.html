@@ -20,27 +20,7 @@
         </div>
     </div>
     <div class="row d-flex justify-content-center align-items-center" id="card-container">
-        <div class="col-lg-2 col-sm-6 card-item">
-            <div class="circle-tile ">
-                <a href="{% url 'view_followers' %}"><div class="circle-tile-heading dark-blue"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
-                <div class="circle-tile-content dark-blue overflow-hidden" style="border-radius: 1rem;">
-                    <div class="circle-tile-description text-faded"> Followers </div>
-                    <div class="circle-tile-number text-faded ">{{user_followers}}</div>
-                    <a class="circle-tile-footer" href="{% url 'view_followers' %}">View</a>
-                </div>
-            </div>
-        </div>
-     
-        <div class="col-lg-2 col-sm-6 card-item">
-            <div class="circle-tile ">
-                <a href="{% url 'view_following' %}"><div class="circle-tile-heading red"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
-                <div class="circle-tile-content red overflow-hidden" style="border-radius: 1rem;">
-                    <div class="circle-tile-description text-faded"> Following </div>
-                    <div class="circle-tile-number text-faded ">{{user_following}}</div>
-                    <a class="circle-tile-footer" href="{% url 'view_following' %}">View</a>
-                </div>
-            </div>
-        </div> 
+
      
         <div class="col-lg-2 col-sm-6 card-item">
             <div class="circle-tile ">
@@ -48,7 +28,7 @@
                 <div class="circle-tile-content yellow overflow-hidden" style="border-radius: 1rem;">
                     <div class="circle-tile-description text-faded text-black"> QR Scans </div>
                     <div class="circle-tile-number text-faded text-black fw-bold">{{qr_scans}}</div>
-                    <a class="circle-tile-footer text-black" href="{% url 'sticker_index' %}">View Code</a>
+                    <a class="circle-tile-footer text-black" href="{% url 'sticker_index' %}">View My QR Code</a>
                 </div>
             </div>
         </div>
