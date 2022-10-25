@@ -125,7 +125,8 @@
                     <div class="row gx-3 mb-3">
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputPhone">Donation Link</label>
-                            <input type="url" name="payment_link_url" value="{{current_user.profile.payment_link_url}}" placeholder="https://cash.app/$yourcashtag" maxlength="200" class="urlinput form-control" required="" id="id_payment_link_url" style="background-color: #3b3b3b; color: #CDD1CC;">
+                            <input type="url" name="payment_link_url" value="{{current_user.profile.cashapp_link_url}}" placeholder="https://cash.app/$yourcashtag" maxlength="200" class="urlinput form-control" required="" id="id_payment_link_url" style="background-color: #3b3b3b; color: #CDD1CC;">
+                            <input type="url" name="payment_link_url" value="{{current_user.profile.venmo_link_url}}" placeholder="https://venmo.com/yourvenmotag" maxlength="200" class="urlinput form-control" required="" id="id_payment_link_url" style="background-color: #3b3b3b; color: #CDD1CC;">
                         </div>
 
                         <div class="col-md-6">

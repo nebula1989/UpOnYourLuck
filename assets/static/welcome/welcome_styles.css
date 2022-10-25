@@ -222,6 +222,7 @@ a:active {
 
 .homeless-advantages-right img {
     max-height: 25em;
+    opacity: 75%;
 }
 
 /* Donator Advantages */

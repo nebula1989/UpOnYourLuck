@@ -14,6 +14,7 @@ from .models import Profile
 
 import qrcode
 
+
 @login_required
 def dashboard(request):
     qr_scans = Profile.objects.get(user=request.user).qr_scan_count
@@ -44,14 +45,13 @@ def visitor_to_profile(request, username=None):
     current_user = username_obj.username
     logged_in_user = request.user.username
 
-
-
     if username_obj.username == request.user.username:
         return redirect('profile')
     context = {
         'current_user': current_user,
         'profile_username': username_obj.username,
-        'payment_link_url': username_obj.profile.payment_link_url,
+        'cashapp_link_url': username_obj.profile.cashapp_link_url,
+        'venmo_link_url': username_obj.profile.venmo_link_url,
         'life_story': username_obj.profile.life_story,
         'profile_img': username_obj.profile.profile_img,
         'city': username_obj.profile.city,
@@ -68,7 +68,8 @@ def profile(request):
 
     context = {
         'current_user': request.user,
-        'payment_link_url': request.user.profile.payment_link_url,
+        'cashapp_link_url': request.user.profile.cashapp_link_url,
+        'venmo_link_url': request.user.profile.venmo_link_url,
         'life_story': request.user.profile.life_story,
         'profile_img': request.user.profile.profile_img,
         'city': request.user.profile.city,
@@ -145,9 +146,9 @@ def delete_profile(request):
 def register_request(request):
     args = {}
     if request.method == "POST":
-        
+
         user_form = NewUserForm(request.POST)
-        
+
         if user_form.is_valid():
             user = user_form.save()
             if user is not None:
@@ -157,7 +158,7 @@ def register_request(request):
                 return redirect('user_dashboard')
             else:
                 messages.error(request, f"Email already in use.")
-                return redirect('register')    
+                return redirect('register')
         else:
             messages.error(request, f"{user_form.errors}")
             return redirect('register')
@@ -202,7 +203,8 @@ def login_request(request):
                         verification = service.verifications \
                             .create(to=user.profile.phone_number, channel='sms')
                         # Render login verifcation page
-                        return render(request, template_name='login_verify.html', context={'user_id': user.id, 'user': user})
+                        return render(request, template_name='login_verify.html',
+                                      context={'user_id': user.id, 'user': user})
                     # If user not using 2FA
                     else:
                         # Log user in
@@ -235,7 +237,7 @@ def login_verification(request):
         user_id = request.POST['user_id']
         # Get user object from user ID
         user = Profile.objects.get(user_id=user_id)
-        
+
         # Get verification code entered by user
         code = ''
         for i in range(1, 7):
@@ -318,7 +320,7 @@ def generate_qr_code(request, username=None):
 
     # Open and resize the UpOnYourLuck Logo
     logo = Image.open(str(MEDIA_ROOT) + '/home_page/UpOnYourLuck_Logo_transparent_for_QR_code.jpg')
-    logo.thumbnail((150,150), Image.ANTIALIAS)
+    logo.thumbnail((150, 150), Image.ANTIALIAS)
 
     # Create a new QR code with maximum error correction
     qr_img = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
@@ -329,7 +331,7 @@ def generate_qr_code(request, username=None):
 
     # Convert to RGB so Logo has color
     qr_code = qr_img.make_image().convert('RGB')
-    
+
     # Set the logo position in the center of the QR Code
     logo_pos = ((qr_code.size[0] - logo.size[0]) // 2, (qr_code.size[1] - logo.size[1]) // 2)
 
@@ -359,7 +361,7 @@ def regenerate_qr_code(request):
     # Otherwise generate a new code
     if exists(qr_path):
         os.remove(qr_path)
-        generate_qr_code(request=request)   
+        generate_qr_code(request=request)
     else:
         generate_qr_code(request=request)
 

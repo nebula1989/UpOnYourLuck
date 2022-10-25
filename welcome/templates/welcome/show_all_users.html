@@ -6,40 +6,38 @@
 {% endblock %}
 
 {% block content %}
-<div class="row" style="padding-bottom: 3rem;">
-    <div class="col-lg-7 mx-auto text-center pt-5">
-        <h1 class="display-4" id="dashboard-banner" style="color: #CDD1CC;">{{title}}</h1>
-    </div>
-</div>
-<div class="container">
-    <div class="main-body">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm justify-content-center">
-
-            {% for user in list_of_users %}
-                <div class="col mb-3">
-                    <div class="card" style="overflow: hidden; background-color: #202123;">
-                    <img src="/media/banner_imgs/banner{{ num_list|random }}.jpg" alt="Cover" class="card-img-top">
-                    
-                    <div class="card-body text-center">
-                        <img src="{{user.profile.profile_img.url}}" style="width:100px;margin-top:-60px;" alt="User Profile Image" class="rounded mb-2 img-thumbnail">
-                        <h5 class="card-title" style="color: #CDD1CC;">{{ user.first_name }} {{user.last_name}}</h5>
-                        <p class="text-secondary mb-1">@{{user.username}}</p>
-                        <p class="text-muted font-size-sm">{{ user.profile.city }}, {{user.profile.state}}</p>
-                    </div>
-                    <div class="card-footer" style="justify-content: center;">
-                        <a href="{% url 'visitor_to_profile' user.username %}" class="btn rounded-pill btn-outline-dark btn-sm view-profile-btn" role="button">View Profile</a>
-                        
-
-                    </div>
-                    </div>
-                </div>
-            {% endfor %}
+    <div class="row" style="padding-bottom: 3rem;">
+        <div class="col-lg-7 mx-auto text-center pt-5">
+            <h1 class="display-4" id="dashboard-banner" style="color: #CDD1CC;">{{ title }}</h1>
         </div>
     </div>
-</div>
+    <div class="container">
+        <div class="main-body">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 gutters-sm justify-content-center">
 
-<footer class="footer" style="background: #222224;">
-    <p>UpOnYourLuck - All rights reserved</p>
-</footer>
+                {% for user in list_of_users %}
+                    <div class="col mb-3">
+                        <div class="card" style="overflow: hidden; background-color: #202123;">
+                            <img src="/static/welcome/banner_imgs/banner{{ num_list|random }}.jpg" alt="Cover"
+                                 class="card-img-top">
+                            <div class="card-body text-center">
+                                <img src="{{ user.profile.profile_img.url }}" style="width:100px;margin-top:-1px;"
+                                     alt="User Profile Image" class="rounded mb-2 img-thumbnail">
+                                <h5 class="card-title"
+                                    style="color: #CDD1CC;">{{ user.first_name }} {{ user.last_name }}</h5>
+                                <p class="text-secondary mb-1">@{{ user.username }}</p>
+                                <p class="text-muted font-size-sm">{{ user.profile.city }}, {{ user.profile.state }}</p>
+                            </div>
+                            <div class="card-footer" style="justify-content: center;">
+                                <a href="{% url 'visitor_to_profile' user.username %}"
+                                   class="btn rounded-pill btn-outline-dark btn-sm view-profile-btn" role="button">View
+                                    Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 

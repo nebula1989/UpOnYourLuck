@@ -37,7 +37,7 @@ class OverwriteStorage(FileSystemStorage):
         elif local_os() == 'Linux' or local_os() == 'Darwin':
             file = file.split('/')[1]
 
-        #Checks for other file extensions to remove
+        # Checks for other file extensions to remove
         for ext in ext_list:
             filename = 'profile_img/{}{}'.format(file, ext)
             if self.exists(filename) and file != 'default':
@@ -48,7 +48,7 @@ class OverwriteStorage(FileSystemStorage):
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    profile_url = models.URLField(max_length=200)
+    profile_url = models.CharField(max_length=200)
     life_story = models.TextField(max_length=500)
     profile_img = models.ImageField(
         upload_to=UploadToPathAndRename(user, "profile_img/"),
@@ -56,7 +56,8 @@ class Profile(models.Model):
         default='profile_img/default.jpg',
     )
     qr_code_img = models.FilePathField(path='media/qr_code/')
-    payment_link_url = models.URLField(max_length=200, default="https://cash.app/$")
+    cashapp_link_url = models.URLField(max_length=200, default="https://cash.app/$")
+    venmo_link_url = models.URLField(max_length=200, default="https://venmo.com/")
     city = models.CharField(default="Raleigh", max_length=60)
     state = USStateField(default="NC", blank=True)
     qr_scan_count = models.IntegerField(default=0)
@@ -85,8 +86,6 @@ class Profile(models.Model):
 
     def get_profile_url(self):
         return self.profile_url
-
-
 
 
 # create a user profile automatically upon account creation using signals

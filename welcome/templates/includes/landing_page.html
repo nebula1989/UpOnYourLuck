@@ -1,9 +1,11 @@
+{% load static %}
 <div class="scroll container-wrap">
     <div id="jumbotron-container">
     </div>
     <!-- Banner Section -->
     <div class="register-cta">
-        <div class="container" style="background-color: #1a202c; opacity: 60%; border-radius: 5%; width: max-content; margin-left: 3%">
+        <div class="container"
+             style="background-color: #1a202c; opacity: 60%; border-radius: 5%; width: max-content; margin-left: 3%">
             <h2 class="h2" style="color: #eeeeee;">Generate More Donations.<br>Promote Yourself.<br>Tell the World Your
                 Story.
             </h2>
@@ -28,7 +30,8 @@
         </div>
 
         <div class="homeless-advantages-right">
-            <img src="/media/home_page/qrcode_royaltyfree.jpg" alt="Man holding QR code">
+            <img src="{% static 'welcome/background-images/homeless_royaltyfree.jpg' %}"
+                 alt="picture of homeless person with a dog">
         </div>
 
     </div>
