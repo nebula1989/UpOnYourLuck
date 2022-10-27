@@ -1,122 +1,154 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Profile Page{% endblock title %}
+{% block title %}Update Security Profile Page{% endblock title %}
 
 {% block css %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <link rel="stylesheet" href="{% static 'user/twofactor_styles.css' %}"/>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 {% endblock %}
+
 {% block content %}
 
-<div class="container-xl px-4 mt-4">
-    <nav class="nav nav-borders">
-        <a class="nav-link" href="{% url 'update_profile' %}" style="color: #CDD1CC;">Profile</a>
-        <a class="nav-link active ms-0" href="{% url 'update_security' %}"  style="color: #26dda6; border-bottom-color: #26dda6;">Security</a>
-    </nav>
-    <hr class="mt-0 mb-4">
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="card mb-4" style="background-color: #202123; border-radius: 1rem;">
-                <div class="card-header" style="color: #CDD1CC;">Change Password</div>
-                <div class="card-body">
-                    <form method='POST' enctype="multipart/form-data">
-                        {%csrf_token%}
-                        <div class="mb-3">
-                            <label class="small mb-1" for="currentPassword" style="color: #CDD1CC;">Current Password</label>
-                            {{p_form.old_password}}
-                        </div>
-                        <div class="mb-3">
-                            <label class="small mb-1" for="newPassword" style="color: #CDD1CC;">New Password</label>
-                            {{p_form.new_password1}}
-                        </div>
-                        <div class="mb-3">
-                            <label class="small mb-1" for="confirmPassword" style="color: #CDD1CC;">Confirm Password</label>
-                            {{p_form.new_password2}}
-                        </div>
-                        <div class="pt-2">
-                            <button class="btn btn-primary btn-sm rounded-pill btn-outline-dark text-black px-4" type="submit" style="background-color: #26dda6;">Save</button>
-                            <a class="btn btn-sm rounded-pill text-black" href="{% url 'profile' %}" style="border-color: #69707a; background-color: #bb86fc;">Cancel</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card mb-4" style="background-color: #202123; border-radius: 1rem;">
-                <div class="card-header" style="color: #CDD1CC;">Two-Factor Authentication</div>
-                <div class="card-body">
-                    <p style="color: #CDD1CC;">Add another level of security to your account by enabling two-factor authentication. We will send you a text message to verify your login attempts on unrecognized devices and browsers.</p>
-                    <form action="toggle_two_factor" id="form" method="post">
-                        {% csrf_token %}
-                        {% if user.profile.two_factor_enabled %}
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="two_factor_enabled" value="1" required="" id="id_two_factor_enabled_1" checked="">
-                                <label class="form-check-label" for="id_two_factor_enabled_1">On</label>
+    <div class="container-xl px-4 mt-4">
+        <nav class="nav nav-borders">
+            <a class="nav-link" href="{% url 'update_profile' %}" style="color: #CDD1CC;">Profile</a>
+            <a class="nav-link active ms-0" href="{% url 'update_security' %}"
+               style="color: #26dda6; border-bottom-color: #26dda6;">Security</a>
+        </nav>
+        <hr class="mt-0 mb-4">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card mb-4" style="background-color: #202123; border-radius: 1rem;">
+                    <div class="card-header" style="color: #CDD1CC;">Change Password</div>
+                    <div class="card-body">
+                        <form method='POST' enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label class="small mb-1" for="currentPassword" style="color: #CDD1CC;">Current
+                                    Password</label>
+                                {{ p_form.old_password }}
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="two_factor_enabled" value="0" required="" id="id_two_factor_enabled_0">
-                                <label class="form-check-label" for="id_two_factor_enabled_0">Off</label>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="newPassword" style="color: #CDD1CC;">New Password</label>
+                                {{ p_form.new_password1 }}
                             </div>
-                            
-                            <div class="mt-3" id="test" style="padding-bottom: 1rem;">
-                                <label class="small mb-1" for="twoFactorSMS" style="color: #CDD1CC;">SMS Number</label>
-                                <input class="form-control" name="phone_number" id="id_phone_number" type="tel" placeholder="Enter a phone number" value="{{user.profile.phone_number}}" style="background-color: #3b3b3b; color: #CDD1CC;">
-                                <div class="invalid-feedback">Must be in +1 (123) 456-7890 format</div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="confirmPassword" style="color: #CDD1CC;">Confirm
+                                    Password</label>
+                                {{ p_form.new_password2 }}
                             </div>
-                        {% else %}
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="two_factor_enabled" value="1" required="" id="id_two_factor_enabled_1">
-                                <label class="form-check-label" for="id_two_factor_enabled_1">On</label>
+                            <div class="pt-2">
+                                <button class="btn btn-primary btn-sm rounded-pill btn-outline-dark text-black px-4"
+                                        type="submit" style="background-color: #26dda6;">Save
+                                </button>
+                                <a class="btn btn-sm rounded-pill text-black" href="{% url 'profile' %}"
+                                   style="border-color: #69707a; background-color: #bb86fc;">Cancel</a>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="two_factor_enabled" value="0" required="" id="id_two_factor_enabled_0" checked="">
-                                <label class="form-check-label" for="id_two_factor_enabled_0">Off</label>
-                            </div>
-                            
-                            <div class="mt-3" id="test" style="padding-bottom: 1rem;">
-                                <label class="small mb-1" for="twoFactorSMS" style="color: #CDD1CC;">SMS Number</label>
-                                <input class="form-control" name="phone_number" id="id_phone_number" type="tel" placeholder="+1 (123) 456-7890" value="" style="background-color: #3b3b3b; color: #CDD1CC;">
-                                <div class="invalid-feedback">Must be in +1 (123) 456-7890 format</div>
-                            </div>
-                        {% endif %}
-                        <button class="btn btn-sm rounded-pill btn-outline-dark text-black px-3" type="submit" id="save" disabled style="background-color: #26dda6;">Save</button>
-                    </form>
-                </div>
-            </div>
-            <div class="card mb-4" style="background-color: #202123; border-radius: 1rem;">
-                <div class="card-header" style="color: #CDD1CC;">Delete Account</div>
-                <div class="card-body">
-                    <p style="color: #CDD1CC;">Deleting your account is a permanent action and cannot be undone. If you are sure you want to delete your account, select the button below.</p>
-                    <button class="btn btn-danger-soft text-danger" type="button" data-toggle="modal" data-target="#delete_modal" style="background-color: #3b3b3b; border-color: transparent;">I understand, delete my account</button>
-                </div>
-            </div>
-        </div>
-        <!-- Modal -->
-        <form action="delete_profile" method="POST">
-            {%csrf_token%}
-            <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="Delete Account" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content" style="background-color: #202123; color: #CDD1CC;">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="title">Delete Account</h5>
-                    <button type="button" class="btn-close btn-danger-soft" data-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" style="border-color: transparent;">
-                    Are you sure you want to delete your account?
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-sm rounded-pill px-4" data-dismiss="modal" style="border-color: #69707a; background-color: #bb86fc;">No</button>
-                    <button type="submit" class="btn btn-sm rounded-pill px-4 btn-danger">Yes</button>
+                        </form>
                     </div>
                 </div>
-                </div>
             </div>
-        </form>
-    </div>
-</div>
+            <div class="col-lg-4">
+                <div class="card mb-4" style="background-color: #202123; border-radius: 1rem;">
+                    <div class="card-header" style="color: #CDD1CC;">Two-Factor Authentication</div>
+                    <div class="card-body">
+                        <p style="color: #CDD1CC;">Add another level of security to your account by enabling two-factor
+                            authentication. We will send you a text message to verify your login attempts on
+                            unrecognized devices and browsers.</p>
+                        <form action="toggle_two_factor" id="form" method="post">
+                            {% csrf_token %}
+                            {% if user.profile.two_factor_enabled %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="two_factor_enabled" value="1"
+                                           required="" id="id_two_factor_enabled_1" checked="">
+                                    <label class="form-check-label" for="id_two_factor_enabled_1">On</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="two_factor_enabled" value="0"
+                                           required="" id="id_two_factor_enabled_0">
+                                    <label class="form-check-label" for="id_two_factor_enabled_0">Off</label>
+                                </div>
 
-<script src="{% static 'user/two_factor.js' %}" type="text/javascript"></script>
+                                <div class="mt-3" id="test" style="padding-bottom: 1rem;">
+                                    <label class="small mb-1" for="twoFactorSMS" style="color: #CDD1CC;">SMS
+                                        Number</label>
+                                    <input class="form-control" name="phone_number" id="id_phone_number" type="tel"
+                                           placeholder="Enter a phone number" value="{{ user.profile.phone_number }}"
+                                           style="background-color: #3b3b3b; color: #CDD1CC;">
+                                    <div class="invalid-feedback">Must be in +1 (123) 456-7890 format</div>
+                                </div>
+                            {% else %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="two_factor_enabled" value="1"
+                                           required="" id="id_two_factor_enabled_1">
+                                    <label class="form-check-label" for="id_two_factor_enabled_1">On</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="two_factor_enabled" value="0"
+                                           required="" id="id_two_factor_enabled_0" checked="">
+                                    <label class="form-check-label" for="id_two_factor_enabled_0">Off</label>
+                                </div>
+
+                                <div class="mt-3" id="test" style="padding-bottom: 1rem;">
+                                    <label class="small mb-1" for="twoFactorSMS" style="color: #CDD1CC;">SMS
+                                        Number</label>
+                                    <input class="form-control" name="phone_number" id="id_phone_number" type="tel"
+                                           placeholder="+1 (123) 456-7890" value=""
+                                           style="background-color: #3b3b3b; color: #CDD1CC;">
+                                    <div class="invalid-feedback">Must be in +1 (123) 456-7890 format</div>
+                                </div>
+                            {% endif %}
+                            <button class="btn btn-sm rounded-pill btn-outline-dark text-black px-3" type="submit"
+                                    id="save" disabled style="background-color: #26dda6;">Save
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            <!-- DELETE ACCOUNT -->
+                <div class="card mb-4" style="background-color: #202123; border-radius: 1rem;">
+                    <div class="card-header" style="color: #CDD1CC;">Delete Account</div>
+                    <div class="card-body">
+                        <p style="color: #CDD1CC;">Deleting your account is a permanent action and cannot be undone. If
+                            you are sure you want to delete your account, select the button below.</p>
+                        <button class="btn btn-danger-soft text-danger" type="button" data-bs-toggle="modal"
+                                data-bs-target="#delete_modal"
+                                style="background-color: #3b3b3b; border-color: transparent;">I understand, delete my
+                            account
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+            <!-- Modal -->
+            <form action="{% url 'delete_profile' %}" method="post">
+                {% csrf_token %}
+                <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="Delete Account"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content" style="background-color: #202123; color: #CDD1CC;">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="title">Delete Account</h5>
+                                <button type="button" class="btn-close btn-danger-soft" data-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" style="border-color: transparent;">
+                                Are you sure you want to delete your account?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm rounded-pill px-4" data-dismiss="modal"
+                                        style="border-color: #69707a; background-color: #bb86fc;">No
+                                </button>
+                                <button type="submit" class="btn btn-sm rounded-pill px-4 btn-danger">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'user/two_factor.js' %}" type="text/javascript"></script>
 
 {% endblock content %}

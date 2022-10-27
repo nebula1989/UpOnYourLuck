@@ -124,6 +124,7 @@ def update_security(request):
 
 @login_required()
 def delete_profile(request):
+    print("AT DELETE PROFILE")
     if request.method == 'POST':
         # Get Profile object of user
         profile = Profile.objects.get(user=request.user)
